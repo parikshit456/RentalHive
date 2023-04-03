@@ -1,38 +1,261 @@
-.App {
+.navbar {
+  height: 80px;
+  /* background-color: aliceblue; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.navbar-logo {
+  font-size: 25px;
+  color: rgb(164, 164, 164);
+  font-weight: 600;
+}
+
+.navbar-logo span {
+  color: rgb(255, 208, 89);
+}
+
+.navbar-list {
+  margin-right: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.signin-btn,
+.signup-btn {
+  font-size: 18px;
+  color: gray;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.signup-btn {
+  color: rgb(255, 208, 89);
+  border-left: 1px solid rgb(164, 164, 164, 0.5);
+}
+
+.download-btn button {
+  margin-left: 20px;
+  background-color: rgb(255, 208, 89, 0.8); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.signin-btn:hover,
+.signup-btn:hover {
+  background-color: rgb(164, 164, 164, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.explore {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.explore-tagline {
+  font-size: 40px;
+  font-weight: 600;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.explore-tagline span {
+  color: rgb(255, 208, 89);
+}
+.explore-right img {
+  width: 700px;
+}
+
+.explore-left {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+.sub-tagline {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.location-searchbar {
+  display: flex;
+}
+
+.search-bar input {
+  font-size: 18px;
+  /* margin-top: 40px; */
+  width: 340px;
+  padding: 0px 10px 0px 50px;
+  height: 50px;
+  border-radius: 20px;
+  border: 2px solid rgb(205, 205, 206);
+  background-color: rgb(243, 244, 246);
+}
+
+.search-bar input:focus {
+  outline: none !important;
+  border: 2px solid rgb(255, 208, 89);
+}
+.location-icon {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  padding: 10px;
+
+  left: 55px;
+  bottom: 3px;
+  z-index: 1000;
+}
+
+.location-picker {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  max-width: 90%;
+  margin: auto;
+}
+
+.city-card {
+  width: 210px;
+  height: 250px;
+  padding: 10px;
+  margin: 20px 0px 30px 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.city-card h2 {
   color: white;
+  position: relative;
+  /* top: 100px; */
 }
 
-.App-link {
-  color: #61dafb;
+.city-card:hover {
+  transform: scale(1.1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.listing-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.list-types {
+  display: flex;
+  list-style: none;
+}
+
+.list-types li {
+  font-size: 18px;
+  margin: 10px 20px 10px 30px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  color: rgb(105, 105, 105);
+}
+
+.listing-partition {
+  height: 1px;
+  width: 80%;
+
+  margin: auto;
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+.listing-card {
+  margin: 50px;
+  margin-top: 30px;
+  display: flex;
+  /* border: 1px solid black; */
+  flex-direction: column;
+  width: fit-content;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.card-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-img {
+  width: 130px;
+  object-fit: cover;
+  border-radius: 10px 0px 0px 0px;
+}
+
+.card-info {
+  border-bottom: 1px dashed rgb(205, 205, 206);
+  width: 400px;
+  padding: 10px;
+}
+
+.card-name {
+  font-size: 20px;
+}
+
+.card-loc {
+  font-size: 14px;
+  color: rgb(205, 205, 206);
+}
+
+.card-pref {
+  margin: 17px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 320px;
+}
+
+.rent,
+.gender-head,
+.looking-head {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(205, 205, 206);
+}
+
+.amount {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.amount,
+.gender,
+.looking-for {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(105, 105, 105);
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 12px;
+  color: rgb(105, 105, 105);
+  font-weight: 500;
+}
+
+.listings {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.list-active {
+  color: black;
+  font-weight: bold;
+  border-bottom: 1px solid black;
 }
