@@ -8,6 +8,7 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import PersonalDetails from "./components/PersonalDetails";
 import Pref from "./components/Pref";
+import AddListing from "./components/AddListing";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/PersonalDetails' element={<PersonalDetails/>}/>
           <Route path='/Pref' element={<Pref/>}/>
           <Route path="/listings" element={<Listings />} />
+          <Route path="/add-listing" element={<AddListing /> } />
         </Routes>
       </Router>
     </div>
