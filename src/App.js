@@ -8,6 +8,7 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import PersonalDetails from "./components/PersonalDetails";
 import Pref from "./components/Pref";
+import FlatForm from "./components/FlatForm";
 import AddListing from "./components/AddListing";
 import Myprofile from "./components//Myprofile";
 
@@ -19,13 +20,18 @@ function App() {
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/choose-location" element={<LocationPicker />} />
-          <Route path='/Signin' element={<Signin/>}/>
-          <Route path='/Signup' element={<Signup/>}/>
-          <Route path='/PersonalDetails' element={<PersonalDetails/>}/>
-          <Route path='/Pref' element={<Pref/>}/>
+          <Route path="/Signin" element={<Signin />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/PersonalDetails" element={<PersonalDetails />} />
+          <Route path="/Pref" element={<Pref />} />
           <Route path="/listings" element={<Listings />} />
+
           <Route path="/add-listing" element={<AddListing /> } />
           <Route path="/MyProfile" element={<Myprofile /> } />
+
+          <Route path="/have-flat" element={<FlatForm />} />
+         
+
         </Routes>
       </Router>
     </div>
