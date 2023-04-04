@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import PersonalDetails from "./components/PersonalDetails";
 import Pref from "./components/Pref";
 import FlatForm from "./components/FlatForm";
+import AddListing from "./components/AddListing";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Pref" element={<Pref />} />
           <Route path="/listings" element={<Listings />} />
           <Route path="/have-flat" element={<FlatForm />} />
+          <Route path="/add-listing" element={<AddListing />} />
         </Routes>
       </Router>
     </div>
