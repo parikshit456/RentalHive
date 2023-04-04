@@ -718,10 +718,7 @@ a {
   margin-top: 20px;
 }
 
-
-
 /* Myprofile page Css */
-
 
 .App {
   text-align: center;
@@ -762,47 +759,46 @@ a {
   }
 }
 
-
-.mainDivProfile{
+.mainDivProfile {
   background-color: rgb(255, 255, 255);
   color: #000000;
   display: flex;
   justify-content: center;
 }
 
-.formDivProfile{
+.formDivProfile {
   background-color: #fefefe;
   /* padding-top: 80px; */
   padding: 75px;
-  
+
   width: 70vw;
   margin: 3%;
   box-shadow: 2px 2px 3px 3px #e7cece;
 }
 
-
-.formDivProfile hr{
+.formDivProfile hr {
   margin-left: 5px;
   width: 64vw;
-  color: #F3F4F6;
+  color: #f3f4f6;
 }
 
-.formContainerProfile .item1Profile, .item2Profile, .item3Profile, .item4Profile{
+.formContainerProfile .item1Profile,
+.item2Profile,
+.item3Profile,
+.item4Profile {
   margin-left: 13px;
   padding: 20px 0 5px 5px;
   font-size: 20px;
-
 }
 
-.formContainerProfile input{
-  background-color: #F3F4F6;
+.formContainerProfile input {
+  background-color: #f3f4f6;
   border: none;
   height: 7vh;
   width: 26vw;
   margin-left: 15px;
   margin-right: -5px;
   border-radius: 5px;
-
 }
 
 input:focus {
@@ -811,14 +807,14 @@ input:focus {
 
 input,
 input::placeholder {
-    font: 18px/3 sans-serif;
-    padding: 4px;
-    letter-spacing: 0.3px;
+  font: 18px/3 sans-serif;
+  padding: 4px;
+  letter-spacing: 0.3px;
 }
 
-.formButtonProfile{
+.formButtonProfile {
   color: #000000;
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   height: 7vh;
   width: 10vw;
   border: none;
@@ -828,7 +824,7 @@ input::placeholder {
   font-size: 15px;
 }
 
-.formButtonActiveProfile{
+.formButtonActiveProfile {
   color: #ffffff;
   background-color: rgb(255, 208, 89);
   height: 7vh;
@@ -840,9 +836,9 @@ input::placeholder {
   font-size: 15px;
 }
 
-.submitButtonProfile{
+.submitButtonProfile {
   color: #ffffff;
-  background-color:rgb(255, 208, 89);
+  background-color: rgb(255, 208, 89);
   height: 3rem;
   width: 11rem;
   border: none;
@@ -851,10 +847,10 @@ input::placeholder {
   font-size: 18px;
 }
 
-.formContainerProfile{
+.formContainerProfile {
   display: grid;
   grid-template-columns: auto auto;
-
+}
 .flat-form {
   width: 75%;
   margin: auto;
@@ -1117,5 +1113,4 @@ label {
   text-decoration: none;
   font-size: 16px;
   border-radius: 5px;
-
 }
