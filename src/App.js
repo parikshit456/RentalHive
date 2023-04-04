@@ -10,6 +10,7 @@ import PersonalDetails from "./components/PersonalDetails";
 import Pref from "./components/Pref";
 import FlatForm from "./components/FlatForm";
 import AddListing from "./components/AddListing";
+import Myprofile from "./components//Myprofile";
 
 function App() {
   return (
@@ -24,8 +25,13 @@ function App() {
           <Route path="/PersonalDetails" element={<PersonalDetails />} />
           <Route path="/Pref" element={<Pref />} />
           <Route path="/listings" element={<Listings />} />
+
+          <Route path="/add-listing" element={<AddListing /> } />
+          <Route path="/MyProfile" element={<Myprofile /> } />
+
           <Route path="/have-flat" element={<FlatForm />} />
-          <Route path="/add-listing" element={<AddListing />} />
+         
+
         </Routes>
       </Router>
     </div>
