@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import PersonalDetails from "./components/PersonalDetails";
 import Pref from "./components/Pref";
 import AddListing from "./components/AddListing";
+import Myprofile from "./components//Myprofile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/Pref' element={<Pref/>}/>
           <Route path="/listings" element={<Listings />} />
           <Route path="/add-listing" element={<AddListing /> } />
+          <Route path="/MyProfile" element={<Myprofile /> } />
         </Routes>
       </Router>
     </div>
