@@ -5,9 +5,6 @@
 * {
   font-family: Poppins, sans-serif;
 }
-.App {
-  text-align: center;
-}
 
 .navbar {
   height: 80px;
@@ -637,6 +634,10 @@ a {
   border-color: #4b5563;
 }
 
+.add-listing {
+  text-align: center;
+}
+
 .add-listing-content {
   width: 80%;
   /* margin-left: auto; */
@@ -719,10 +720,6 @@ a {
 }
 
 /* Myprofile page Css */
-
-.App {
-  text-align: center;
-}
 
 .App-logo {
   height: 40vmin;
