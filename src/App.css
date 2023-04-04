@@ -61,7 +61,8 @@
 
 .signin-btn:hover,
 .signup-btn:hover {
-  background-color: rgb(164, 164, 164, 0.1);
+  background-color: rgb(79, 77, 77);
+ 
 }
 
 .explore {
@@ -328,6 +329,7 @@ body {
   width: 380px;
   height: 450px;
   border: 1px solid rgba(255, 208, 0, 0.863);
+ 
   /* box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow); */
 }
 @media (min-width: 1024px) {
@@ -526,20 +528,23 @@ a {
 .option {
   display: flex;
   justify-content: space-between;
-  padding: 15px 0px;
+  padding: 15px 17px;
+  
 }
 .dropdown {
   height: 40px;
   margin-top: 10px;
   width: 195px;
   border-radius: 5px;
-  background-color: rgb(243, 244, 246);
+  background-color:rgb(243, 244, 246);
 }
 .formButton {
   background-color: #e2e2e2;
-  font-weight: 600;
-  border-radius: 5px;
-  font-size: 1rem;
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 10px;
+ 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -548,11 +553,13 @@ a {
   margin-top: 10px;
 }
 .formButtonActive {
-  background-color: rgba(255, 208, 0, 0.863);
+  background-color: rgb(255, 208, 89); 
   color: #ffffff;
-  font-weight: 600;
-  border-radius: 5px;
-  font-size: 1rem;
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 10px;
+ 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -717,6 +724,42 @@ a {
   display: flex;
   align-items: center;
   margin-top: 20px;
+}
+
+
+.gender-button{
+  margin-left: 218px;
+}
+
+/* .phone-number{
+  background-color: rgb(243, 244, 246);
+} */
+
+.sign-in-image-container{
+  margin-left: 396px;
+  height: 450px;
+  margin-top: -422px;
+  border-radius: 10px;
+  border: 1px solid rgb(255, 208, 89);
+  filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
+}
+
+
+.gender-button{
+  margin-left: 218px;
+}
+
+/* .phone-number{
+  background-color: rgb(243, 244, 246);
+} */
+
+.sign-in-image-container{
+  margin-left: 396px;
+  height: 450px;
+  margin-top: -422px;
+  border-radius: 10px;
+  border: 1px solid rgb(255, 208, 89);
+  filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
 
 /* Myprofile page Css */
