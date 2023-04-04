@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import location_icon from "../assets/svg/location_icon.svg";
 import house_search from "../assets/svg/house_search.svg";
+import TextInputField from "./TextInputField";
 
 const ListingNavbar = ({ accodomationType }) => {
   const [type, setType] = useState("all");
@@ -36,13 +37,7 @@ const ListingNavbar = ({ accodomationType }) => {
           PG
         </li>
       </ul>
-      <div className="location-searchbar">
-        <img className="location-icon" src={location_icon} alt="" />
-
-        <div className="search-bar">
-          <input type="text" placeholder="Search Places..." />
-        </div>
-      </div>
+      <TextInputField placeholder={"Search Places..."} icon={location_icon} />
     </div>
   );
 };
