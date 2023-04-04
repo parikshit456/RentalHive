@@ -7,7 +7,7 @@ import { getAuth , signInWithEmailAndPassword } from 'firebase/auth'
 import { toast } from 'react-toastify' 
 import OAuth from './OAuth'
 
-
+import peopleImg from '../assets/jpg/people-transformed.jpeg'
 const Signin = () => {
     const [showPassword , setShowPassword] = useState(false)
     const [formData , setFormData] = useState({
@@ -43,6 +43,7 @@ const Signin = () => {
         <header>
             <p className='pageHeader'></p>
         </header>
+       
         <form onSubmit={onSubmit}>
             <input type='email'
             className='emailInput'
@@ -68,6 +69,9 @@ const Signin = () => {
         </form>
         <OAuth/>
         <Link to='/Signup' className='registerLink'>Sign Up Instead</Link>
+        <div >
+            <img src={peopleImg} alt='image' className='sign-in-image-container'/>
+        </div>
     </div>
   )
 }

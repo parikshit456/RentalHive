@@ -31,7 +31,8 @@ const PersonalDetails = () => {
       </div>
       
       <div className="option">
-            <p style={{marginRight : "340px"}}>Gender</p>
+            <p>Gender</p>
+            <div style={{display:'flex'}} className='gender-button'>
             <button
               className={gender ? 'formButtonActive' : 'formButton'}
               type='button'
@@ -51,6 +52,7 @@ const PersonalDetails = () => {
             >
               Female
             </button>
+            </div>
           </div>
       <div className="option">
         <p>In which city you are looking for?</p>
@@ -72,9 +74,10 @@ const PersonalDetails = () => {
         <PhoneInput
                   country={"in"}
                   containerStyle={{height: "34px" }}
-                  inputStyle={{width : "198px" , borderRadius: "5px"}}
+                  inputStyle={{width : "300px" , borderRadius: "5px",backgroundColor:"rgb(243, 244, 246)"}}
                   disableDropdown="false"
                   placeholder="+91 99999-99999"
+                  className='phone-number'
                
                 />
         </div>
