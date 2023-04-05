@@ -11,6 +11,8 @@ import Pref from "./components/Pref";
 import FlatForm from "./components/FlatForm";
 import AddListing from "./components/AddListing";
 import Myprofile from "./components//Myprofile";
+import Profile from "./components/Profile";
+import ListingDetails from "./components/ListingDetails";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/Signup" element={<Signup />} />
           <Route path="/PersonalDetails" element={<PersonalDetails />} />
           <Route path="/Pref" element={<Pref />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path="/ListingDetails" element={<ListingDetails />} />
           <Route path="/listings" element={<Listings />} />
 
           <Route path="/add-listing" element={<AddListing /> } />
