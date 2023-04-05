@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/choose-location" element={<LocationPicker />} />
@@ -30,12 +30,10 @@ function App() {
           <Route path="/ListingDetails" element={<ListingDetails />} />
           <Route path="/listings" element={<Listings />} />
 
-          <Route path="/add-listing" element={<AddListing /> } />
-          <Route path="/MyProfile" element={<Myprofile /> } />
+          <Route path="/add-listing" element={<AddListing />} />
+          <Route path="/MyProfile" element={<Myprofile />} />
 
           <Route path="/have-flat" element={<FlatForm />} />
-         
-
         </Routes>
       </Router>
     </div>

@@ -1,6 +1,11 @@
 import React from "react";
 
-const TextInputField = ({ placeholder, icon, type = "icon" }) => {
+const TextInputField = ({
+  handleInputChange,
+  placeholder,
+  icon,
+  type = "icon",
+}) => {
   return (
     <div className="text-box">
       {type === "icon" ? (
@@ -10,7 +15,11 @@ const TextInputField = ({ placeholder, icon, type = "icon" }) => {
       )}
 
       <div className="input-bar">
-        <input type="text" placeholder={placeholder} />
+        <input
+          onChange={handleInputChange}
+          type="text"
+          placeholder={placeholder}
+        />
       </div>
     </div>
   );
