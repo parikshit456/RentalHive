@@ -14,7 +14,7 @@ const Pref = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className="prefDiv">
       <div className="prefCard">
         <p style={{ textAlign: "center", fontSize: "23px" }}>
           What type of flatmate you like?

@@ -62,7 +62,6 @@
 .signin-btn:hover,
 .signup-btn:hover {
   background-color: rgb(79, 77, 77);
- 
 }
 
 .explore {
@@ -71,6 +70,9 @@
   align-items: center;
   justify-content: space-evenly;
 }
+
+
+
 .explore-tagline {
   font-size: 40px;
   font-weight: 600;
@@ -329,8 +331,14 @@ body {
   width: 380px;
   height: 450px;
   border: 1px solid rgba(255, 208, 0, 0.863);
- 
+  border-radius: 10px;
+
   /* box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow); */
+}
+@media only screen and (max-width: 600px) {
+  .pageContainer {
+    width: 345px;
+  }
 }
 @media (min-width: 1024px) {
   .pageContainer {
@@ -510,12 +518,11 @@ a {
   padding: 1rem;
   box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   width: 650px;
-  height: 450px;
-  border: 1px solid rgba(255, 208, 0, 0.863);
   background-color: white;
+  margin: 20px;
+  border-radius: 10px;
 }
-
-/* @media only screen and (max-width: 800px){
+@media only screen and (max-width: 600px){
   .personaldetailForm{
     margin: 1rem;
     padding: 1rem;
@@ -524,54 +531,48 @@ a {
     height: 400px;
     border: 1px solid rgba(255, 208, 0, 0.863);
   }
-} */
+}
+
 .option {
   display: flex;
   justify-content: space-between;
   padding: 15px 17px;
-  
+}
+@media only screen and (max-width: 600px) {
+  .option {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 17px;
+  }
 }
 .dropdown {
   height: 40px;
   margin-top: 10px;
-  width: 195px;
+  width: 220px;
   border-radius: 5px;
-  background-color:rgb(243, 244, 246);
+  background-color: rgb(243, 244, 246);
+  padding: 0px 10px;
 }
 .formButton {
   background-color: #e2e2e2;
-  width: 120px;
+  width: 80px;
   height: 40px;
   margin: 10px;
   border-radius: 10px;
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10%;
-  height: 30px;
-  margin-top: 10px;
 }
 .formButtonActive {
-  background-color: rgb(255, 208, 89); 
+  background-color: rgb(255, 208, 89);
   color: #ffffff;
-  width: 120px;
+  width: 80px;
   height: 40px;
   margin: 10px;
   border-radius: 10px;
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10%;
-  height: 30px;
-  margin-top: 10px;
 }
 .prefCard {
   box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  height: 705px;
   width: 685px;
   padding: 10px;
+  margin: 20px;
   border-radius: 10px;
 }
 .selectCardImg {
@@ -610,7 +611,7 @@ a {
   color: white;
 }
 .prefBtn {
-  background-color: rgba(255, 208, 0, 0.863);
+  background-color: rgb(255 255 196 / 86%);
   width: 200px;
   height: 40px;
   margin: 40px;
@@ -618,12 +619,26 @@ a {
   text-align: center;
   cursor: pointer;
 }
+.prefBtn:hover {
+  background-color: rgb(255, 208, 89);
+}
+
+
 .prefCardInside {
-  height: 500px;
   width: 60%;
   display: grid;
   grid-template-columns: auto auto auto auto;
 }
+@media only screen and (max-width: 600px) {
+  .prefCardInside{
+    grid-template-columns: 1fr auto; 
+    }
+}
+.prefDiv{
+  display: flex;
+  justify-content: center;
+}
+
 
 .requirement-heading {
   font-weight: normal;
@@ -726,16 +741,11 @@ a {
   margin-top: 20px;
 }
 
-
-.gender-button{
-  margin-left: 218px;
-}
-
 /* .phone-number{
   background-color: rgb(243, 244, 246);
 } */
 
-.sign-in-image-container{
+.sign-in-image-container {
   margin-left: 396px;
   height: 450px;
   margin-top: -422px;
@@ -743,17 +753,20 @@ a {
   border: 1px solid rgb(255, 208, 89);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
-
-
-.gender-button{
-  margin-left: 218px;
+@media only screen and (max-width: 600px) {
+  .sign-in-image-container{
+    visibility: hidden;
+  }
+}
+.gender-button {
+  margin-left: 300px;
 }
 
 /* .phone-number{
   background-color: rgb(243, 244, 246);
 } */
 
-.sign-in-image-container{
+.sign-in-image-container {
   margin-left: 396px;
   height: 450px;
   margin-top: -422px;
@@ -1153,4 +1166,64 @@ label {
   text-decoration: none;
   font-size: 16px;
   border-radius: 5px;
+}
+/* Dropdown Button */
+.dropbtn {
+  background-color: rgb(255, 208, 89);
+  color: white;
+  padding: 3px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown1 {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  color: rgb(255, 208, 89);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown1:hover .dropdown-content {
+  display: block;
+}
+
+.listingdetail {
+  box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  width: 760px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.listingdetasilinside hr {
+  margin: 45px 0px;
+  border-color: #d5d5d5;
+}
+.listingInfo {
+  margin: 0px 50px;
 }
