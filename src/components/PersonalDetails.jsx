@@ -4,7 +4,6 @@ import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 
 const PersonalDetails = () => {
-    const [value , setValue] = useState()
     const [gender , setGender] = useState()
 
     const onMutate = (e) => {
@@ -20,7 +19,8 @@ const PersonalDetails = () => {
 
     
     <div className="personaldetailForm">
-      <div style={{textAlign : "center" , padding :"30px"}}>Personal Details</div>
+      <h3 style={{textAlign : "center" , padding :"10px" , fontSize: "30px"}}>Personal Details</h3>
+      <hr/>
       <div className="option">
         <p>You are</p>
         <select className="dropdown">
@@ -70,11 +70,11 @@ const PersonalDetails = () => {
       </div>
       <div className="option">
         <p>Your Mobile Number</p>
-        <div style={{float:"right"}}>
+        <div style={{float:"right", marginTop:"10px"}}>
         <PhoneInput
                   country={"in"}
                   containerStyle={{height: "34px" }}
-                  inputStyle={{width : "300px" , borderRadius: "5px",backgroundColor:"rgb(243, 244, 246)"}}
+                  inputStyle={{width : "223px" , borderRadius: "5px",backgroundColor:"rgb(243, 244, 246)"}}
                   disableDropdown="false"
                   placeholder="+91 99999-99999"
                   className='phone-number'
@@ -82,7 +82,9 @@ const PersonalDetails = () => {
                 />
         </div>
       </div>
-      
+      <div style={{ display: "flex", justifyContent: "center" }}>
+          <button className="prefBtn">Continue</button>
+        </div>
     </div>
     </div>
     
