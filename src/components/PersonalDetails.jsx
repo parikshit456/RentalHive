@@ -19,7 +19,7 @@ const PersonalDetails = () => {
 
     
     <div className="personaldetailForm">
-      <h3 style={{textAlign : "center" , fontSize: "30px"}}>Personal Details</h3>
+      <h3 style={{textAlign : "center" , padding :"10px" , fontSize: "30px"}}>Personal Details</h3>
       <hr/>
       <div className="option">
         <p>You are</p>
@@ -31,7 +31,7 @@ const PersonalDetails = () => {
       </div>
       
       <div className="option">
-            <p>Your Gender</p>
+            <p>Gender</p>
             <div style={{display:'flex'}} className='gender-button'>
             <button
               className={gender ? 'formButtonActive' : 'formButton'}
@@ -70,14 +70,15 @@ const PersonalDetails = () => {
       </div>
       <div className="option">
         <p>Your Mobile Number</p>
-        <div className="phone-number">
+        <div style={{float:"right", marginTop:"10px"}}>
         <PhoneInput
                   country={"in"}
                   containerStyle={{height: "34px" }}
-                  inputStyle={{width : "100%" , borderRadius: "5px",backgroundColor:"rgb(243, 244, 246)"}}
-                  inputClass="phone-number"
+                  inputStyle={{width : "223px" , borderRadius: "5px",backgroundColor:"rgb(243, 244, 246)"}}
                   disableDropdown="false"
-                  placeholder="+91 99999-99999"  
+                  placeholder="+91 99999-99999"
+                  className='phone-number'
+               
                 />
         </div>
       </div>

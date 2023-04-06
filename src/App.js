@@ -34,7 +34,6 @@ function App() {
           <Route path="/MyProfile" element={<Myprofile />} />
 
           <Route path="/have-flat" element={<FlatForm />} />
-          <Route path="/need-flat" element={<FlatForm />} />
         </Routes>
       </Router>
     </div>
