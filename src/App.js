@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Navbar /> */}
+        <Navbar />
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/choose-location" element={<LocationPicker />} />
@@ -26,7 +26,7 @@ function App() {
           <Route path="/Signup" element={<Signup />} />
           <Route path="/PersonalDetails" element={<PersonalDetails />} />
           <Route path="/Pref" element={<Pref />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/ListingDetails" element={<ListingDetails />} />
           <Route path="/listings" element={<Listings />} />
 
