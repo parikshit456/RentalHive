@@ -48,7 +48,21 @@
   padding: 10px 20px;
   cursor: pointer;
 }
-
+.listingPhone p{
+  margin: 10px 0px;
+  font-size: 13px;
+  text-align: center;
+}
+@media only screen and (max-width: 600px) {
+  .listingPhone h3{
+    display: none;
+  }
+  .listingPhone p{
+    font-size: 18px;
+    margin: 0px;
+    text-align: center;
+  }
+}
 .signup-btn {
   color: var(--primary-color);
   border-left: 1px solid rgb(164, 164, 164, 0.5);
@@ -375,11 +389,31 @@ body {
   margin: 1rem;
   padding: 1rem;
   width: 380px;
-  height: 450px;
   border: 1px solid rgba(255, 208, 0, 0.863);
   border-radius: 10px;
 
   /* box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow); */
+}
+.listingProfile{
+  display: flex;
+  grid-template-columns: auto auto auto auto;
+}
+@media only screen and (max-width: 600px) {
+  .listingProfile{
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+}
+.listingImg{
+  /* box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); */
+  width: 160px;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+}
+.listingImg p{
+  margin:0px;
+
 }
 .sign-in-img {
   width: 700px;
@@ -387,6 +421,16 @@ body {
   border: 1px solid rgb(255, 208, 89);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
+@media only screen and (max-width: 600px) {
+  .sign-in-img {
+    display: none;
+  }
+  .sign-up-img {
+    display: none;
+  }
+  
+}
+
 .sign-up-img {
   width: 780px;
   border-radius: 10px;
@@ -396,12 +440,14 @@ body {
 
 @media only screen and (max-width: 600px) {
   .pageContainer {
-    width: 345px;
+    width: 370px;
+    display: flex;
+    margin:auto;
   }
 }
 @media (min-width: 1024px) {
   .pageContainer {
-    margin: 3rem;
+    margin:auto;
   }
 }
 .pageHeader {
@@ -585,11 +631,10 @@ a {
   .personaldetailForm {
     margin: 1rem;
     padding: 1rem;
-    box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1),
-      0 4px 6px -4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    height: 400px;
+    box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1),0 4px 6px -4px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 208, 0, 0.863);
+    max-width: 80%;
+    margin: auto;
   }
 }
 
@@ -598,11 +643,14 @@ a {
   justify-content: space-between;
   padding: 15px 17px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .option {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 15px 17px;
+  }
+  .option p{
+    margin: 0px;
   }
 }
 .dropdown {
@@ -612,6 +660,11 @@ a {
   border-radius: 5px;
   background-color: rgb(243, 244, 246);
   padding: 0px 10px;
+}
+@media only screen and (max-width: 600px) {
+  .dropdown {
+    width: 100%;
+  }
 }
 .formButton {
   background-color: #e2e2e2;
@@ -720,14 +773,19 @@ a {
 
 .add-listing-content {
   width: 80%;
-  /* margin-left: auto; */
   display: flex;
   margin: auto;
   justify-content: space-around;
   align-items: center;
-  /* margin-right: auto; */
-  /* max-width: 1100px; */
-  /* height: 100%; */
+}
+@media only screen and (max-width: 600px) {
+  .add-listing-content {
+    /* width: 80%; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+  }
 }
 
 .addImage {
@@ -798,10 +856,13 @@ a {
   align-items: center;
   margin-top: 20px;
 }
+@media only screen and (max-width: 600px) {
+  .list-card,
+.list-card2 {
+  margin-right:100px;
+}
+}
 
-/* .phone-number{
-  background-color: rgb(243, 244, 246);
-} */
 
 .sign-in-image-container {
   margin-left: 396px;
@@ -819,18 +880,21 @@ a {
 .gender-button {
   margin-left: 300px;
 }
+@media only screen and (max-width: 600px) {
+  .gender-button {
+    margin-left: -10px;
+  }
+}
 
-/* .phone-number{
-  background-color: rgb(243, 244, 246);
-} */
-
-.sign-in-image-container {
-  margin-left: 396px;
-  height: 450px;
-  margin-top: -422px;
-  border-radius: 10px;
-  border: 1px solid rgb(255, 208, 89);
-  filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
+.phone-number{
+  float: right;
+  margin-top: 10px;
+  max-width: 13.9rem;
+}
+@media only screen and (max-width: 600px) {
+  .phone-number{
+    max-width: 15rem;
+  }
 }
 
 /* Myprofile page Css */
@@ -1348,16 +1412,124 @@ label {
 .listingdetail {
   box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   width: 760px;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   margin: 20px;
 }
+@media only screen and (max-width: 600px) {
+  .listingdetail {
+    box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    width: 360px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+}
 .listingdetasilinside hr {
-  margin: 45px 0px;
+  margin: 45px 0.5rem;
   border-color: #d5d5d5;
 }
 .listingInfo {
   margin: 0px 50px;
+}
+@media only screen and (max-width: 600px) {
+  .listingInfo{
+    margin: 20px;
+  }
+}
+
+.listingPhone {
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  justify-content: end;
+  padding: 5px;
+  align-items: center;
+}
+@media only screen and (max-width: 600px) {
+  .listingPhone {
+    display: flex;
+    flex-direction: column;
+    width: 295px;
+    justify-content: end;
+    padding: 5px;
+    align-items: center;
+  }
+}
+.listingPref{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.listingPrefCard{
+  background-color: rgb(239, 239, 239);
+  padding: 17px;
+  width: 102px;
+  height: 90px;
+  justify-content: center;
+  display: grid;
+  margin: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 600px) {
+  .listingPrefCard{
+    background-color: rgb(239, 239, 239);
+    padding: 17px;
+    width: 91px;
+    height: 88px;
+    justify-content: center;
+    display: grid;
+    margin: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+}
+.listingProfileCard{
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 600px) {
+  .listingProfileCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.listingButton{
+  background-color: rgb(209, 209, 209);
+  width: 85%;
+  height: 34px;
+  padding: 10px;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+
+}
+@media only screen and (max-width: 600px) {
+  .listingButton{
+    background-color: rgb(255, 208, 89);
+    width: 55%;
+    height: 36px;
+    padding: 10px;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 25px 0px;
+    display: flex;
+    align-items: center;
+  }
+}
+.listingButton:hover{
+  background-color: rgb(255, 208, 89);
 }
