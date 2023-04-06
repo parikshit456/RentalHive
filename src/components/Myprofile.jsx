@@ -15,21 +15,21 @@ const Myprofile = () => {
 
 	return (
 		<div className="mainDivProfile">
-			<div className="formDivProfile" style={{ height: "72vh" }}>
+			<div className="formDivProfile">
 				<h1 style={{marginRight: '50vw', marginTop: '-30px',color: 'rgb(104, 107, 112)'}}>Profile</h1>
-                <hr style={{marginleft: '5px', width: '62vw',color: '#F3F4F6'}} />
+                <hr/>
 				<div className="gridContainerProfile">
-					<form className="formContainerProfile">
+					<div >
 						<div>
-							<div className="item1Profile" style={{ marginRight: "225px" }}>First Name</div>
+							<div className="item1Profile">First Name</div>
 							<input className="inputProfile" type="text" placeholder="John" />
 						</div>
 						<div>
-							<div className="item2Profile" style={{ marginRight: "230px" }}>Last Name</div>
+							<div className="item2Profile">Last Name</div>
 							<input className="inputProfile" type="text" placeholder="Doe" />
 						</div>
 						<div>
-							<div className="item3Profile" style={{ marginRight: "225px" }}>Contact No.</div>
+							<div className="item3Profile">Contact No.</div>
 							<input className="inputProfile" type="tel" placeholder="987654321" />
 						</div>
 						<div>
@@ -61,7 +61,7 @@ const Myprofile = () => {
 								</button>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 				<button className="submitButtonProfile" style={{marginRight: '70vw'}}>Save Changes</button>
             <hr style={{marginleft: '5px', width: '62vw',color: '#F3F4F6'}}/>

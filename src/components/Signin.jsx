@@ -40,6 +40,7 @@ const Signin = () => {
     }
   };
   return (
+    <div>
     <div className="pageContainer">
       <div className="pageContent">
         <header>
@@ -81,9 +82,10 @@ const Signin = () => {
           Sign Up Instead
         </Link>
       </div>
-      <div>
+   
         <img src={peopleImg} alt="image" className="sign-in-img" />
-      </div>
+    
+    </div>
     </div>
   );
 };
