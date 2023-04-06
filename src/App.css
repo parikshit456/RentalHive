@@ -33,6 +33,14 @@
   align-items: center;
 }
 
+.navbar-toggle {
+  display: none;
+}
+
+.btn-container {
+  display: flex;
+}
+
 .signin-btn,
 .signup-btn {
   font-size: 18px;
@@ -62,6 +70,71 @@
 .signin-btn:hover,
 .signup-btn:hover {
   background-color: rgb(79, 77, 77);
+}
+
+@media only screen and (max-width: 900px) {
+  .navbar {
+    height: auto;
+    padding: 20px 40px;
+  }
+  /* .navbar span:nth-child(1) {
+    transform: translateY(-8px);
+  }
+
+  .navbar span:nth-child(2) {
+    transform: translateY(0);
+  }
+
+  .navbar span:nth-child(3) {
+    transform: translateY(8px);
+  } */
+
+  .navbar-list {
+    background-color: rgb(242, 244, 248);
+    /* background-color: #fff; */
+    box-shadow: 5px 5px 5px rgba(196, 196, 196, 0.3);
+    display: none; /* hide the menu items by default */
+    list-style: none;
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    transform: translateY(-100%);
+    transition: transform 1.3s ease-out;
+    width: 100%;
+    z-index: 0;
+  }
+  .btn-container {
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .navbar-list.active {
+    display: flex;
+    transform: translateY(0%);
+    /* show the menu items when the hamburger menu is active */
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .navbar-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .navbar-toggle span {
+    display: block;
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+  }
+  .download-btn button {
+    margin: 0px;
+  }
 }
 
 .explore {
@@ -288,62 +361,6 @@
 
 body {
   font-family: "Poppins", sans-serif;
-}
-.navbar {
-  height: 80px;
-  /* background-color: aliceblue; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 20px;
-}
-
-.navbar-logo {
-  font-size: 25px;
-  color: rgb(164, 164, 164);
-  font-weight: 600;
-}
-
-.navbar-logo span {
-  color: var(--primary-color);
-}
-
-.navbar-list {
-  margin-right: 100px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.signin-btn,
-.signup-btn {
-  font-size: 18px;
-  color: gray;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.signup-btn {
-  color: var(--primary-color);
-  border-left: 1px solid rgb(164, 164, 164, 0.5);
-}
-
-.download-btn button {
-  margin-left: 20px;
-  background-color: rgb(255, 208, 89, 0.8); /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-.signin-btn:hover,
-.signup-btn:hover {
-  background-color: rgb(164, 164, 164, 0.1);
 }
 
 .pageContainer {
@@ -1225,6 +1242,52 @@ label {
   text-decoration: none;
   font-size: 16px;
   border-radius: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+  .flat-form {
+    width: 80%;
+  }
+  .form-content {
+    padding: 10px;
+  }
+  .form-header {
+    font-size: 20px;
+    padding: 0px 10px;
+  }
+  .form-subheader {
+    padding: 0px 10px;
+    font-size: 12px;
+  }
+  .form-partition {
+    margin: 4px 10px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .form-row label {
+    margin: 0px 20px;
+  }
+  .text-box {
+    margin: 10px;
+  }
+  .multiple-select-card {
+    background-color: rgb(180, 39, 39);
+    padding: 17px;
+    width: 80px;
+    /* height: 108px; */
+    justify-content: center;
+    display: grid;
+    margin: 23px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 }
 
 .suggestion-list {
