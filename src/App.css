@@ -707,7 +707,12 @@ a {
   cursor: pointer;
 }
 .multiple-select-card:hover {
-  background-color: #dadada;
+  background-color: rgb(255, 208, 89);
+}
+@media only screen and (max-width: 600px){
+  .multiple-select-card:hover {
+    background-color: rgb(207, 207, 207);
+  }
 }
 .multiple-select-card-active {
   background-color: var(--primary-color);
@@ -1340,10 +1345,9 @@ label {
     margin: 10px;
   }
   .multiple-select-card {
-    background-color: rgb(180, 39, 39);
+    background-color: rgb(207, 207, 207);
     padding: 17px;
-    width: 80px;
-    /* height: 108px; */
+    width: 120px;
     justify-content: center;
     display: grid;
     margin: 23px;
@@ -1532,4 +1536,25 @@ label {
 }
 .listingButton:hover{
   background-color: rgb(255, 208, 89);
+}
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: rgb(255, 208, 89);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
 }
