@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Profile from "./Profile";
+import { getAuth } from "@firebase/auth";
 
-const Navbar = () => {
+
+
+const Navbar = ({authUser}) => {
+  
   const [isActive, setIsActive] = useState(false);
+  const [user , setUser] = useState(false)
   const navigate = useNavigate();
+
+
+  const auth = getAuth()
+
+  useEffect(() => {
+    setUser(auth.currentUser)
+    console.log(auth.currentUser)
+    setUser(false)
+  },[])
+
 
   const onSignin = () => {
     if (isActive) {
@@ -30,14 +46,23 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsActive(!isActive);
+    console.log(auth)
   };
+  
   return (
     <div className="navbar">
       <div onClick={onLogoClick} className="navbar-logo">
         House<span>Hunter</span>
       </div>
 
-      <div className={isActive ? "navbar-list active" : "navbar-list"}>
+      {authUser.currentUser ? <div>
+        <div className="btn-container">
+          <Profile/>
+        </div>
+        
+      </div> :
+      <div>
+       <div className={isActive ? "navbar-list active" : "navbar-list"}>
         <div className="btn-container">
           <div onClick={onSignin} className="signin-btn">
             Sign In
@@ -49,12 +74,17 @@ const Navbar = () => {
         <div className="download-btn">
           <button>Contact Us</button>
         </div>
-      </div>
-      <div class="navbar-toggle" onClick={toggleMenu}>
+      
+      </div> 
+      
+        <div className="navbar-toggle" onClick={toggleMenu}>
         <span></span>
         <span></span>
         <span></span>
       </div>
+      </div>
+      }
+      
     </div>
   );
 };

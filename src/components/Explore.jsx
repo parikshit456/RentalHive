@@ -9,6 +9,8 @@ const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+
+
   const handleInputChange = (event) => {
     setQuery(event.target.value);
 
