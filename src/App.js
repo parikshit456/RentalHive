@@ -14,16 +14,36 @@ import Myprofile from "./components//Myprofile";
 import Profile from "./components/Profile";
 import ListingDetails from "./components/ListingDetails";
 import PrivateRoute from "./components/PrivateRoute";
-import { getAuth } from "@firebase/auth";
-import { useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "@firebase/auth";
+import { useEffect, useState } from "react";
 
 function App() {
   const auth = getAuth()
+  const [user, setUser] = useState(null);
+
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        console.log(user)
+        setUser(user)
+        const uid = user.uid;
+        // ...
+      } else {
+        // User is signed out
+        setUser(null)
+  
+        // ...
+      }
+    });
+  }, []);
   
   return (
     <div className="App">
       <Router>
-        <Navbar authUser={auth}/>
+        <Navbar authUser={user}/>
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/choose-location" element={<LocationPicker />} />
