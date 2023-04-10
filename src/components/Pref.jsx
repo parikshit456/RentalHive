@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import MultipleSelectCard from "./MultipleSelectCard";
 import { preferenceList } from "../assets/prefs";
 
