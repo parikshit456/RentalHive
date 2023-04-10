@@ -19,13 +19,16 @@ const ListingCard = ({ user }) => {
               <div className="rent">Rent</div>
               <div className="amount">₹ {rent}</div>
             </div>
-            <div className="gender">
-              <div className="gender-head">Looking for</div>
-              <div>{gender}</div>
-            </div>
-            <div className="looking-for">
-              <div className="looking-head">Looking for</div>
-              <div>Roommate</div>
+            <div className="sub-card-pref">
+              {" "}
+              <div className="gender">
+                <div className="gender-head">Looking for</div>
+                <div>{gender}</div>
+              </div>
+              <div className="looking-for">
+                <div className="looking-head">Looking for</div>
+                <div>Roommate</div>
+              </div>
             </div>
           </div>
         </div>

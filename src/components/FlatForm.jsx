@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TextInputField from "./TextInputField";
 import location_icon from "../assets/svg/location_icon.svg";
 import SelectInputField from "./SelectInputField";
@@ -10,6 +10,7 @@ import MultipleSelectCard from "./MultipleSelectCard";
 const FlatForm = () => {
   const location = useLocation();
   const type = location.pathname;
+  const navigate = useNavigate();
 
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
@@ -32,6 +33,7 @@ const FlatForm = () => {
     <div className="flat-form">
       <div className="flat-type">
         <button
+          onClick={() => navigate("/have-flat")}
           className={
             type === "/have-flat" ? "have-flat-btn-active" : "have-flat-btn"
           }
@@ -39,6 +41,7 @@ const FlatForm = () => {
           Have Flat
         </button>
         <button
+          onClick={() => navigate("/need-flat")}
           className={
             type === "/need-flat" ? "need-flat-btn-active" : "need-flat-btn"
           }
@@ -83,30 +86,33 @@ const FlatForm = () => {
               tagline={"Occupancy"}
             />
           </div>
-
-          <label htmlFor="">Upload 3 Photos of your flat</label>
-          <div className="upload-image">
-            <input type="file" name="file" id="file" class="inputfile" />
-            <label for="file" className="upload-btn">
-              <img src={upload} />
-              Click to upload Image
-              <input
-                type="file"
-                className="formInputFile"
-                id="images"
-                // onChange={onMutate}
-                max="6"
-                accept=".jpg,.png,.jpeg"
-                multiple
-                required
-              />
-              <p>(JPG, PNG, JPEG)</p>
-            </label>
-          </div>
-          <label style={{ fontSize: "12px", fontWeight: "600" }} htmlFor="">
-            {" "}
-            You can upload images upto 25 MB
-          </label>
+          {type === "/have-flat" && (
+            <div>
+              <label htmlFor="">Upload 3 Photos of your flat</label>
+              <div className="upload-image">
+                <input type="file" name="file" id="file" class="inputfile" />
+                <label for="file" className="upload-btn">
+                  <img src={upload} />
+                  Click to upload Image
+                  <input
+                    type="file"
+                    className="formInputFile"
+                    id="images"
+                    // onChange={onMutate}
+                    max="6"
+                    accept=".jpg,.png,.jpeg"
+                    multiple
+                    required
+                  />
+                  <p>(JPG, PNG, JPEG)</p>
+                </label>
+              </div>
+              <label style={{ fontSize: "12px", fontWeight: "600" }} htmlFor="">
+                {" "}
+                You can upload images upto 25 MB
+              </label>
+            </div>
+          )}
 
           <div className="form-row-date">
             <div>
@@ -121,7 +127,9 @@ const FlatForm = () => {
             </div>
 
             <div className="form-date">
-              <label for="start">Availaible from</label>
+              <label for="start">
+                {type === "/have-flat" ? "Availaible from" : "Shift from"}
+              </label>
 
               <input
                 type="date"
@@ -132,20 +140,22 @@ const FlatForm = () => {
             </div>
           </div>
 
-          <div className="amenities">
-            <label htmlFor="">Amenities</label>
-            <div className="amenities-list">
-              {utilityList.map((utility, index) => {
-                return (
-                  <MultipleSelectCard
-                    project={utility}
-                    index={index}
-                    onClick={onClick}
-                  />
-                );
-              })}
+          {type === "/have-flat" && (
+            <div className="amenities">
+              <label htmlFor="">Amenities</label>
+              <div className="amenities-list">
+                {utilityList.map((utility, index) => {
+                  return (
+                    <MultipleSelectCard
+                      project={utility}
+                      index={index}
+                      onClick={onClick}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
           <div className="form-desc">
             <label htmlFor="">Description*</label>
             <textarea
