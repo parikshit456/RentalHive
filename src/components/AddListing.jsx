@@ -4,6 +4,11 @@ import addListingImage from "../assets/jpg/add-listing-image.jpg"
 
 import buildingSvg from "../assets/svg/building.svg";
 import roomMate from "../assets/svg/roommate.svg";
+
+
+import { Link } from "react-router-dom";
+
+
 const AddListing = () => {
   return (
     <div className="add-listing">
@@ -30,10 +35,12 @@ const AddListing = () => {
           <div className="list-card">
             <img src={roomMate} alt="Building" className="building-img" />
 
+          <Link to="/have-flat">
             <div className="option1">
               <h5>Have Flat</h5>
               <p className="desc1">Looking for flatmate</p>
             </div>
+            </Link>
           </div>
           <div className="list-card2">
             <img src={buildingSvg} alt="Building" className="building-img2" />

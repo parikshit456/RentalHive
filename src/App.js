@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "./components/Navbar";
 import Explore from "./components/Explore";
 import LocationPicker from "./components/LocationPicker";
