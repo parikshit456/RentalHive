@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
-const SelectInputField = ({ tagline, selectList }) => {
+const SelectInputField = ({ tagline, selectList,getSelectedValue,fieldType }) => {
   const [selectValue, setSelectValue] = useState("");
 
   const onMutate = (e) => {
+    console.log(e.target.name)
     selectList.forEach((element) => {
       if (e.target.name === element) {
         setSelectValue(element);
       }
     });
     console.log(selectValue);
+    getSelectedValue(e.target.name,fieldType)
 
     // if (e.target.name === "Male") {
     //   setSelectValue("Male");
@@ -23,7 +25,6 @@ const SelectInputField = ({ tagline, selectList }) => {
       <p className="select-tag">{tagline}</p>
       <div className="select-options">
         {selectList.map((value) => {
-          console.log(value);
           return (
             <button
               className={selectValue === value ? "btnactive" : "btn"}

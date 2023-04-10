@@ -5,6 +5,7 @@ const TextInputField = ({
   placeholder,
   icon,
   type = "icon",
+  name
 }) => {
   return (
     <div className="text-box">
@@ -16,6 +17,7 @@ const TextInputField = ({
 
       <div className="input-bar">
         <input
+        name={name}
           onChange={handleInputChange}
           type="text"
           placeholder={placeholder}
