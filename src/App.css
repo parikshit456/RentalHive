@@ -49,17 +49,14 @@
   cursor: pointer;
 }
 .listingPhone p {
-.listingPhone p {
   margin: 10px 0px;
   font-size: 13px;
   text-align: center;
 }
 @media only screen and (max-width: 600px) {
   .listingPhone h3 {
-  .listingPhone h3 {
     display: none;
   }
-  .listingPhone p {
   .listingPhone p {
     font-size: 18px;
     margin: 0px;
