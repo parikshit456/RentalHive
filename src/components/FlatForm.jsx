@@ -24,16 +24,21 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { async } from "@firebase/util";
 
 const FlatForm = () => {
-
   const location = useLocation();
   let type = location.pathname;
   type = type.substring(1);
-  
-  const [loading, setLoading] = useState(false);  const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  var curr = new Date();
+  console.log(type);
+  const auth = getAuth();
+  curr.setDate(curr.getDate());
+  var date = curr.toISOString().substring(0, 10);
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
   const [formData, setFormData] = useState({
+    name: "",
     clientType: type,
     loc: "",
     genderPreference: "",
@@ -43,7 +48,7 @@ const FlatForm = () => {
     amenities: [],
     desc: "",
     contactNumber: "",
-    availableFrom: "",
+    availableFrom: date,
   });
 
   const {
@@ -58,169 +63,150 @@ const FlatForm = () => {
     contactNumber,
     availableFrom,
   } = formData;
-  const [selectedUtilityList,setSelectedUtilityList] = useState([]) 
-  var curr = new Date();
-console.log(type)
-  const auth = getAuth();
-  curr.setDate(curr.getDate());
-  var date = curr.toISOString().substring(0, 10);
+  const [selectedUtilityList, setSelectedUtilityList] = useState([]);
 
   const [utilityList, setUtilityList] = useState(amenitiesList);
-  const onClick =async (index) => {
+  const onClick = async (index) => {
     let utilities = [...utilityList];
-    
+
     let selectedUtility = {
       ...utilities[index],
       selected: !utilities[index].selected,
     };
 
-      
-    
     console.log(selectedUtility.title);
     utilities[index] = selectedUtility;
     setUtilityList(utilities);
-    let amenitiesTempList =  utilities.filter((utility)=> utility.selected===true)
-    console.log(utilities)
+    let amenitiesTempList = utilities.filter(
+      (utility) => utility.selected === true
+    );
+    console.log(utilities);
 
-    amenitiesTempList = amenitiesTempList.map((element)=>{
-
-      return element.title
-    })
-    console.log(amenitiesTempList)
-    setFormData(
-      {
-        ...formData,
-        clientType:type,
-        amenities:[...amenitiesTempList]
-
-      }
-    )
-  };
-
-
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
- 
-
-    console.log(formData)
-    setLoading(true);
-let formDataCopy = {
-  ...formData
-}; 
-if(type==="have-flat"){
-  if (images?.length > 3) {
-    setLoading(false);
-    toast.error("Max 3 images");
-    return;
-  }
-  const storeImage = async (image) => {
-    return new Promise((resolve, reject) => {
-      const storage = getStorage();
-      const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
-
-      const storageRef = ref(storage, "images/" + fileName);
-      const uploadTask = uploadBytesResumable(storageRef, image);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
-        },
-        (error) => {
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            resolve(downloadURL);
-          });
-        }
-      );
+    amenitiesTempList = amenitiesTempList.map((element) => {
+      return element.title;
+    });
+    console.log(amenitiesTempList);
+    setFormData({
+      ...formData,
+      clientType: type,
+      amenities: [...amenitiesTempList],
     });
   };
 
-  const imgUrls = await Promise.all(
-    [...images].map((image) => storeImage(image))
-  ).catch(() => {
-    setLoading(false);
-    toast.error("Images not uploaded");
-    return;
-  });
-  formDataCopy = {
-    ...formData,
-    imgUrls,
+  const onSubmit = async (e) => {
+    e.preventDefault();
 
-    timestamp: serverTimestamp(),
-  };
-}else{
-  delete formDataCopy.amenities;
-}
+    console.log(formData);
+    setLoading(true);
+    let formDataCopy = {
+      ...formData,
+    };
+    if (type === "have-flat") {
+      if (images?.length > 3) {
+        setLoading(false);
+        toast.error("Max 3 images");
+        return;
+      }
+      const storeImage = async (image) => {
+        return new Promise((resolve, reject) => {
+          const storage = getStorage();
+          const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
 
-delete formDataCopy.images;
-    
+          const storageRef = ref(storage, "images/" + fileName);
+          const uploadTask = uploadBytesResumable(storageRef, image);
 
- 
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log("Upload is " + progress + "% done");
+              switch (snapshot.state) {
+                case "paused":
+                  console.log("Upload is paused");
+                  break;
+                case "running":
+                  console.log("Upload is running");
+                  break;
+              }
+            },
+            (error) => {
+              reject(error);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                resolve(downloadURL);
+              });
+            }
+          );
+        });
+      };
 
-   
+      const imgUrls = await Promise.all(
+        [...images].map((image) => storeImage(image))
+      ).catch(() => {
+        setLoading(false);
+        toast.error("Images not uploaded");
+        return;
+      });
+      formDataCopy = {
+        ...formData,
+        imgUrls,
 
-console.log(formDataCopy)
+        timestamp: serverTimestamp(),
+      };
+    } else {
+      delete formDataCopy.amenities;
+    }
+
+    delete formDataCopy.images;
+
+    console.log(formDataCopy);
     const docRef = await addDoc(collection(db, "listings"), formDataCopy);
-    setFormData({})
+    setFormData({});
     setLoading(false);
     toast.success("Listing saved");
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
-  }
-
-    const onMutate = (e) => {
-      let boolean = null;
-      console.log(e.target.name)
-      if (e.target.value === "true") {
-        boolean = true;
-      }
-
-      if (e.target.value === "false") {
-        boolean = false;
-      }
-
-      setFormData({
-        ...formData,
-        [e.target.name]:e.target.value
-      })
-
-      //Files
-      if (e.target.files) {
-        setFormData((prevState) => ({
-          ...prevState,
-          images: e.target.files,
-        }));
-      }
-
-      //text/boolean/numbers
-      if (!e.target.files) {
-        setFormData((prevState) => ({
-          ...prevState,
-          [e.target.name]: boolean ?? e.target.value,
-        }));
-        
-      
-    };
   };
-  const getSelectedValue = (selectedValue,type) =>{
+
+  const onMutate = (e) => {
+    let boolean = null;
+    console.log(e.target.name);
+    if (e.target.value === "true") {
+      boolean = true;
+    }
+
+    if (e.target.value === "false") {
+      boolean = false;
+    }
+
     setFormData({
-...formData,
-[type]: selectedValue
-})
-        }
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+    //Files
+    if (e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        images: e.target.files,
+      }));
+    }
+
+    //text/boolean/numbers
+    if (!e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: boolean ?? e.target.value,
+      }));
+    }
+  };
+  const getSelectedValue = (selectedValue, type) => {
+    setFormData({
+      ...formData,
+      [type]: selectedValue,
+    });
+  };
 
   if (loading) {
     return <Spinner />;
@@ -248,7 +234,7 @@ console.log(formDataCopy)
       </div>
       <div className="form-content">
         <h2 className="form-header">
-          {type === "/have-flat" ? "Have" : "Need"} Flat
+          {type === "have-flat" ? "Have" : "Need"} Flat
         </h2>
         <h6 className="form-subheader">If you are looking for flatmate.</h6>
         <div className="form-partition"></div>
@@ -267,7 +253,12 @@ console.log(formDataCopy)
                 handleInputChange={onMutate}
               />
             </div>
-            <SelectInputField selectList={genderList} tagline={"Looking For"} fieldType="genderPreference" getSelectedValue={getSelectedValue}/>
+            <SelectInputField
+              selectList={genderList}
+              tagline={"Looking For"}
+              fieldType="genderPreference"
+              getSelectedValue={getSelectedValue}
+            />
           </div>
           <div className="form-row">
             <div>
@@ -289,11 +280,19 @@ console.log(formDataCopy)
               fieldType="occupancy"
             />
           </div>
-          {type === "/have-flat" && (
+          {type === "have-flat" && (
             <div>
               <label htmlFor="">Upload 3 Photos of your flat</label>
               <div className="upload-image">
-                <input type="file" name="images" id="file" multiple required class="inputfile" onChange={onMutate}/>
+                <input
+                  type="file"
+                  name="images"
+                  id="file"
+                  multiple
+                  required
+                  class="inputfile"
+                  onChange={onMutate}
+                />
                 <label for="file" className="upload-btn">
                   <img src={upload} />
                   Click to upload Image
@@ -328,13 +327,12 @@ console.log(formDataCopy)
                 icon="+91"
                 name="contactNumber"
                 handleInputChange={onMutate}
-
               />
             </div>
 
             <div className="form-date">
               <label for="start">
-                {type === "/have-flat" ? "Availaible from" : "Shift from"}
+                {type === "have-flat" ? "Availaible from" : "Shift from"}
               </label>
 
               <input
@@ -347,7 +345,7 @@ console.log(formDataCopy)
             </div>
           </div>
 
-          {type === "/have-flat" && (
+          {type === "have-flat" && (
             <div className="amenities">
               <label htmlFor="">Amenities</label>
               <div className="amenities-list">
