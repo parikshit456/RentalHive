@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import Spinner from "./Spinner";
@@ -67,6 +67,17 @@ const Navbar = ({ authUser }) => {
       {user ? (
         <div className="btn-container">
           {/* <button className="navButton">Add Listing</button> */}
+          <Link to="/add-listing">
+            <button className="add-listing-btn">
+              <img
+                alt="svgImg"
+                style={{ width: "20px" }}
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNjQiIGhlaWdodD0iNjQiCnZpZXdCb3g9IjAsMCwyNTYsMjU2IgpzdHlsZT0iZmlsbDojMDAwMDAwOyI+CjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxnIHRyYW5zZm9ybT0ic2NhbGUoOC41MzMzMyw4LjUzMzMzKSI+PHBhdGggZD0iTTQsMTZoMTB2MTBjMCwwLjU1MjI4IDAuNDQ3NzIsMSAxLDFjMC41NTIyOCwwIDEsLTAuNDQ3NzIgMSwtMXYtMTBoMTBjMC41NTIyOCwwIDEsLTAuNDQ3NzIgMSwtMWMwLC0wLjU1MjI4IC0wLjQ0NzcyLC0xIC0xLC0xaC0xMHYtMTBjMCwtMC41NTIyOCAtMC40NDc3MiwtMSAtMSwtMWMtMC41NTIyOCwwIC0xLDAuNDQ3NzIgLTEsMXYxMGgtMTBjLTAuNTUyMjgsMCAtMSwwLjQ0NzcyIC0xLDFjMCwwLjU1MjI4IDAuNDQ3NzIsMSAxLDF6Ij48L3BhdGg+PC9nPjwvZz4KPC9zdmc+"
+              />
+              <span>Add Listing</span>
+            </button>
+          </Link>
+
           <Profile user={user} />
         </div>
       ) : (

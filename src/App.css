@@ -1889,3 +1889,14 @@ input::placeholder {
 .navButton {
   width: 50px;
 }
+
+.add-listing-btn {
+  background-color: var(--primary-color);
+  margin-right: 50px;
+  width: 150px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
