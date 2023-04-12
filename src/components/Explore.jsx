@@ -3,13 +3,12 @@ import house_search from "../assets/svg/house_search.svg";
 import location_icon from "../assets/svg/location_icon.svg";
 import TextInputField from "./TextInputField";
 import { cityList } from "../assets/cityList";
+import { ToastContainer } from "react-toastify";
 const Explore = () => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
-
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
@@ -67,6 +66,7 @@ const Explore = () => {
       <div className="explore-right">
         <img src={house_search} alt="" />
       </div>
+      <ToastContainer />
     </div>
   );
 };

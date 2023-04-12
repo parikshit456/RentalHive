@@ -13,19 +13,18 @@ const Navbar = ({ authUser }) => {
   const auth = getAuth();
 
   useEffect(() => {
-
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log(user)
-        setUser(user)
+        console.log(user);
+        setUser(user);
         const uid = user.uid;
         // ...
       } else {
         // User is signed out
-        setUser(null)
-  
+        setUser(null);
+
         // ...
       }
     });
@@ -59,7 +58,6 @@ const Navbar = ({ authUser }) => {
     console.log(auth);
   };
 
-
   return (
     <div className="navbar">
       <div onClick={onLogoClick} className="navbar-logo">
@@ -67,34 +65,34 @@ const Navbar = ({ authUser }) => {
       </div>
 
       {user ? (
-        <div>
-          <div className="btn-container">
-            {/* <button className="navButton">Add Listing</button> */}
-            <Profile user={user}/>
-          </div>
+        <div className="btn-container">
+          {/* <button className="navButton">Add Listing</button> */}
+          <Profile user={user} />
         </div>
-      ) : !user && (
-       <div>
-     <div className={isActive ? "navbar-list active" : "navbar-list"}>
-            <div className="btn-container">
-              <div onClick={onSignin} className="signin-btn">
-                Sign In
+      ) : (
+        !user && (
+          <div>
+            <div className={isActive ? "navbar-list active" : "navbar-list"}>
+              <div className="btn-container">
+                <div onClick={onSignin} className="signin-btn">
+                  Sign In
+                </div>
+                <div onClick={onSignup} className="signup-btn">
+                  Sign Up
+                </div>
               </div>
-              <div onClick={onSignup} className="signup-btn">
-                Sign Up
+              <div className="download-btn">
+                <button>Contact Us</button>
               </div>
             </div>
-            <div className="download-btn">
-              <button>Contact Us</button>
-            </div>
-          </div>
 
-          <div className="navbar-toggle" onClick={toggleMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
+            <div className="navbar-toggle" onClick={toggleMenu}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
-        </div>
+        )
       )}
     </div>
   );
