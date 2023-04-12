@@ -19,14 +19,14 @@ const ListingNavbar = ({ accodomationType }) => {
           All Listings
         </li>
         <li
-          className={type === "Flat" ? "list-active" : ""}
-          onClick={() => typeFunc("Flat")}
+          className={type === "have-flat" ? "list-active" : ""}
+          onClick={() => typeFunc("have-flat")}
         >
           Have Flat
         </li>
         <li
-          className={type === "Need Flat" ? "list-active" : ""}
-          onClick={() => typeFunc("Need Flat")}
+          className={type === "need-flat" ? "list-active" : ""}
+          onClick={() => typeFunc("need-flat")}
         >
           Need Flat
         </li>

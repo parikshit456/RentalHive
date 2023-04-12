@@ -37,10 +37,6 @@
   display: none;
 }
 
-.btn-container {
-  display: flex;
-}
-
 .signin-btn,
 .signup-btn {
   font-size: 18px;
@@ -89,7 +85,7 @@
 @media only screen and (max-width: 900px) {
   .navbar {
     height: auto;
-    padding: 20px 40px;
+    padding: 15px 18px;
   }
   /* .navbar span:nth-child(1) {
     transform: translateY(-8px);
@@ -117,10 +113,6 @@
     transition: transform 1.3s ease-out;
     width: 100%;
     z-index: 0;
-  }
-  .btn-container {
-    justify-content: center;
-    padding: 20px;
   }
 
   .navbar-list.active {
@@ -732,9 +724,23 @@ a {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.multiple-selected {
+  background-color: rgb(239, 239, 239);
+  padding: 17px;
+  width: 120px;
+  height: 108px;
+  justify-content: center;
+  display: grid;
+  margin: 23px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 5px;
+}
 .multiple-select-card:hover {
   background-color: rgb(255, 208, 89);
 }
+
 @media only screen and (max-width: 600px) {
   .multiple-select-card:hover {
     background-color: rgb(207, 207, 207);
@@ -1416,19 +1422,25 @@ label {
   border-bottom: 1px solid rgba(0, 0, 0, 0.342);
 }
 /* Dropdown Button */
-.dropbtn {
+.dropbtn-logo {
   background-color: rgb(255, 208, 89);
   color: white;
-  padding: 3px;
-  font-size: 16px;
+  padding: 10px 15px;
+  font-size: 22px;
+  font-weight: bold;
   border: none;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown1 {
   position: relative;
   display: inline-block;
+}
+
+.btn-container {
+  display: flex;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -1438,7 +1450,7 @@ label {
   right: 0px;
   padding: 20px;
 
-  top: 65px;
+  top: 55px;
   background-color: #f1f1f1;
   min-width: 200px;
   box-shadow: 10px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -1483,6 +1495,10 @@ label {
   margin: 20px;
 }
 @media only screen and (max-width: 600px) {
+  /* .dropbtn-logo {
+    margin-right: 0px;
+    margin-left: 10px;
+  } */
   .listingdetail {
     box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1),
       0 4px 6px -4px rgba(0, 0, 0, 0.1);

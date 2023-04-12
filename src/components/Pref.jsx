@@ -1,16 +1,60 @@
 import React from "react";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import MultipleSelectCard from "./MultipleSelectCard";
 import { preferenceList } from "../assets/prefs";
+import { getAuth } from "firebase/auth";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { db } from "../firebase.config";
+import { toast, ToastContainer } from "react-toastify";
 
-const Pref = () => {
+const Pref = ({ data }) => {
+  const navigate = useNavigate();
+  const [selectedPrefList, setSelectedPrefList] = useState([]);
   const [prefList, setPrefList] = useState(preferenceList);
   const onClick = (index) => {
     let prefs = [...prefList];
     let selectedPref = { ...prefs[index], selected: !prefs[index].selected };
     prefs[index] = selectedPref;
     setPrefList(prefs);
+    let prefsTempList = prefs.filter((pref) => pref.selected === true);
+
+    prefsTempList = prefsTempList.map((element) => {
+      return element.title;
+    });
+
+    setSelectedPrefList([...prefsTempList]);
+  };
+  const auth = getAuth();
+
+  console.log(auth);
+  const user = auth.currentUser;
+
+  const onSubmit = async () => {
+    console.log(user);
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+        ...data,
+        prefList: selectedPrefList,
+        timeStamp: serverTimestamp(),
+      });
+      navigate("/");
+
+      toast.success("You are succesfully registered", {
+        position: "top-right", // Set the position of the toast
+        autoClose: 3000, // Close the toast after 3 seconds
+        hideProgressBar: false, // Show progress bar while the toast is open
+        closeOnClick: true, // Close the toast when clicked
+        pauseOnHover: true, // Pause autoClose when hovered
+        draggable: true, // Make the toast draggable
+        progress: undefined, // Use the default progress bar
+      });
+    }
   };
 
   return (
@@ -36,7 +80,9 @@ const Pref = () => {
         </div>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <button className="prefBtn">Continue</button>
+          <button className="prefBtn" onClick={onSubmit}>
+            Submit
+          </button>
         </div>
       </div>
     </div>

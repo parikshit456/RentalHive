@@ -1,6 +1,11 @@
 import React from "react";
 
-const MultipleSelectCard = ({ project, index, onClick }) => {
+const MultipleSelectCard = ({
+  project,
+  index,
+  onClick,
+  isDetailedView = false,
+}) => {
   return (
     <button
       onClick={() => onClick(index)}
@@ -8,6 +13,8 @@ const MultipleSelectCard = ({ project, index, onClick }) => {
       className={
         project.selected
           ? "multiple-select-card-active"
+          : isDetailedView
+          ? "multiple-selected"
           : "multiple-select-card"
       }
     >

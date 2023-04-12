@@ -6,6 +6,8 @@ import SelectInputField from "./SelectInputField";
 import upload from "../assets/svg/upload.svg";
 import { amenitiesList } from "../assets/amenities";
 import MultipleSelectCard from "./MultipleSelectCard";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 //import { useNavigate } from "react-router-dom";
@@ -18,7 +20,6 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { db } from "../firebase.config";
-import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { async } from "@firebase/util";
@@ -38,6 +39,7 @@ const FlatForm = () => {
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
   const [formData, setFormData] = useState({
+    name: "",
     name: "",
     clientType: type,
     loc: "",
@@ -98,8 +100,10 @@ const FlatForm = () => {
 
     console.log(formData);
     setLoading(true);
+    console.log(auth.currentUser.displayName);
     let formDataCopy = {
       ...formData,
+      name: auth.currentUser.displayName,
     };
     if (type === "have-flat") {
       if (images?.length > 3) {
@@ -372,6 +376,7 @@ const FlatForm = () => {
           </div>
           <div className="submit-btn">
             <button onClick={onSubmit}>Submit</button>
+            <ToastContainer />
           </div>
         </form>
       </div>

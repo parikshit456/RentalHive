@@ -20,48 +20,53 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { useEffect, useState } from "react";
 
 function App() {
-  const auth = getAuth()
+  const auth = getAuth();
   const [user, setUser] = useState(null);
-
-
+  const [data, setData] = useState({});
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log(user)
-        setUser(user)
+        console.log(user);
+        setUser(user);
         const uid = user.uid;
         // ...
       } else {
         // User is signed out
-        setUser(null)
-  
+        setUser(null);
+
         // ...
       }
     });
   }, []);
-  
+
   return (
     <div className="App">
       <Router>
-        <Navbar authUser={user}/>
+        <Navbar authUser={user} />
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/choose-location" element={<LocationPicker />} />
           <Route exact path="/Signin" element={<Signin />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/PersonalDetails" element={<PersonalDetails />} />
-          <Route path="/Pref" element={<Pref />} />
-          <Route path="/Profile" element={<PrivateRoute />} >
+          <Route
+            path="/PersonalDetails"
+            element={<PersonalDetails setData={setData} />}
+          />
+          <Route path="/Pref" element={<Pref data={data} />} />
+          <Route path="/Profile" element={<PrivateRoute />}>
             <Route path="/Profile" element={<Profile />} />
           </Route>
-          
-          <Route path="/ListingDetails" element={<ListingDetails />} />
+
+          <Route
+            path="/ListingDetails/:listingId"
+            element={<ListingDetails />}
+          />
           <Route path="/listings" element={<Listings />} />
 
           <Route path="/add-listing" element={<AddListing />} />
-          
+
           <Route path="/MyProfile" element={<Myprofile />} />
 
           <Route path="/have-flat" element={<FlatForm />} />
