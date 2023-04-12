@@ -35,8 +35,8 @@ const Profile = ({ user }) => {
         <p>Hi {user.displayName}</p>
         <a href="/Pref">My Prefrence</a>
         <a href="#">My Notification</a>
-        <a href="#">My Profile</a>
-        <a href="#" style={{ color: "red" }} onClick={onLogout}>
+        <a href="/MyProfile">My Profile</a>
+        <a href="" style={{ color: "red" }} onClick={onLogout}>
           Logout
         </a>
       </div>

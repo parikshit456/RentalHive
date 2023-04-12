@@ -5,14 +5,27 @@ import MultipleSelectCard from "./MultipleSelectCard";
 import { preferenceList } from "../assets/prefs";
 import { getAuth } from "firebase/auth";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast, ToastContainer } from "react-toastify";
+import Spinner from "./Spinner";
 
 const Pref = ({ data }) => {
   const navigate = useNavigate();
+
   const [selectedPrefList, setSelectedPrefList] = useState([]);
   const [prefList, setPrefList] = useState(preferenceList);
+  const [loading, setLoading] = useState(false);
+
   const onClick = (index) => {
     let prefs = [...prefList];
     let selectedPref = { ...prefs[index], selected: !prefs[index].selected };
@@ -29,7 +42,7 @@ const Pref = ({ data }) => {
   const auth = getAuth();
 
   console.log(auth);
-  const user = auth.currentUser;
+  const user = auth?.currentUser;
 
   const onSubmit = async () => {
     console.log(user);
@@ -56,6 +69,42 @@ const Pref = ({ data }) => {
       });
     }
   };
+
+  useEffect(() => {
+    console.log(user?.uid);
+
+    const fetchListing = async () => {
+      const docRef = doc(db, "users", user?.uid);
+      const docSnap = await getDoc(docRef);
+
+      console.log(docSnap.data());
+      if (docSnap.exists()) {
+        setLoading(true);
+
+        console.log(docSnap.data());
+        let tempList = docSnap.data().prefList;
+        const updatedListWithSelected = prefList.map((item) => {
+          if (tempList.includes(item.title)) {
+            return { ...item, selected: true };
+          } else {
+            return item;
+          }
+        });
+        setPrefList(updatedListWithSelected);
+        console.log(prefList);
+        // prefList = prefList.map((pref) => {});
+        // setUserList(docSnap.data().prefList);
+        console.log(docSnap.data().prefList);
+
+        setLoading(false);
+      }
+    };
+    fetchListing();
+  }, [auth?.currentUser?.uid]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="prefDiv">

@@ -55,9 +55,9 @@ function App() {
             element={<PersonalDetails setData={setData} />}
           />
           <Route path="/Pref" element={<Pref data={data} />} />
-          <Route path="/Profile" element={<PrivateRoute />}>
+          {/* <Route path="/Profile" element={<PrivateRoute />}>
             <Route path="/Profile" element={<Profile />} />
-          </Route>
+          </Route> */}
 
           <Route
             path="/ListingDetails/:listingId"
