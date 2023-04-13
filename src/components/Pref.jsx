@@ -13,6 +13,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
@@ -25,19 +26,39 @@ const Pref = ({ data }) => {
   const [selectedPrefList, setSelectedPrefList] = useState([]);
   const [prefList, setPrefList] = useState(preferenceList);
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    city: "",
+    email: "",
+    mobile: "",
+    lookingFor: "",
+    myGender: "",
+    timeStamp: {},
+    prefList: [],
+  });
 
-  const onClick = (index) => {
-    let prefs = [...prefList];
-    let selectedPref = { ...prefs[index], selected: !prefs[index].selected };
-    prefs[index] = selectedPref;
-    setPrefList(prefs);
-    let prefsTempList = prefs.filter((pref) => pref.selected === true);
+  const getSelectedPrefList = (prefsList) => {
+    let prefsTempList = prefsList.filter((pref) => pref.selected === true);
 
     prefsTempList = prefsTempList.map((element) => {
       return element.title;
     });
-
     setSelectedPrefList([...prefsTempList]);
+  };
+
+  const onClick = (index) => {
+    let prefs = [...prefList];
+    console.log(prefs);
+
+    let selectedPref = { ...prefs[index], selected: !prefs[index].selected };
+    prefs[index] = selectedPref;
+    setPrefList(prefs);
+    getSelectedPrefList(prefs);
+
+    setFormData({
+      ...formData,
+      prefList: prefs.filter((pref) => pref.selected).map((pref) => pref.title),
+    });
   };
   const auth = getAuth();
 
@@ -67,6 +88,13 @@ const Pref = ({ data }) => {
         draggable: true, // Make the toast draggable
         progress: undefined, // Use the default progress bar
       });
+    } else {
+      setLoading(true);
+      const docRef = doc(db, "users", user.uid);
+      await updateDoc(docRef, formData);
+      setLoading(false);
+      toast.success("Preference Updated");
+      navigate("/");
     }
   };
 
@@ -77,11 +105,11 @@ const Pref = ({ data }) => {
       const docRef = doc(db, "users", user?.uid);
       const docSnap = await getDoc(docRef);
 
-      console.log(docSnap.data());
       if (docSnap.exists()) {
         setLoading(true);
 
         console.log(docSnap.data());
+        setFormData(docSnap.data());
         let tempList = docSnap.data().prefList;
         const updatedListWithSelected = prefList.map((item) => {
           if (tempList && tempList.includes(item.title)) {
@@ -91,6 +119,8 @@ const Pref = ({ data }) => {
           }
         });
         setPrefList(updatedListWithSelected);
+        getSelectedPrefList(updatedListWithSelected);
+
         console.log(prefList);
         // prefList = prefList.map((pref) => {});
         // setUserList(docSnap.data().prefList);
