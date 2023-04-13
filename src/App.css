@@ -101,23 +101,27 @@
 
   .navbar-list {
     background-color: rgb(242, 244, 248);
-    /* background-color: #fff; */
-    box-shadow: 5px 5px 5px rgba(196, 196, 196, 0.3);
-    display: none; /* hide the menu items by default */
+
+    /* box-shadow: 5px 5px 5px  rgba(196, 196, 196, 0.3); */
+    /* display: none; */
+    display: flex;
+
+    flex-direction: column;
+
     list-style: none;
     padding: 10px;
     position: absolute;
-    top: 50px;
+    top: 0px;
     left: 0;
     transform: translateY(-100%);
-    transition: transform 1.3s ease-out;
+    transition: transform 0.3s ease-out;
     width: 100%;
     z-index: 0;
   }
 
   .navbar-list.active {
     display: flex;
-    transform: translateY(0%);
+    transform: translateY(50%);
     /* show the menu items when the hamburger menu is active */
     flex-direction: column;
     justify-content: center;
@@ -137,6 +141,19 @@
     height: 4px;
     background-color: #333;
     border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .navbar-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+
+  .navbar-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
   }
   .download-btn button {
     margin: 0px;
@@ -732,7 +749,7 @@ a {
   height: 108px;
   justify-content: center;
   display: grid;
-  margin: 23px;
+  margin: 18px;
   font-size: 12px;
   font-weight: 600;
   border-radius: 5px;
@@ -1425,7 +1442,7 @@ label {
 .dropbtn-logo {
   background-color: rgb(255, 208, 89);
   color: white;
-  padding: 10px 15px;
+  padding: 8px 15px;
   font-size: 22px;
   font-weight: bold;
   border: none;
@@ -1499,6 +1516,7 @@ label {
     margin-right: 0px;
     margin-left: 10px;
   } */
+
   .listingdetail {
     box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1),
       0 4px 6px -4px rgba(0, 0, 0, 0.1);
@@ -1893,12 +1911,35 @@ input::placeholder {
 .add-listing-btn {
   background-color: var(--primary-color);
   margin-right: 50px;
-  width: 150px;
+  /* width: 200px; */
   border-radius: 10px;
+  padding: 15px 25px;
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.add-icon {
+  width: 20px;
+  margin-right: 4px;
+}
+
+@media only screen and (max-width: 900px) {
+  .add-listing-btn {
+    border-radius: 50%;
+    padding: 10px 12px;
+    margin-right: 15px;
+  }
+  .add-listing-btn span {
+    display: none;
+  }
+  .add-icon {
+    width: 22px;
+    margin-right: 0px;
+  }
 }
 
 

@@ -110,7 +110,7 @@ const ListingDetails = () => {
                   project={project}
                   index={index}
                   isDetailedView={true}
-                  onClick={onClick}
+                  onClick={() => {}}
                 />
               );
             })}
