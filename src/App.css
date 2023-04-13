@@ -1908,12 +1908,6 @@ input::placeholder {
 }
 
 
-.swiperSlideDiv {
-  position: inherit;
-  width: 400px;
-  height: 300px;
-}
-
 /* ImageSlider */
 .slider {
   width: 100%;
