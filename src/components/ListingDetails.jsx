@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import picture from "../assets/jpg/picture.jpg";
 import owl from "../assets/jpg/owl.png";
 import profile from "../assets/svg/profile.svg";
@@ -6,12 +6,26 @@ import { preferenceList } from "../assets/prefs";
 import MultipleSelectCard from "./MultipleSelectCard";
 import sendreq from "../assets/svg/sendreq.svg";
 import address from "../assets/svg/address.svg";
-import { useNavigate, useParams } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase.config";
-import Spinner from "./Spinner";
-import { amenitiesList } from "../assets/amenities";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import SwiperCore, { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+import ImageSlider from "./ImageSlider";
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y,Autoplay]);
+
+const images = [
+  "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80",
+  
+ "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+  
+ "https://images.unsplash.com/photo-1536782376847-5c9d14d97cc0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+];
+
+console.log(images);
 
 const ListingDetails = () => {
   const navigate = useNavigate();
@@ -67,7 +81,15 @@ const ListingDetails = () => {
               </button>
             </div>
           </div>
+          </div>
 
+          <hr />
+
+          <h3>Basic Info</h3>
+          <div className="listingProfile">
+            <div className="listingInfo">
+              <p>Gender</p>
+              <h3>Male</h3>
           <hr />
 
           <h3>Basic Info</h3>
