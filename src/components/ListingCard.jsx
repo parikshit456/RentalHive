@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import location_icon from "../assets/svg/location_icon.svg";
+import Spinner from "./Spinner";
 
 const ListingCard = ({ user }) => {
   const {
@@ -10,6 +11,10 @@ const ListingCard = ({ user }) => {
     genderPreference,
     match_percentage,
   } = user.data;
+
+  if (!user) {
+    return <Spinner />;
+  }
   return (
     <Link to={`/ListingDetails/${user.id}`}>
       <div className="listing-card">

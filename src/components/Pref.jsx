@@ -84,7 +84,7 @@ const Pref = ({ data }) => {
         console.log(docSnap.data());
         let tempList = docSnap.data().prefList;
         const updatedListWithSelected = prefList.map((item) => {
-          if (tempList.includes(item.title)) {
+          if (tempList && tempList.includes(item.title)) {
             return { ...item, selected: true };
           } else {
             return item;
