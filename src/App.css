@@ -1,5 +1,6 @@
 :root {
-  --primary-color: rgb(255, 208, 89);
+  --primary-color: rgb(255, 87, 51);
+  --secondary-color:  rgb(255,176,124);
 }
 
 * {
@@ -66,7 +67,7 @@
 
 .download-btn button {
   margin-left: 20px;
-  background-color: rgb(255, 208, 89, 0.8); /* Green */
+  background-color: var(--secondary-color); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -79,7 +80,7 @@
 
 .signin-btn:hover,
 .signup-btn:hover {
-  background-color: rgb(79, 77, 77);
+  background-color: rgb(116, 116, 116);
 }
 
 @media only screen and (max-width: 900px) {
@@ -402,12 +403,11 @@ body {
 }
 
 .pageContent {
-  border: 1px solid rgba(255, 208, 0, 0.863);
+  border: 1px solid var(--primary-color);
   box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   margin: 1rem;
   padding: 1rem;
   width: 380px;
-  border: 1px solid rgba(255, 208, 0, 0.863);
   border-radius: 10px;
 
   /* box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow); */
@@ -453,7 +453,7 @@ body {
 .sign-in-img {
   width: 700px;
   border-radius: 10px;
-  border: 1px solid rgb(255, 208, 89);
+  border: 1px solid var(--primary-color);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
 @media only screen and (max-width: 600px) {
@@ -468,7 +468,7 @@ body {
 .sign-up-img {
   width: 780px;
   border-radius: 10px;
-  border: 1px solid rgb(255, 208, 89);
+  border: 1px solid var(--primary-color);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
 
@@ -709,7 +709,7 @@ a {
   border-radius: 10px;
 }
 .formButtonActive {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   color: #ffffff;
   width: 80px;
   height: 40px;
@@ -755,7 +755,7 @@ a {
   border-radius: 5px;
 }
 .multiple-select-card:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
 }
 
 @media only screen and (max-width: 600px) {
@@ -787,7 +787,7 @@ a {
   cursor: pointer;
 }
 .prefBtn:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
 }
 
 .prefCardInside {
@@ -875,7 +875,7 @@ a {
 }
 
 .option1:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   color: white;
   transition: 0.3s ease-in-out;
 }
@@ -922,7 +922,7 @@ a {
   height: 450px;
   margin-top: -422px;
   border-radius: 10px;
-  border: 1px solid rgb(255, 208, 89);
+  border: 1px solid var(--primary-color);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
 @media only screen and (max-width: 600px) {
@@ -1030,7 +1030,7 @@ a {
 }
 
 input:focus {
-  outline-color: rgb(255, 208, 89);
+  outline-color: var(--primary-color);
 }
 
 input,
@@ -1054,7 +1054,7 @@ input::placeholder {
 
 .formButtonActiveProfile {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   height: 7vh;
   width: 10vw;
   border: none;
@@ -1066,7 +1066,7 @@ input::placeholder {
 
 .submitButtonProfile {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   height: 3rem;
   width: 11rem;
   border: none;
@@ -1355,7 +1355,7 @@ label {
 .submit-btn button {
   margin-top: 30px;
   margin-left: 20px;
-  background-color: rgb(255, 208, 89); /* Green */
+  background-color: var(--primary-color); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -1440,7 +1440,7 @@ label {
 }
 /* Dropdown Button */
 .dropbtn-logo {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   color: white;
   padding: 8px 15px;
   font-size: 22px;
@@ -1494,7 +1494,7 @@ label {
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  color: rgb(255, 208, 89);
+  color: var(--primary-color);
 }
 
 /* Show the dropdown menu on hover */
@@ -1615,7 +1615,7 @@ label {
 }
 @media only screen and (max-width: 600px) {
   .listingButton {
-    background-color: rgb(255, 208, 89);
+    background-color: var(--primary-color);
     width: 55%;
     height: 36px;
     padding: 10px;
@@ -1628,7 +1628,7 @@ label {
   }
 }
 .listingButton:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
 }
 .loadingSpinnerContainer {
   position: fixed;
@@ -1647,7 +1647,7 @@ label {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: rgb(255, 208, 89);
+  border-color: var(--primary-color);
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -1831,7 +1831,7 @@ label {
 }
 
 .formContainer input:focus {
-  outline-color: rgb(255, 208, 89);
+  outline-color: var(--primary-color);
 }
 
 .formContainer input,
@@ -1869,7 +1869,7 @@ input::placeholder {
 
 .formButtonActive1 {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   height: 7vh;
   width: 10vw;
   border: none;
@@ -1888,7 +1888,7 @@ input::placeholder {
 
 .submitButton1 {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   height: 3rem;
   width: 11rem;
   border: none;
@@ -1913,7 +1913,7 @@ input::placeholder {
   margin-right: 50px;
   /* width: 200px; */
   border-radius: 10px;
-  padding: 15px 25px;
+  padding: 10px 25px;
   border: none;
   color: white;
   cursor: pointer;
