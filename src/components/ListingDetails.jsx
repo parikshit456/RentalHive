@@ -12,6 +12,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import Spinner from "./Spinner";
 import { amenitiesList } from "../assets/amenities";
+import ImageSlider from "./ImageSlider";
+
+
 
 const ListingDetails = () => {
   const navigate = useNavigate();
@@ -19,9 +22,9 @@ const ListingDetails = () => {
   const auth = getAuth();
   const [listing, setListing] = useState({});
   const [loading, setLoading] = useState(true);
+  const [image , setImage] = useState([])
   useEffect(() => {
     const fetchListing = async () => {
-      console.log(params);
       const docRef = doc(db, "listings", params.listingId);
       const docSnap = await getDoc(docRef);
 
@@ -34,7 +37,6 @@ const ListingDetails = () => {
     };
     fetchListing();
   }, [navigate, params.listingId]);
-  console.log(listing.useRef);
 
   const [prefList, setPrefList] = useState(preferenceList);
   const onClick = (index) => {
@@ -42,6 +44,7 @@ const ListingDetails = () => {
     let selectedPref = { ...prefs[index], selected: !prefs[index].selected };
     prefs[index] = selectedPref;
     setPrefList(prefs);
+    setImage(listing.imgUrls)
   };
   if (loading) {
     return <Spinner />;
@@ -70,6 +73,7 @@ const ListingDetails = () => {
 
           <hr />
 
+    
           <h3>Basic Info</h3>
           <div className="listingProfile">
             <div className="listingInfo">
@@ -93,10 +97,8 @@ const ListingDetails = () => {
           <hr></hr>
 
           <h3>Pictures</h3>
-          <img
-            src={listing.imgUrls[0]}
-            style={{ width: "50%", height: "250px" }}
-          />
+          <ImageSlider images={listing.imgUrls}/>
+         
 
           <hr></hr>
 
