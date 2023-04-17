@@ -18,6 +18,7 @@ import ListingDetails from "./components/ListingDetails";
 import PrivateRoute from "./components/PrivateRoute";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { useEffect, useState } from "react";
+import CityCard from "./components/CityCard";
 
 function App() {
   const auth = getAuth();
@@ -64,6 +65,7 @@ function App() {
             element={<ListingDetails />}
           />
           <Route path="/listings" element={<Listings />} />
+
 
           <Route path="/add-listing" element={<AddListing />} />
 

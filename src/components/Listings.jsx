@@ -71,13 +71,12 @@ const Listings = () => {
   return (
     <div>
       <ListingNavbar accodomationType={accodomationType} />
-      <div className="listing-partition"></div>(
+      <div className="listing-partition"></div>
       <div className="listings">
         {(type !== "all" ? filterList : userlist).map((user) => {
           return <ListingCard user={user} />;
         })}
       </div>
-      )
     </div>
   );
 };
