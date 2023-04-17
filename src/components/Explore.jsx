@@ -4,6 +4,7 @@ import location_icon from "../assets/svg/location_icon.svg";
 import TextInputField from "./TextInputField";
 import { cityList } from "../assets/cityList";
 import { ToastContainer } from "react-toastify";
+import LocationPicker from "./LocationPicker";
 const Explore = () => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -37,6 +38,7 @@ const Explore = () => {
     // }
   };
   return (
+  <div className="explore-container">
     <div className="explore">
       <div className="explore-left">
         <div className="explore-tagline">
@@ -63,10 +65,17 @@ const Explore = () => {
             ))}
         </ul> */}
       </div>
-      <div className="explore-right">
-        <img src={house_search} alt="" />
+
+      <div style={{ display: "flex" , flexDirection: "column" }}>
+        <div className="explore-right">
+          <img src={house_search} alt="" />
+        </div>
       </div>
       <ToastContainer />
+
+    </div>
+    <h1 className="location-header"><span>Choose the city</span> you'll be living in next</h1>
+    <LocationPicker />
     </div>
   );
 };

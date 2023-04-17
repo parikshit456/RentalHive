@@ -1,5 +1,6 @@
 :root {
-  --primary-color: rgb(255, 208, 89);
+  --primary-color: rgb(255, 87, 51);
+  --secondary-color:  rgb(255, 229, 180);
 }
 
 * {
@@ -66,7 +67,7 @@
 
 .download-btn button {
   margin-left: 20px;
-  background-color: rgb(255, 208, 89, 0.8); /* Green */
+  background-color: var(--secondary-color); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -79,7 +80,7 @@
 
 .signin-btn:hover,
 .signup-btn:hover {
-  background-color: rgb(79, 77, 77);
+  background-color: rgb(116, 116, 116);
 }
 
 @media only screen and (max-width: 900px) {
@@ -166,6 +167,7 @@
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .explore-tagline {
@@ -185,6 +187,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.location-header{
+text-align: center;
+}
+
+.location-header span{
+  color: var(--primary-color);
 }
 
 .sub-tagline {
@@ -257,7 +267,22 @@
   cursor: pointer;
   transition: transform 0.3s;
 }
-
+@media only screen and (max-width: 700px){
+  .city-card {
+    width: 140px;
+    height: 160px;
+    margin: 14px;
+  }
+  .location-picker {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .city-card h2 {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+}
 .city-card h2 {
   color: white;
   position: relative;
@@ -402,12 +427,11 @@ body {
 }
 
 .pageContent {
-  border: 1px solid rgba(255, 208, 0, 0.863);
+  border: 1px solid var(--primary-color);
   box-shadow: 0 10px 30px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   margin: 1rem;
   padding: 1rem;
   width: 380px;
-  border: 1px solid rgba(255, 208, 0, 0.863);
   border-radius: 10px;
 
   /* box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow); */
@@ -453,7 +477,7 @@ body {
 .sign-in-img {
   width: 700px;
   border-radius: 10px;
-  border: 1px solid rgb(255, 208, 89);
+  border: 1px solid var(--primary-color);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
 @media only screen and (max-width: 600px) {
@@ -468,7 +492,7 @@ body {
 .sign-up-img {
   width: 780px;
   border-radius: 10px;
-  border: 1px solid rgb(255, 208, 89);
+  border: 1px solid var(--primary-color);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
 
@@ -709,7 +733,7 @@ a {
   border-radius: 10px;
 }
 .formButtonActive {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--secondary-color);
   color: #ffffff;
   width: 80px;
   height: 40px;
@@ -744,23 +768,26 @@ a {
 
 .multiple-selected {
   background-color: rgb(239, 239, 239);
-  padding: 17px;
-  width: 120px;
-  height: 108px;
+  padding: 10px;
+  width: 91px;
+  height: 75px;
   justify-content: center;
   display: grid;
-  margin: 18px;
+  margin: 15px;
   font-size: 12px;
   font-weight: 600;
   border-radius: 5px;
 }
 .multiple-select-card:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--secondary-color);
 }
 
 @media only screen and (max-width: 600px) {
   .multiple-select-card:hover {
-    background-color: rgb(207, 207, 207);
+    background-color: var(--secondary-color);;
+  }
+  .multiple-selected {
+    margin: 10px;
   }
 }
 .multiple-select-card-active {
@@ -787,7 +814,7 @@ a {
   cursor: pointer;
 }
 .prefBtn:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--secondary-color);
 }
 
 .prefCardInside {
@@ -875,7 +902,7 @@ a {
 }
 
 .option1:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   color: white;
   transition: 0.3s ease-in-out;
 }
@@ -922,7 +949,7 @@ a {
   height: 450px;
   margin-top: -422px;
   border-radius: 10px;
-  border: 1px solid rgb(255, 208, 89);
+  border: 1px solid var(--primary-color);
   filter: drop-shadow(10px 10px 10px rgb(109, 109, 109));
 }
 @media only screen and (max-width: 600px) {
@@ -1030,7 +1057,7 @@ a {
 }
 
 input:focus {
-  outline-color: rgb(255, 208, 89);
+  outline-color: var(--primary-color);
 }
 
 input,
@@ -1054,7 +1081,7 @@ input::placeholder {
 
 .formButtonActiveProfile {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   height: 7vh;
   width: 10vw;
   border: none;
@@ -1066,7 +1093,7 @@ input::placeholder {
 
 .submitButtonProfile {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   height: 3rem;
   width: 11rem;
   border: none;
@@ -1094,7 +1121,7 @@ input::placeholder {
 .have-flat-btn-active,
 .need-flat-btn-active {
   padding: 10px 20px;
-  background-color: rgba(255, 208, 89, 0.9);
+  background-color: var(--primary-color);
 }
 .have-flat-btn-active {
   border-radius: 5px 0px 0px 0px;
@@ -1355,7 +1382,7 @@ label {
 .submit-btn button {
   margin-top: 30px;
   margin-left: 20px;
-  background-color: rgb(255, 208, 89); /* Green */
+  background-color: var(--secondary-color); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -1363,6 +1390,10 @@ label {
   text-decoration: none;
   font-size: 16px;
   border-radius: 5px;
+}
+
+.submit-btn button:hover{
+  background-color: var(--primary-color);
 }
 
 @media only screen and (max-width: 900px) {
@@ -1405,7 +1436,7 @@ label {
     height: 104px;
     justify-content: center;
     display: grid;
-    margin: 23px;
+    margin: 30px;
     font-size: 10px;
     font-weight: 600;
     border-radius: 5px;
@@ -1418,7 +1449,7 @@ label {
     height: 104px;
     justify-content: center;
     display: grid;
-    margin: 23px;
+    margin: 30px;
     font-size: 10px;
     font-weight: 600;
     border-radius: 5px;
@@ -1440,7 +1471,7 @@ label {
 }
 /* Dropdown Button */
 .dropbtn-logo {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
   color: white;
   padding: 8px 15px;
   font-size: 22px;
@@ -1494,7 +1525,7 @@ label {
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  color: rgb(255, 208, 89);
+  color: var(--primary-color);
 }
 
 /* Show the dropdown menu on hover */
@@ -1615,7 +1646,7 @@ label {
 }
 @media only screen and (max-width: 600px) {
   .listingButton {
-    background-color: rgb(255, 208, 89);
+    background-color: var(--primary-color);
     width: 55%;
     height: 36px;
     padding: 10px;
@@ -1628,7 +1659,7 @@ label {
   }
 }
 .listingButton:hover {
-  background-color: rgb(255, 208, 89);
+  background-color: var(--primary-color);
 }
 .loadingSpinnerContainer {
   position: fixed;
@@ -1647,7 +1678,7 @@ label {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: rgb(255, 208, 89);
+  border-color: var(--primary-color);
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -1831,7 +1862,7 @@ label {
 }
 
 .formContainer input:focus {
-  outline-color: rgb(255, 208, 89);
+  outline-color: var(--primary-color);
 }
 
 .formContainer input,
@@ -1869,7 +1900,7 @@ input::placeholder {
 
 .formButtonActive1 {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: var(--secondary-color);
   height: 7vh;
   width: 10vw;
   border: none;
@@ -1888,7 +1919,7 @@ input::placeholder {
 
 .submitButton1 {
   color: #ffffff;
-  background-color: rgb(255, 208, 89);
+  background-color: rgb(182, 182, 182);
   height: 3rem;
   width: 11rem;
   border: none;
@@ -1896,6 +1927,9 @@ input::placeholder {
   margin: 25px 0 10px 15px;
   font-size: 18px;
   cursor: pointer;
+}
+.submitButton1:hover {
+  background-color: var(--primary-color);
 }
 
 @media only screen and (min-width: 800px) {
@@ -1913,7 +1947,7 @@ input::placeholder {
   margin-right: 50px;
   /* width: 200px; */
   border-radius: 10px;
-  padding: 15px 25px;
+  padding: 10px 25px;
   border: none;
   color: white;
   cursor: pointer;
@@ -1949,7 +1983,7 @@ input::placeholder {
 
 /* ImageSlider */
 .slider {
-  width: 100%;
+  width: 40%;
   height: auto;
   position: relative;
   overflow: hidden;
@@ -1959,6 +1993,7 @@ input::placeholder {
 .slider-wrapper {
   display: flex;
   transition: all 0.3s ease-in-out;
+  height: 350px;
 }
 
 .slider-wrapper img {
@@ -1994,5 +2029,12 @@ input::placeholder {
     font-size: 20px;
     width: 30px;
     height: 30px;
+  }
+  .slider {
+    width: 100%;
+  }
+  
+  .slider-wrapper {
+    height: auto;
   }
 }
