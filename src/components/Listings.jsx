@@ -61,7 +61,7 @@ const Listings = () => {
         });
         setUserList(listings);
         console.log(listings);
-        setLoading(0);
+        setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
       }

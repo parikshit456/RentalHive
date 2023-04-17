@@ -1,10 +1,14 @@
 :root {
   --primary-color: rgb(255, 87, 51);
-  --secondary-color:  rgb(255, 229, 180);
+  --secondary-color: rgb(255, 229, 180);
 }
 
 * {
   font-family: Poppins, sans-serif;
+}
+
+.App {
+  overflow: hidden;
 }
 
 .navbar {
@@ -189,11 +193,11 @@
   align-items: center;
 }
 
-.location-header{
-text-align: center;
+.location-header {
+  text-align: center;
 }
 
-.location-header span{
+.location-header span {
   color: var(--primary-color);
 }
 
@@ -267,7 +271,7 @@ text-align: center;
   cursor: pointer;
   transition: transform 0.3s;
 }
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 700px) {
   .city-card {
     width: 140px;
     height: 160px;
@@ -281,7 +285,6 @@ text-align: center;
     font-size: 18px;
     font-weight: 500;
   }
-  
 }
 .city-card h2 {
   color: white;
@@ -784,7 +787,7 @@ a {
 
 @media only screen and (max-width: 600px) {
   .multiple-select-card:hover {
-    background-color: var(--secondary-color);;
+    background-color: var(--secondary-color);
   }
   .multiple-selected {
     margin: 10px;
@@ -818,13 +821,16 @@ a {
 }
 
 .prefCardInside {
-  width: 60%;
   display: grid;
+  justify-content: center;
   grid-template-columns: auto auto auto auto;
 }
 @media only screen and (max-width: 600px) {
   .prefCardInside {
-    grid-template-columns: 1fr auto;
+    width: 100%;
+    justify-content: center;
+    justify-content: center;
+    grid-template-columns: auto auto;
   }
 }
 .prefDiv {
@@ -1392,7 +1398,7 @@ label {
   border-radius: 5px;
 }
 
-.submit-btn button:hover{
+.submit-btn button:hover {
   background-color: var(--primary-color);
 }
 
@@ -1784,9 +1790,9 @@ label {
     font-size: 13px;
   }
   .amenities-list {
-    width: 60%;
     grid-template-columns: auto auto;
     margin: 0px;
+    justify-content: center;
   }
   /* .form-desc label {
     font-size: 15px;
@@ -2033,7 +2039,7 @@ input::placeholder {
   .slider {
     width: 100%;
   }
-  
+
   .slider-wrapper {
     height: auto;
   }
