@@ -20,10 +20,10 @@ const MultipleSelectCard = ({
     >
       <img
         src={project.src}
-        style={{ width: "90%", height: "50px" }}
+        style={{ width: "50%", height: "25px" }}
         className="selectCardImg"
       ></img>
-      <p>{project.title}</p>
+      <p style={{fontWeight: "600" , fontSize:"11px"}}>{project.title}</p>
     </button>
   );
 };
