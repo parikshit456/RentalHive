@@ -73,10 +73,14 @@ const Explore = () => {
         </div>
         <ToastContainer />
       </div>
-      <h1 className="location-header">
-        <span>Choose the city</span> you'll be living in next
-      </h1>
-      <LocationPicker />
+      <ToastContainer />
+
+    </div>
+    <div style={{backgroundColor:"rgb(249,255,249)" , paddingTop: "30px"}}>
+    <h1 className="location-header"><span>Choose the city</span> you'll be living in next</h1>
+    <LocationPicker />
+    </div>
+    
     </div>
   );
 };

@@ -22,13 +22,10 @@ const PersonalDetails = ({ setData }) => {
   const navigate = useNavigate();
 
   const onMutate = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
     setPersonalDetailForm({
       ...personaldetailForm,
       [e.target.name]: e.target.value,
     });
-    console.log(personaldetailForm);
     if (e.target.value === "true") {
       setPersonalDetailForm({
         ...personaldetailForm,
@@ -63,7 +60,6 @@ const PersonalDetails = ({ setData }) => {
     //   }
   };
 
-  console.log(personaldetailForm);
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="personaldetailForm">
@@ -111,6 +107,9 @@ const PersonalDetails = ({ setData }) => {
         <div className="option">
           <p>In which city you are looking for?</p>
           <select name="city" className="dropdown" onChange={onMutate}>
+            <option value="" disabled selected>
+              Select your city
+            </option>
             <option value="Chennai">Chennai</option>
             <option value="Banglore">Banglore</option>
             <option value="Gandhinagar">Gandhinagar</option>

@@ -196,6 +196,7 @@
 
 .location-header {
   text-align: center;
+font-size: 45px;
 }
 
 .location-header span {
@@ -254,17 +255,16 @@
 }
 
 .location-picker {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  max-width: 90%;
-  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .city-card {
   width: 210px;
   height: 250px;
   padding: 10px;
-  margin: 20px 0px 30px 10px;
+  margin: 35px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -286,6 +286,11 @@
     font-size: 18px;
     font-weight: 500;
   }
+  .location-header{
+    text-align: center;
+    font-size: 33px;
+  }
+  
 }
 .city-card h2 {
   color: white;
@@ -725,9 +730,28 @@ a {
   background-color: rgb(243, 244, 246);
   padding: 0px 10px;
 }
+.addlistingDropdown:focus{
+  outline: none !important;
+  border: 2px solid var(--primary-color);
+}
+.addlistingDropdown{
+  font-size: 15px;
+  width: 400px;
+  padding: 0px 10px 0px 20px;
+  height: 37px;
+  border-radius: 10px;
+  border: 2px solid rgb(205, 205, 206);
+  background-color: rgb(243, 244, 246);
+}
+
 @media only screen and (max-width: 600px) {
-  .dropdown {
-    width: 100%;
+  .addlistingDropdown {
+    font-size: 15px;
+    width: 276px;
+    padding: 0px 10px 0px 40px;
+    height: 50px;
+    border-radius: 10px;
+    margin-left: 5px;
   }
 }
 .formButton {
@@ -792,7 +816,7 @@ a {
     background-color: var(--secondary-color);
   }
   .multiple-selected {
-    margin: 10px;
+    margin: 7px;
   }
 }
 .multiple-select-card-active {
@@ -1283,6 +1307,12 @@ label {
   justify-content: space-between;
   align-items: center;
 }
+.form-row1 {
+  display: flex;
+  margin: 30px auto;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
 .upload-image {
   border: 2px dashed rgb(205, 205, 206);
@@ -1435,6 +1465,12 @@ label {
 
   .form-row,
   .form-row-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .form-row1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1637,6 +1673,9 @@ label {
     font-weight: 600;
     border-radius: 10px;
   }
+  .listingPref {
+    justify-content: center;
+  }
 }
 .listingProfileCard {
   display: flex;
@@ -1677,7 +1716,7 @@ label {
   }
 }
 .listingButton:hover {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
 }
 .loadingSpinnerContainer {
   position: fixed;
@@ -1826,7 +1865,7 @@ label {
   /* padding-top: 80px; */
   padding: 40px;
   margin: 3%;
-  box-shadow: 2px 2px 3px 3px #e7cece;
+  box-shadow: 0px 3px 10px 3px #bfbfbf;
 }
 
 @media only screen and (max-width: 800px) {
@@ -2054,5 +2093,33 @@ input::placeholder {
 
   .slider-wrapper {
     height: auto;
+  }
+}
+.whatsapp{
+  width: 75%;
+  height: 34px;
+  padding: 9px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+  background-color: #c7ede6;
+  cursor: pointer;
+}
+.whatsapp:hover{
+  background-color: var(--secondary-color);
+}
+@media only screen and (max-width: 600px) {
+  .whatsapp {
+    background-color: #c7ede6;
+    width: 55%;
+    height: 36px;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 25px 0px;
+    display: flex;
+    align-items: center;
   }
 }
