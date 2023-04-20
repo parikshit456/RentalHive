@@ -15,7 +15,7 @@ export const cities = {
         "https://images.unsplash.com/photo-1598977054780-2dc700fdc9d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80",
     },
     {
-      name: "Bengaluru",
+      name: "Bangalore",
       state: "Karnataka",
       population: 8.52,
       image:

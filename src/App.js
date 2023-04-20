@@ -19,11 +19,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import CityCard from "./components/CityCard";
+// import ExploreNew from "./components/ExploreNew";
 
 function App() {
   const auth = getAuth();
   const [user, setUser] = useState(null);
   const [data, setData] = useState({});
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -65,7 +67,6 @@ function App() {
             element={<ListingDetails />}
           />
           <Route path="/listings" element={<Listings />} />
-
 
           <Route path="/add-listing" element={<AddListing />} />
 

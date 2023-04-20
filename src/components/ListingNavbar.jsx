@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import location_icon from "../assets/svg/location_icon.svg";
 import house_search from "../assets/svg/house_search.svg";
 import TextInputField from "./TextInputField";
+import SearchBar from "./SearchBar";
 
-const ListingNavbar = ({ accodomationType }) => {
+const ListingNavbar = ({ accodomationType, cityName }) => {
   const [type, setType] = useState("all");
   const typeFunc = (typeValue) => {
     setType(typeValue);
@@ -37,7 +38,12 @@ const ListingNavbar = ({ accodomationType }) => {
           PG
         </li>
       </ul>
-      <TextInputField placeholder={"Search Places..."} icon={location_icon} />
+      <SearchBar
+        placeholder={"Search Places..."}
+        icon={location_icon}
+        name={cityName}
+      />
+      {/* <TextInputField placeholder={"Search Places..."} icon={location_icon} /> */}
     </div>
   );
 };

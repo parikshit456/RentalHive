@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import house_search from "../assets/svg/house_search.svg";
 import location_icon from "../assets/svg/location_icon.svg";
 import TextInputField from "./TextInputField";
 import { cityList } from "../assets/cityList";
 import { ToastContainer } from "react-toastify";
 import LocationPicker from "./LocationPicker";
+import SearchBar from "./SearchBar";
+// import { Canvas } from "@react-three/fiber";
+// import House, { Model } from "../components/House";
+// import { OrbitControls } from "@react-three/drei";
 const Explore = () => {
   const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -19,64 +22,65 @@ const Explore = () => {
       city.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
     setSearchResults(results);
-
-    // if (event.target.value.length > 4) {
-    //   fetch(
-    //     // `https://nominatim.openstreetmap.org/search?q=${event.target.value}&format=json`
-    //     `https://us1.locationiq.com/v1/autocomplete.php?key=pk.562b03e1a2f2f410ff0b9b406766bbbd&q=${event.target.value}&countrycodes=in&limit=5&format=json`
-    //   )
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       setSuggestions(data);
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //       setSuggestions([]);
-    //     });
-    // } else {
-    //   setSuggestions([]);
-    // }
   };
   return (
-  <div className="explore-container">
-    <div className="explore">
-      <div className="explore-left">
-        <div className="explore-tagline">
-          Find <span>Like-Minded</span> <br /> Roommates & PGs
-        </div>
-        <div className="sub-tagline">Share your room with right roommates</div>
-        <TextInputField
+    <div className="explore-container">
+      <div className="explore">
+        <div className="explore-left">
+          <div className="explore-tagline">
+            Find <span>Like-Minded</span> <br /> Roommates & PGs
+          </div>
+          <div className="sub-tagline">
+            Share your room with right roommates
+          </div>
+          {/* <TextInputField
           handleInputChange={handleInputChange}
           placeholder={"Search Places..."}
           icon={location_icon}
-        />
-        <ul className="suggestion-list">
-          {searchTerm !== "" &&
-            searchResults.slice(0, 4).map((result) => (
-              <li key={result.id}>
-                {result.name}, {result.state}
-              </li>
-            ))}
-        </ul>
-        {/* <ul className="suggestion-list">
+        /> */}
+          <SearchBar
+            handleInputChange={handleInputChange}
+            icon={location_icon}
+          />
+          <ul className="suggestion-list">
+            {searchTerm !== "" &&
+              searchResults.slice(0, 4).map((result) => (
+                <li key={result.id}>
+                  {result.name}, {result.state}
+                </li>
+              ))}
+          </ul>
+          {/* <ul className="suggestion-list">
           {suggestions.length > 0 &&
             suggestions.map((suggestion) => (
               <li key={suggestion.place_id}>{suggestion.display_name}</li>
             ))}
         </ul> */}
-      </div>
-
-      <div style={{ display: "flex" , flexDirection: "column" }}>
-        <div className="explore-right">
-          <img src={house_search} alt="" />
         </div>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="explore-right">
+            <img src={house_search} alt="" />
+            {/* <Canvas className="canvas">
+              <OrbitControls enableZoom={false} />
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[-2, 5, 2]} intensity={1} />
+              <Suspense fallback={null}>
+                <Model />
+              </Suspense>
+            </Canvas> */}
+          </div>
+        </div>
+        <ToastContainer />
       </div>
       <ToastContainer />
-
-    </div>
+      <div style={{backgroundColor:"rgb(249,255,249)" , paddingTop: "30px"}}>
     <h1 className="location-header"><span>Choose the city</span> you'll be living in next</h1>
     <LocationPicker />
     </div>
+    </div>
+   
+
   );
 };
 

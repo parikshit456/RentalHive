@@ -244,7 +244,7 @@ const FlatForm = () => {
         <div className="form-partition"></div>
 
         <form className="form-main">
-          <div className="form-row">
+          <div className="form-row1">
             <div>
               {" "}
               <label htmlFor="">Add Your Location*</label>
@@ -256,6 +256,19 @@ const FlatForm = () => {
                 type="icon"
                 handleInputChange={onMutate}
               />
+              <select
+                className="addlistingDropdown"
+                onClick={onMutate}        
+              > 
+                <option value="" disabled selected>
+                  Select your city
+                </option>
+                <option value="Banglore">Banglore</option>
+                <option value="Banglore">Chennai</option>
+                <option value="Banglore">Indore</option>
+                <option value="Banglore">Surat</option>
+                <option value="Banglore">Ahemdabad</option>
+              </select>
             </div>
             <SelectInputField
               selectList={genderList}

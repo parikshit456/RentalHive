@@ -1,14 +1,19 @@
 :root {
   --primary-color: rgb(255, 87, 51);
-  --secondary-color:  rgb(255, 229, 180);
+  --secondary-color: rgb(255, 229, 180);
 }
 
 * {
   font-family: Poppins, sans-serif;
 }
 
+.App {
+  overflow: hidden;
+}
+
 .navbar {
   height: 80px;
+  width: 100%;
   /* background-color: aliceblue; */
   display: flex;
   justify-content: space-between;
@@ -189,11 +194,12 @@
   align-items: center;
 }
 
-.location-header{
-text-align: center;
+.location-header {
+  text-align: center;
+font-size: 45px;
 }
 
-.location-header span{
+.location-header span {
   color: var(--primary-color);
 }
 
@@ -249,17 +255,16 @@ text-align: center;
 }
 
 .location-picker {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  max-width: 90%;
-  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .city-card {
   width: 210px;
   height: 250px;
   padding: 10px;
-  margin: 20px 0px 30px 10px;
+  margin: 35px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -267,7 +272,7 @@ text-align: center;
   cursor: pointer;
   transition: transform 0.3s;
 }
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 700px) {
   .city-card {
     width: 140px;
     height: 160px;
@@ -280,6 +285,10 @@ text-align: center;
   .city-card h2 {
     font-size: 18px;
     font-weight: 500;
+  }
+  .location-header{
+    text-align: center;
+    font-size: 33px;
   }
   
 }
@@ -328,6 +337,7 @@ text-align: center;
   flex-direction: column;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  width: 583px;
 }
 
 .card-top {
@@ -720,9 +730,28 @@ a {
   background-color: rgb(243, 244, 246);
   padding: 0px 10px;
 }
+.addlistingDropdown:focus{
+  outline: none !important;
+  border: 2px solid var(--primary-color);
+}
+.addlistingDropdown{
+  font-size: 15px;
+  width: 400px;
+  padding: 0px 10px 0px 20px;
+  height: 37px;
+  border-radius: 10px;
+  border: 2px solid rgb(205, 205, 206);
+  background-color: rgb(243, 244, 246);
+}
+
 @media only screen and (max-width: 600px) {
-  .dropdown {
-    width: 100%;
+  .addlistingDropdown {
+    font-size: 15px;
+    width: 276px;
+    padding: 0px 10px 0px 40px;
+    height: 50px;
+    border-radius: 10px;
+    margin-left: 5px;
   }
 }
 .formButton {
@@ -784,10 +813,10 @@ a {
 
 @media only screen and (max-width: 600px) {
   .multiple-select-card:hover {
-    background-color: var(--secondary-color);;
+    background-color: var(--secondary-color);
   }
   .multiple-selected {
-    margin: 10px;
+    margin: 7px;
   }
 }
 .multiple-select-card-active {
@@ -818,13 +847,16 @@ a {
 }
 
 .prefCardInside {
-  width: 60%;
   display: grid;
+  justify-content: center;
   grid-template-columns: auto auto auto auto;
 }
 @media only screen and (max-width: 600px) {
   .prefCardInside {
-    grid-template-columns: 1fr auto;
+    width: 100%;
+    justify-content: center;
+    justify-content: center;
+    grid-template-columns: auto auto;
   }
 }
 .prefDiv {
@@ -1160,21 +1192,25 @@ input::placeholder {
   background-color: rgb(0, 0, 0, 0.1);
 }
 
-.text-box {
+.text-box,
+.search-input {
   display: flex;
   width: fit-content;
   margin: 5px 0px;
 }
 
-.input-icon {
+.input-icon,
+.search-input-icon {
   width: 45px;
   height: 45px;
   position: absolute;
+
   margin-top: 3px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
 }
 
-.input-bar input {
+.input-bar input,
+.search-input-bar input {
   font-size: 18px;
   /* margin-top: 40px; */
   width: 400px;
@@ -1191,7 +1227,8 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 900px) {
-  .input-icon {
+  .input-icon,
+  .search-input-icon {
     width: 35px;
     height: 35px;
     position: absolute;
@@ -1199,7 +1236,12 @@ input::placeholder {
     margin-left: 7px;
   }
 
-  .input-bar input {
+  /* .search-input-icon {
+    left: 252px;
+  } */
+
+  .input-bar input,
+  .search-input-bar input {
     font-size: 15px;
     /* margin-top: 40px; */
     width: 276px;
@@ -1264,6 +1306,12 @@ label {
   margin: 30px auto;
   justify-content: space-between;
   align-items: center;
+}
+.form-row1 {
+  display: flex;
+  margin: 30px auto;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .upload-image {
@@ -1392,7 +1440,7 @@ label {
   border-radius: 5px;
 }
 
-.submit-btn button:hover{
+.submit-btn button:hover {
   background-color: var(--primary-color);
 }
 
@@ -1417,6 +1465,12 @@ label {
 
   .form-row,
   .form-row-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .form-row1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1619,6 +1673,9 @@ label {
     font-weight: 600;
     border-radius: 10px;
   }
+  .listingPref {
+    justify-content: center;
+  }
 }
 .listingProfileCard {
   display: flex;
@@ -1659,7 +1716,7 @@ label {
   }
 }
 .listingButton:hover {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
 }
 .loadingSpinnerContainer {
   position: fixed;
@@ -1784,9 +1841,9 @@ label {
     font-size: 13px;
   }
   .amenities-list {
-    width: 60%;
     grid-template-columns: auto auto;
     margin: 0px;
+    justify-content: center;
   }
   /* .form-desc label {
     font-size: 15px;
@@ -1808,7 +1865,7 @@ label {
   /* padding-top: 80px; */
   padding: 40px;
   margin: 3%;
-  box-shadow: 2px 2px 3px 3px #e7cece;
+  box-shadow: 0px 3px 10px 3px #bfbfbf;
 }
 
 @media only screen and (max-width: 800px) {
@@ -2033,8 +2090,36 @@ input::placeholder {
   .slider {
     width: 100%;
   }
-  
+
   .slider-wrapper {
     height: auto;
+  }
+}
+.whatsapp{
+  width: 75%;
+  height: 34px;
+  padding: 9px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+  background-color: #c7ede6;
+  cursor: pointer;
+}
+.whatsapp:hover{
+  background-color: var(--secondary-color);
+}
+@media only screen and (max-width: 600px) {
+  .whatsapp {
+    background-color: #c7ede6;
+    width: 55%;
+    height: 36px;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 25px 0px;
+    display: flex;
+    align-items: center;
   }
 }
