@@ -6,9 +6,9 @@ import { cityList } from "../assets/cityList";
 import { ToastContainer } from "react-toastify";
 import LocationPicker from "./LocationPicker";
 import SearchBar from "./SearchBar";
-import { Canvas } from "@react-three/fiber";
-import House, { Model } from "../components/House";
-import { OrbitControls } from "@react-three/drei";
+// import { Canvas } from "@react-three/fiber";
+// import House, { Model } from "../components/House";
+// import { OrbitControls } from "@react-three/drei";
 const Explore = () => {
   const [query, setQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -73,11 +73,14 @@ const Explore = () => {
         </div>
         <ToastContainer />
       </div>
-      <h1 className="location-header">
-        <span>Choose the city</span> you'll be living in next
-      </h1>
-      <LocationPicker />
+      <ToastContainer />
+      <div style={{backgroundColor:"rgb(249,255,249)" , paddingTop: "30px"}}>
+    <h1 className="location-header"><span>Choose the city</span> you'll be living in next</h1>
+    <LocationPicker />
     </div>
+    </div>
+   
+
   );
 };
 
