@@ -19,7 +19,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import CityCard from "./components/CityCard";
-import ExploreNew from "./components/ExploreNew";
+// import ExploreNew from "./components/ExploreNew";
 
 function App() {
   const auth = getAuth();
