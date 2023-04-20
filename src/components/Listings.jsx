@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { users } from "../assets/user";
 import ListingCard from "./ListingCard";
 import ListingNavbar from "./ListingNavbar";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { db } from "../firebase.config";
 import {
   getDoc,
@@ -19,13 +19,15 @@ const Listings = () => {
   const [userlist, setUserList] = useState([]);
   const [filterList, setFilterList] = useState([]);
   const [type, setType] = useState("all");
+  const location = useLocation();
+  console.log(location);
 
   const auth = getAuth();
   console.log(auth);
 
   const [listing, setListing] = useState({});
   const [loading, setLoading] = useState(true);
-
+  const { name } = location.state.value;
   const params = useParams();
   const navigate = useNavigate();
 
@@ -70,11 +72,15 @@ const Listings = () => {
   }, [navigate, params.listingId]);
   return (
     <div>
-      <ListingNavbar accodomationType={accodomationType} />
+      <ListingNavbar accodomationType={accodomationType} cityName={name} />
       <div className="listing-partition"></div>
       <div className="listings">
         {(type !== "all" ? filterList : userlist).map((user) => {
-          return <ListingCard user={user} />;
+          return (
+            user?.data?.loc?.toLowerCase() === name?.toLowerCase() && (
+              <ListingCard user={user} />
+            )
+          );
         })}
       </div>
     </div>
