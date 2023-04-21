@@ -27,10 +27,9 @@ const Profile = ({ user }) => {
 
   return (
     <div className="dropdown1">
-      <button class="dropbtn-logo">
-        {user.displayName.substring(0, 1)}
-        {/* <img src={profile}></img> */}
-      </button>
+      {/* <button class="dropbtn-logo"> */}
+      <img src={user.photoURL} className="dropbtn-logo"></img>
+      {/* </button> */}
       <div class="dropdown-content">
         <p>Hi {user.displayName}</p>
         <a href="/Pref">My Prefrence</a>

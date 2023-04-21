@@ -6,9 +6,11 @@ import { cityList } from "../assets/cityList";
 import { ToastContainer } from "react-toastify";
 import LocationPicker from "./LocationPicker";
 import SearchBar from "./SearchBar";
-import { Canvas } from "@react-three/fiber";
-import House, { Model } from "../components/House";
-import { OrbitControls } from "@react-three/drei";
+// import { Canvas } from "@react-three/fiber";
+// import { OrbitControls, useGLTF } from "@react-three/drei";
+// import { useEffect } from "react";
+// import { House } from "../components/House";
+// import { GLTFLoader } from "three-stdlib";
 const Explore = () => {
   const [query, setQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,12 +63,12 @@ const Explore = () => {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="explore-right">
             <img src={house_search} alt="" />
-            {/* <Canvas className="canvas">
-              <OrbitControls enableZoom={false} />
+            {/* <Canvas resize={true}>
+              <OrbitControls enableZoom={true} />
               <ambientLight intensity={0.5} />
-              <directionalLight position={[-2, 5, 2]} intensity={1} />
+              <directionalLight intensity={1} />
               <Suspense fallback={null}>
-                <Model />
+                <House />
               </Suspense>
             </Canvas> */}
           </div>
