@@ -101,8 +101,11 @@ const EditListing = () => {
             });
           }
         });
-        setFormData(listings[0]?.data);
-        setListingId(listings[0]?.id);
+        console.log(listings[0].data.imgUrls);
+        setUploadedImages(listings[0]?.data?.imgUrls)
+
+        setFormData(listings[0]?.data)
+        setListingId(listings[0]?.id)
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
@@ -223,23 +226,32 @@ const EditListing = () => {
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
+  const handleRemoveImage = (index) => {
+    const imageArray = [...uploadedImages];
+    imageArray.splice(index, 1);
+    setUploadedImages([...imageArray]);
+  };
+
   const onMutate = (e) => {
     let boolean = null;
     const files = e.target.files;
     const readerArray = [];
     const newUploadedImages = [...uploadedImages];
+    // console.log(uploadedImages)
 
     // Create an array of FileReader objects
 
-    for (let i = 0; i < files?.length; i++) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        newUploadedImages.push(reader.result);
-        setUploadedImages(newUploadedImages);
-      };
-      reader.readAsDataURL(files[i]);
-      readerArray.push(reader);
-    }
+      for (let i = 0; i < files?.length; i++) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          newUploadedImages.push(reader.result);
+          
+            setUploadedImages( newUploadedImages);
+        };
+        reader.readAsDataURL(files[i]);
+        readerArray.push(reader);
+      }
+    
 
     if (e.target.value === "true") {
       boolean = true;
@@ -256,7 +268,9 @@ const EditListing = () => {
 
     //Files
     if (e.target.files) {
+      console.log(e.target.files)
       setFormData((prevState) => ({
+        
         ...prevState,
         images: e.target.files,
       }));
@@ -417,11 +431,16 @@ const EditListing = () => {
                     <p>Uploaded Images:</p>
                     <hr></hr>
                     {uploadedImages.map((image, index) => (
+                      <div>
+                      <button onClick={() => handleRemoveImage(index)}>
+                        X
+                      </button>
                       <img
                         key={index}
                         src={image}
                         alt={`Uploaded ${index + 1}`}
-                      />
+                      />  
+                    </div>
                     ))}
                   </div>
                 )}

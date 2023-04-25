@@ -178,6 +178,12 @@ const FlatForm = () => {
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
+  const handleRemoveImage = (index) => {
+    const imageArray = [...uploadedImages];
+    imageArray.splice(index, 1);
+    setUploadedImages([...imageArray]);
+  };
+
   const onMutate = (e) => {
     let boolean = null;
     const files = e.target.files;
@@ -368,11 +374,16 @@ const FlatForm = () => {
                     <p>Uploaded Images:</p>
                     <hr></hr>
                     {uploadedImages.map((image, index) => (
-                      <img
-                        key={index}
-                        src={image}
-                        alt={`Uploaded ${index + 1}`}
-                      />
+                      <div>
+                        <button onClick={() => handleRemoveImage(index)}>
+                          X
+                        </button>
+                        <img
+                          key={index}
+                          src={image}
+                          alt={`Uploaded ${index + 1}`}
+                        />  
+                      </div>
                     ))}
                   </div>
                 )}
