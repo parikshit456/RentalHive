@@ -61,6 +61,7 @@ const EditListing = () => {
     occupancy: "",
     images: {},
     amenities: [],
+    imgUrls:[],
     desc: "",
     contactNumber: "",
     city: "",
@@ -72,6 +73,7 @@ const EditListing = () => {
     name,
     clientType,
     loc,
+    imgUrls,
     genderPreference,
     rent,
     occupancy,
@@ -194,7 +196,7 @@ const EditListing = () => {
         });
       };
 
-      const imgUrls = await Promise.all(
+      const imageUrls = await Promise.all(
         [...images].map((image) => storeImage(image))
       ).catch(() => {
         setLoading(false);
@@ -203,7 +205,7 @@ const EditListing = () => {
       });
       formDataCopy = {
         ...formData,
-        imgUrls,
+        imgUrls:[...imgUrls,...imageUrls],
 
         timestamp: "",
       };
@@ -213,20 +215,22 @@ const EditListing = () => {
 
     delete formDataCopy.images;
 
-    try {
-      const docRef = doc(db, "listings", listingId);
-      await updateDoc(docRef, formDataCopy);
-      setLoading(false);
-      toast.success("Listing saved");
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const docRef = doc(db, "listings", listingId);
+    //   await updateDoc(docRef, formDataCopy);
+    //   setLoading(false);
+    //   toast.success("Listing saved");
+    //   navigate("/");
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
-  const handleRemoveImage = (index) => {
+  const handleRemoveImage = (index,image) => {
+    console.log(image)
+     imgUrls.filter((value)=>value!==image)
     const imageArray = [...uploadedImages];
     imageArray.splice(index, 1);
     setUploadedImages([...imageArray]);
@@ -268,9 +272,7 @@ const EditListing = () => {
 
     //Files
     if (e.target.files) {
-      console.log(e.target.files)
       setFormData((prevState) => ({
-        
         ...prevState,
         images: e.target.files,
       }));
@@ -418,7 +420,6 @@ const EditListing = () => {
                     max="6"
                     accept=".jpg,.png,.jpeg"
                     multiple
-                    required
                   />
                   <p>(JPG, PNG, JPEG)</p>
                 </label>
@@ -432,7 +433,7 @@ const EditListing = () => {
                     <hr></hr>
                     {uploadedImages.map((image, index) => (
                       <div>
-                      <button onClick={() => handleRemoveImage(index)}>
+                      <button onClick={() => handleRemoveImage(index,image)}>
                         X
                       </button>
                       <img

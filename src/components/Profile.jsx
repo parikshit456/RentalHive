@@ -8,7 +8,6 @@ const Profile = ({ user }) => {
   // const [user , setUser] = useState(null)
   // const [isActive, setIsActive] = useState(false);
   const auth = getAuth();
-  console.log(user);
   // useEffect(() => {
   //   console.log(auth.currentUser);
   //   setUser(auth.currentUser)
