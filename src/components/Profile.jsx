@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 
 const Profile = ({ user }) => {
   // const [user , setUser] = useState(null)
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
   const auth = getAuth();
   console.log(user);
   // useEffect(() => {
@@ -14,9 +14,9 @@ const Profile = ({ user }) => {
   //   setUser(auth.currentUser)
   // },[])
 
-  const toggleMenu = () => {
-    setIsActive(!isActive);
-  };
+  // const toggleMenu = () => {
+  //   setIsActive(!isActive);
+  // };
 
   const navigate = useNavigate();
 

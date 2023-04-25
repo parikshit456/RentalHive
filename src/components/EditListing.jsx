@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TextInputField from "./TextInputField";
 import location_icon from "../assets/svg/location_icon.svg";
@@ -21,18 +21,15 @@ import {
 } from "firebase/storage";
 import { db } from "../firebase.config";
 import { v4 as uuidv4 } from "uuid";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { useEffect } from "react";
 import { cityList } from "../assets/cityList";
 
-const FlatForm = () => {
-  const location = useLocation();
+const EditListing = () => {
+    const location = useLocation();
   let type = location.pathname;
   type = type.substring(1);
-
-  const fileInputRef = useRef(null);
-  const [lessonImage, setLessonImage] = useState([]);
-  const [uploadedImages, setUploadedImages] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -43,9 +40,12 @@ const FlatForm = () => {
   var date = curr.toISOString().substring(0, 10);
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
+  const [listingId,setListingId] = useState("");
+  const [uploadedImages, setUploadedImages] = useState([]);
+  
   const [formData, setFormData] = useState({
-    name:"",
-    clientType: type,
+    name: "",
+    clientType: "",
     loc: "",
     genderPreference: "",
     rent: 0,
@@ -54,8 +54,8 @@ const FlatForm = () => {
     amenities: [],
     desc: "",
     contactNumber: "",
-    city: "",
-    userID: "",
+    city:"",
+    userID:"",
     availableFrom: date,
   });
 
@@ -63,21 +63,62 @@ const FlatForm = () => {
     name,
     clientType,
     loc,
-    city,
-    userID,
     genderPreference,
     rent,
     occupancy,
     images,
     amenities,
     desc,
+    userID,
+    city,
     contactNumber,
     availableFrom,
   } = formData;
+  const [utilityList, setUtilityList] = useState(amenitiesList);
+
+  useEffect(() => {
+    const fetchListing = async () => {
+      try {
+        const listingsRef = collection(db, "listings");
+        console.log(listingsRef);
+        //query
+        const q = query(listingsRef)
+        const querySnap = await getDocs(q);
+        console.log(querySnap)
+        const listings = [];
+        querySnap.forEach((doc) => {
+          console.log(doc);
+          if(doc.data().userID===auth?.currentUser?.uid){
+            listings.push({
+              id: doc.id,
+              data: doc.data(),
+            });
+          }
+      
+        });
+        console.log(listings);
+        setFormData(listings[0]?.data)
+        setListingId(listings[0]?.id)
+        setLoading(false);
+  
+      } catch (error) {
+        toast.error("Could not fetch listings");
+      }
+    };
+    fetchListing();
+  }, [ auth?.currentUser?.uid]);
   const [selectedUtilityList, setSelectedUtilityList] = useState([]);
 
-  const [utilityList, setUtilityList] = useState(amenitiesList);
   const onClick = async (index) => {
+    let tempUtilityList = amenitiesList.forEach((value)=>{
+      if(amenities.includes(value.title)){
+        value.selected = true;
+      }
+      console.log(value)
+
+    })
+
+    setUtilityList(tempUtilityList)
     let utilities = [...utilityList];
 
     let selectedUtility = {
@@ -85,9 +126,12 @@ const FlatForm = () => {
       selected: !utilities[index].selected,
     };
 
+    console.log(selectedUtility)
+
     console.log(selectedUtility.title);
     utilities[index] = selectedUtility;
     setUtilityList(utilities);
+    console.log(utilities)
     let amenitiesTempList = utilities.filter(
       (utility) => utility.selected === true
     );
@@ -99,22 +143,22 @@ const FlatForm = () => {
     console.log(amenitiesTempList);
     setFormData({
       ...formData,
-      clientType: type,
       amenities: [...amenitiesTempList],
     });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    
 
     console.log(formData);
     setLoading(true);
     console.log(auth.currentUser.displayName);
     let formDataCopy = {
       ...formData,
-      name: auth?.currentUser?.displayName,
+      name: auth.currentUser.displayName,
     };
-    if (type === "have-flat") {
+    if (clientType === "have-flat") {
       if (images?.length > 3) {
         setLoading(false);
         toast.error("Max 3 images");
@@ -166,7 +210,7 @@ const FlatForm = () => {
         ...formData,
         imgUrls,
 
-        timestamp: serverTimestamp(),
+        timestamp: "",
       };
     } else {
       delete formDataCopy.amenities;
@@ -175,10 +219,17 @@ const FlatForm = () => {
     delete formDataCopy.images;
 
     console.log(formDataCopy);
-    const docRef = await addDoc(collection(db, "listings"), formDataCopy);
-    setFormData({});
-    setLoading(false);
-    toast.success("Listing saved");
+    console.log(listingId)
+    try{
+      const docRef = doc(db, 'listings', listingId)
+      await updateDoc(docRef, formDataCopy)
+      setLoading(false)
+      toast.success('Listing saved')
+      navigate("/")
+    } catch (error){
+      console.log(error)
+    }
+ 
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
@@ -200,9 +251,7 @@ const FlatForm = () => {
         readerArray.push(reader);
       }
     
-  
-    
-    
+
     if (e.target.value === "true") {
       boolean = true;
     }
@@ -221,18 +270,7 @@ const FlatForm = () => {
       setFormData((prevState) => ({
         ...prevState,
         images: e.target.files,
-        name:auth?.currentUser?.displayName,
-        userID:auth?.currentUser?.uid
       }));
-
-      console.log(e.target.files[0].name);
-
-      const data = [];
-      for (let i = 0; i < e.target.files.length; i++) {
-        data.push(e.target.files[i].name);
-        console.log(e.target.files[i].name);
-      }
-      setLessonImage((old) => [...old, data]);
     }
 
     //text/boolean/numbers
@@ -242,8 +280,7 @@ const FlatForm = () => {
         [e.target.name]: boolean ?? e.target.value,
       }));
     }
-
-    console.log(formData);
+    console.log(formData)
   };
   const getSelectedValue = (selectedValue, type) => {
     setFormData({
@@ -251,18 +288,24 @@ const FlatForm = () => {
       [type]: selectedValue,
     });
   };
+  const onDelete = async () => {
+    console.log(listingId)
+    if (window.confirm('Are you sure you want to delete?')) {
+      await deleteDoc(doc(db, 'listings', listingId))
+      toast.success('Successfully deleted listing')
+    }
+  }
 
   if (loading) {
     return <Spinner />;
   }
-
   return (
     <div className="flat-form">
       <div className="flat-type">
         <button
           onClick={() => navigate("/have-flat")}
           className={
-            type === "have-flat" ? "have-flat-btn-active" : "have-flat-btn"
+            clientType === "have-flat" ? "have-flat-btn-active" : "have-flat-btn"
           }
         >
           Have Flat
@@ -270,15 +313,18 @@ const FlatForm = () => {
         <button
           onClick={() => navigate("/need-flat")}
           className={
-            type === "need-flat" ? "need-flat-btn-active" : "need-flat-btn"
+            clientType === "need-flat" ? "need-flat-btn-active" : "need-flat-btn"
           }
         >
           Need Flat
         </button>
+        <button onClick={onDelete}>
+          delete
+        </button>
       </div>
       <div className="form-content">
         <h2 className="form-header">
-          {type === "have-flat" ? "Have" : "Need"} Flat
+          {clientType === "have-flat" ? "Have" : "Need"} Flat
         </h2>
         <h6 className="form-subheader">If you are looking for flatmate.</h6>
         <div className="form-partition"></div>
@@ -292,28 +338,29 @@ const FlatForm = () => {
                 className="form-location"
                 placeholder={"Add Location..."}
                 icon={location_icon}
-                name="loc"
                 value={loc}
+                name="loc"
                 type="icon"
                 handleInputChange={onMutate}
               />
               <select
                 className="addlistingDropdown"
-                onClick={onMutate}
+                onClick={onMutate}        
                 name="city"
-              >
-                <option value="" disabled selected>
-                  Select your city
+              > 
+                <option value={city} disabled selected>
+                 {city}
                 </option>
-                {cityList.map((city) => {
-                  return <option value={city.name}>{city.name}</option>;
+                {cityList.map((city)=>{
+                  return <option value={city.name}>{city.name}</option>
                 })}
+                
               </select>
             </div>
             <SelectInputField
               selectList={genderList}
-              value={genderPreference}
               tagline={"Looking For"}
+              value={genderPreference}
               fieldType="genderPreference"
               getSelectedValue={getSelectedValue}
             />
@@ -326,9 +373,9 @@ const FlatForm = () => {
                 className="form-location"
                 placeholder={"5000"}
                 type="text"
-                value={rent}
                 icon="₹"
                 name="rent"
+                value={rent}
                 handleInputChange={onMutate}
               />
             </div>
@@ -340,7 +387,7 @@ const FlatForm = () => {
               fieldType="occupancy"
             />
           </div>
-          {type === "have-flat" && (
+          {clientType === "have-flat" && (
             <div>
               <label htmlFor="">Upload 3 Photos of your flat</label>
               <div className="upload-image">
@@ -361,17 +408,16 @@ const FlatForm = () => {
                     className="formInputFile"
                     name="images"
                     onChange={onMutate}
+                   
                     max="6"
                     accept=".jpg,.png,.jpeg"
                     multiple
                     required
                   />
                   <p>(JPG, PNG, JPEG)</p>
+                   
                 </label>
-                {/* <div>{fileName && `${fileName.name} - ${fileName.type}`}</div> */}
               </div>
-              {/* <p>{fileName}</p> */}
-
               <label style={{ fontSize: "12px", fontWeight: "600" }} htmlFor="">
                 {" "}
                 You can upload images upto 25 MB
@@ -409,21 +455,21 @@ const FlatForm = () => {
 
             <div className="form-date">
               <label for="start">
-                {type === "have-flat" ? "Availaible from" : "Shift from"}
+                {clientType === "have-flat" ? "Availaible from" : "Shift from"}
               </label>
 
               <input
                 type="date"
                 id="start"
                 name="availableFrom"
-                value={date}
+                value={availableFrom}
                 defaultValue={date}
                 onChange={onMutate}
               />
             </div>
           </div>
 
-          {type === "have-flat" && (
+          {clientType === "have-flat" && (
             <div className="amenities">
               <label htmlFor="">Amenities</label>
               <div className="amenities-list">
@@ -431,9 +477,9 @@ const FlatForm = () => {
                   return (
                     <MultipleSelectCard
                       project={utility}
-                      value={amenities}
                       index={index}
                       onClick={onClick}
+                      value={amenities}
                     />
                   );
                 })}
@@ -445,18 +491,19 @@ const FlatForm = () => {
             <textarea
               name="desc"
               id=""
+              value={desc}
               placeholder="I am looking for a roommate for my flat."
               onChange={onMutate}
             ></textarea>
           </div>
           <div className="submit-btn">
-            <button onClick={onSubmit}>Submit</button>
+            <button onClick={onSubmit}>Update</button>
             <ToastContainer />
           </div>
         </form>
       </div>
     </div>
   );
-};
+}
 
-export default FlatForm;
+export default EditListing

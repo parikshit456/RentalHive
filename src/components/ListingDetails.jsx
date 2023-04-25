@@ -64,7 +64,7 @@ const ListingDetails = () => {
             <div className="listingImg">
              
               <img
-                src={profile}
+                src={auth.currentUser?.photoURL}
                 style={{ width: "100%", borderRadius: "50px" }}
               />
               <p>{listing.name}</p>

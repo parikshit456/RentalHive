@@ -16,7 +16,7 @@ const AddListing = () => {
         style={{
           fontSize: ".85rem",
           lineHeight: "1rem",
-          color: "rgb(205, 205, 206",
+          color: "rgb(205, 205, 206)",
         }}
       >
         It will take less than one minute

@@ -4,7 +4,6 @@ import { doc, Firestore, getDoc, updateDoc } from "firebase/firestore";
 
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase.config";
-import SelectInputField from "./SelectInputField";
 import Spinner from "./Spinner";
 
 const Myprofile = () => {

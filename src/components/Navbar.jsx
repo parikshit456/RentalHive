@@ -4,14 +4,22 @@ import Profile from "./Profile";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import Spinner from "./Spinner";
 import { useAuthStatus } from "../hooks/useAuthStatus";
+import { collection, getDocs, query } from "firebase/firestore";
+import { db } from "../firebase.config";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
+import edit from "../assets/svg/edit.svg"
 
 const Navbar = ({ authUser }) => {
   const [isActive, setIsActive] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const params = useParams();
+  const [isEdit,setIsEdit] = useState(false)
   console.log(params);
+
   const auth = getAuth();
+  
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -30,6 +38,36 @@ const Navbar = ({ authUser }) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    const fetchListing = async () => {
+      try {
+        const listingsRef = collection(db, "listings");
+        console.log(listingsRef);
+        //query
+        const q = query(listingsRef)
+
+        const querySnap = await getDocs(q);
+        console.log(querySnap)
+        const listings = [];
+        querySnap.forEach((doc) => {
+          console.log(doc);
+          if(doc.data().userID===auth?.currentUser?.uid){
+            setIsEdit(true)
+            listings.push({
+              id: doc.id,
+              data: doc.data(),
+            });
+          }
+      
+        });
+        // setLoading(false);
+      } catch (error) {
+        toast.error("Could not fetch listings");
+      }
+    };
+    fetchListing();
+  }, [ auth?.currentUser?.uid]);
 
   const onSignin = () => {
     if (isActive) {
@@ -64,18 +102,19 @@ const Navbar = ({ authUser }) => {
       <div onClick={onLogoClick} className="navbar-logo">
         House<span>Hunter</span>
       </div>
+      {console.log(user)}
 
       {user ? (
         <div className="btn-container">
           {/* <button className="navButton">Add Listing</button> */}
-          <Link to="/add-listing">
+          <Link to={isEdit ? "/EditListing" :"/add-listing"}>
             <button className="add-listing-btn">
               <img
                 className="add-icon"
                 alt="svgImg"
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNjQiIGhlaWdodD0iNjQiCnZpZXdCb3g9IjAsMCwyNTYsMjU2IgpzdHlsZT0iZmlsbDojMDAwMDAwOyI+CjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxnIHRyYW5zZm9ybT0ic2NhbGUoOC41MzMzMyw4LjUzMzMzKSI+PHBhdGggZD0iTTQsMTZoMTB2MTBjMCwwLjU1MjI4IDAuNDQ3NzIsMSAxLDFjMC41NTIyOCwwIDEsLTAuNDQ3NzIgMSwtMXYtMTBoMTBjMC41NTIyOCwwIDEsLTAuNDQ3NzIgMSwtMWMwLC0wLjU1MjI4IC0wLjQ0NzcyLC0xIC0xLC0xaC0xMHYtMTBjMCwtMC41NTIyOCAtMC40NDc3MiwtMSAtMSwtMWMtMC41NTIyOCwwIC0xLDAuNDQ3NzIgLTEsMXYxMGgtMTBjLTAuNTUyMjgsMCAtMSwwLjQ0NzcyIC0xLDFjMCwwLjU1MjI4IDAuNDQ3NzIsMSAxLDF6Ij48L3BhdGg+PC9nPjwvZz4KPC9zdmc+"
+                src={isEdit ? "https://img.icons8.com/ios/50/null/edit--v1.png":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNjQiIGhlaWdodD0iNjQiCnZpZXdCb3g9IjAsMCwyNTYsMjU2IgpzdHlsZT0iZmlsbDojMDAwMDAwOyI+CjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxnIHRyYW5zZm9ybT0ic2NhbGUoOC41MzMzMyw4LjUzMzMzKSI+PHBhdGggZD0iTTQsMTZoMTB2MTBjMCwwLjU1MjI4IDAuNDQ3NzIsMSAxLDFjMC41NTIyOCwwIDEsLTAuNDQ3NzIgMSwtMXYtMTBoMTBjMC41NTIyOCwwIDEsLTAuNDQ3NzIgMSwtMWMwLC0wLjU1MjI4IC0wLjQ0NzcyLC0xIC0xLC0xaC0xMHYtMTBjMCwtMC41NTIyOCAtMC40NDc3MiwtMSAtMSwtMWMtMC41NTIyOCwwIC0xLDAuNDQ3NzIgLTEsMXYxMGgtMTBjLTAuNTUyMjgsMCAtMSwwLjQ0NzcyIC0xLDFjMCwwLjU1MjI4IDAuNDQ3NzIsMSAxLDF6Ij48L3BhdGg+PC9nPjwvZz4KPC9zdmc+"}
               />
-              <span>Add Listing</span>
+              <span>{isEdit ? "Edit" : "Add"}  Listing</span>
             </button>
           </Link>
 
