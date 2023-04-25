@@ -18,6 +18,7 @@ import ListingDetails from "./components/ListingDetails";
 import PrivateRoute from "./components/PrivateRoute";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { useEffect, useState } from "react";
+import Notification from "./components/Notification";
 import CityCard from "./components/CityCard";
 import EditListing from "./components/EditListing";
 // import ExploreNew from "./components/ExploreNew";
@@ -32,7 +33,6 @@ function App() {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log(user);
         setUser(user);
         const uid = user.uid;
         // ...
@@ -76,6 +76,7 @@ function App() {
           <Route path="/have-flat" element={<FlatForm />} />
           <Route path="/need-flat" element={<FlatForm />} />
           <Route path="/EditListing" element={<EditListing />} />
+          <Route path="/Noti" element={<Notification />} />
         </Routes>
       </Router>
     </div>

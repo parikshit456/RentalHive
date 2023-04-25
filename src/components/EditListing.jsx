@@ -61,6 +61,7 @@ const EditListing = () => {
     occupancy: "",
     images: {},
     amenities: [],
+    imgUrls:[],
     desc: "",
     contactNumber: "",
     city: "",
@@ -72,6 +73,7 @@ const EditListing = () => {
     name,
     clientType,
     loc,
+    imgUrls,
     genderPreference,
     rent,
     occupancy,
@@ -101,8 +103,11 @@ const EditListing = () => {
             });
           }
         });
-        setFormData(listings[0]?.data);
-        setListingId(listings[0]?.id);
+        console.log(listings[0].data.imgUrls);
+        setUploadedImages(listings[0]?.data?.imgUrls)
+
+        setFormData(listings[0]?.data)
+        setListingId(listings[0]?.id)
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
@@ -191,7 +196,7 @@ const EditListing = () => {
         });
       };
 
-      const imgUrls = await Promise.all(
+      const imageUrls = await Promise.all(
         [...images].map((image) => storeImage(image))
       ).catch(() => {
         setLoading(false);
@@ -200,7 +205,7 @@ const EditListing = () => {
       });
       formDataCopy = {
         ...formData,
-        imgUrls,
+        imgUrls:[...imgUrls,...imageUrls],
 
         timestamp: "",
       };
@@ -210,17 +215,25 @@ const EditListing = () => {
 
     delete formDataCopy.images;
 
-    try {
-      const docRef = doc(db, "listings", listingId);
-      await updateDoc(docRef, formDataCopy);
-      setLoading(false);
-      toast.success("Listing saved");
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const docRef = doc(db, "listings", listingId);
+    //   await updateDoc(docRef, formDataCopy);
+    //   setLoading(false);
+    //   toast.success("Listing saved");
+    //   navigate("/");
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+  };
+
+  const handleRemoveImage = (index,image) => {
+    console.log(image)
+     imgUrls.filter((value)=>value!==image)
+    const imageArray = [...uploadedImages];
+    imageArray.splice(index, 1);
+    setUploadedImages([...imageArray]);
   };
 
   const onMutate = (e) => {
@@ -228,18 +241,21 @@ const EditListing = () => {
     const files = e.target.files;
     const readerArray = [];
     const newUploadedImages = [...uploadedImages];
+    // console.log(uploadedImages)
 
     // Create an array of FileReader objects
 
-    for (let i = 0; i < files?.length; i++) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        newUploadedImages.push(reader.result);
-        setUploadedImages(newUploadedImages);
-      };
-      reader.readAsDataURL(files[i]);
-      readerArray.push(reader);
-    }
+      for (let i = 0; i < files?.length; i++) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          newUploadedImages.push(reader.result);
+          
+            setUploadedImages( newUploadedImages);
+        };
+        reader.readAsDataURL(files[i]);
+        readerArray.push(reader);
+      }
+    
 
     if (e.target.value === "true") {
       boolean = true;
@@ -404,7 +420,6 @@ const EditListing = () => {
                     max="6"
                     accept=".jpg,.png,.jpeg"
                     multiple
-                    required
                   />
                   <p>(JPG, PNG, JPEG)</p>
                 </label>
@@ -417,11 +432,16 @@ const EditListing = () => {
                     <p>Uploaded Images:</p>
                     <hr></hr>
                     {uploadedImages.map((image, index) => (
+                      <div>
+                      <button onClick={() => handleRemoveImage(index,image)}>
+                        X
+                      </button>
                       <img
                         key={index}
                         src={image}
                         alt={`Uploaded ${index + 1}`}
-                      />
+                      />  
+                    </div>
                     ))}
                   </div>
                 )}

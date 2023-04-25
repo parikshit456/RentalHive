@@ -8,7 +8,6 @@ const Profile = ({ user }) => {
   // const [user , setUser] = useState(null)
   // const [isActive, setIsActive] = useState(false);
   const auth = getAuth();
-  console.log(user);
   // useEffect(() => {
   //   console.log(auth.currentUser);
   //   setUser(auth.currentUser)
@@ -33,7 +32,7 @@ const Profile = ({ user }) => {
       <div class="dropdown-content">
         <p>Hi {user.displayName}</p>
         <a href="/Pref">My Prefrence</a>
-        <a href="#">My Notification</a>
+        <a href="/Noti">My Notification</a>
         <a href="/MyProfile">My Profile</a>
         <a href="" style={{ color: "red" }} onClick={onLogout}>
           Logout
