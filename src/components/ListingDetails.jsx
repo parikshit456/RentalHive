@@ -15,7 +15,6 @@ import { amenitiesList } from "../assets/amenities";
 import ImageSlider from "./ImageSlider";
 import ReactWhatsapp from "react-whatsapp";
 
-
 const ListingDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
@@ -41,7 +40,6 @@ const ListingDetails = () => {
       }
     };
     fetchListing();
-    console.log(listing.clientType);
   }, [navigate, params.listingId]);
 
   const [prefList, setPrefList] = useState(preferenceList);
@@ -62,7 +60,6 @@ const ListingDetails = () => {
         <div className="listingdetasilinside">
           <div className="listingProfileCard">
             <div className="listingImg">
-             
               <img
                 src={auth.currentUser?.photoURL}
                 style={{ width: "100%", borderRadius: "50px" }}
@@ -112,26 +109,26 @@ const ListingDetails = () => {
               <h3>Pictures</h3>
               <ImageSlider images={listing.imgUrls} />
               <hr></hr>
-              </div>
+            </div>
           )}
 
-              <h3>Preferences</h3>
-              <div className="listingPref">
-                {prefList.map((project, index) => {
-                  return (
-                    <MultipleSelectCard
-                      project={project}
-                      index={index}
-                      isDetailedView={true}
-                      onClick={() => {}}
-                    />
-                  );
-                })}
-              </div>
-              <hr></hr>
+          <h3>Preferences</h3>
+          <div className="listingPref">
+            {prefList.map((project, index) => {
+              return (
+                <MultipleSelectCard
+                  project={project}
+                  index={index}
+                  isDetailedView={true}
+                  onClick={() => {}}
+                />
+              );
+            })}
+          </div>
+          <hr></hr>
 
-              {listing.clientType === "have-flat" && (
-                <div>
+          {listing.clientType === "have-flat" && (
+            <div>
               <h3>Amenities</h3>
               <div className="listingPref">
                 {listing.amenities.map((title, index) => {
@@ -150,10 +147,9 @@ const ListingDetails = () => {
                 })}
               </div>
               <hr></hr>
-              </div> )}
-            
+            </div>
+          )}
 
-          
           <h3>Description</h3>
           <p>{listing.desc}</p>
         </div>

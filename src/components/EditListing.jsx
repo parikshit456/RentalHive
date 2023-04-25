@@ -21,28 +21,37 @@ import {
 } from "firebase/storage";
 import { db } from "../firebase.config";
 import { v4 as uuidv4 } from "uuid";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  serverTimestamp,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { async } from "@firebase/util";
 import { useEffect } from "react";
 import { cityList } from "../assets/cityList";
 
 const EditListing = () => {
-    const location = useLocation();
+  const location = useLocation();
   let type = location.pathname;
   type = type.substring(1);
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   var curr = new Date();
-  console.log(type);
   const auth = getAuth();
   curr.setDate(curr.getDate());
   var date = curr.toISOString().substring(0, 10);
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
-  const [listingId,setListingId] = useState("");
+  const [listingId, setListingId] = useState("");
   const [uploadedImages, setUploadedImages] = useState([]);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     clientType: "",
@@ -54,8 +63,8 @@ const EditListing = () => {
     amenities: [],
     desc: "",
     contactNumber: "",
-    city:"",
-    userID:"",
+    city: "",
+    userID: "",
     availableFrom: date,
   });
 
@@ -80,45 +89,37 @@ const EditListing = () => {
     const fetchListing = async () => {
       try {
         const listingsRef = collection(db, "listings");
-        console.log(listingsRef);
         //query
-        const q = query(listingsRef)
+        const q = query(listingsRef);
         const querySnap = await getDocs(q);
-        console.log(querySnap)
         const listings = [];
         querySnap.forEach((doc) => {
-          console.log(doc);
-          if(doc.data().userID===auth?.currentUser?.uid){
+          if (doc.data().userID === auth?.currentUser?.uid) {
             listings.push({
               id: doc.id,
               data: doc.data(),
             });
           }
-      
         });
-        console.log(listings);
-        setFormData(listings[0]?.data)
-        setListingId(listings[0]?.id)
+        setFormData(listings[0]?.data);
+        setListingId(listings[0]?.id);
         setLoading(false);
-  
       } catch (error) {
         toast.error("Could not fetch listings");
       }
     };
     fetchListing();
-  }, [ auth?.currentUser?.uid]);
+  }, [auth?.currentUser?.uid]);
   const [selectedUtilityList, setSelectedUtilityList] = useState([]);
 
   const onClick = async (index) => {
-    let tempUtilityList = amenitiesList.forEach((value)=>{
-      if(amenities.includes(value.title)){
+    let tempUtilityList = amenitiesList.forEach((value) => {
+      if (amenities.includes(value.title)) {
         value.selected = true;
       }
-      console.log(value)
+    });
 
-    })
-
-    setUtilityList(tempUtilityList)
+    setUtilityList(tempUtilityList);
     let utilities = [...utilityList];
 
     let selectedUtility = {
@@ -126,21 +127,15 @@ const EditListing = () => {
       selected: !utilities[index].selected,
     };
 
-    console.log(selectedUtility)
-
-    console.log(selectedUtility.title);
     utilities[index] = selectedUtility;
     setUtilityList(utilities);
-    console.log(utilities)
     let amenitiesTempList = utilities.filter(
       (utility) => utility.selected === true
     );
-    console.log(utilities);
 
     amenitiesTempList = amenitiesTempList.map((element) => {
       return element.title;
     });
-    console.log(amenitiesTempList);
     setFormData({
       ...formData,
       amenities: [...amenitiesTempList],
@@ -149,11 +144,8 @@ const EditListing = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    
 
-    console.log(formData);
     setLoading(true);
-    console.log(auth.currentUser.displayName);
     let formDataCopy = {
       ...formData,
       name: auth.currentUser.displayName,
@@ -218,18 +210,16 @@ const EditListing = () => {
 
     delete formDataCopy.images;
 
-    console.log(formDataCopy);
-    console.log(listingId)
-    try{
-      const docRef = doc(db, 'listings', listingId)
-      await updateDoc(docRef, formDataCopy)
-      setLoading(false)
-      toast.success('Listing saved')
-      navigate("/")
-    } catch (error){
-      console.log(error)
+    try {
+      const docRef = doc(db, "listings", listingId);
+      await updateDoc(docRef, formDataCopy);
+      setLoading(false);
+      toast.success("Listing saved");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
     }
- 
+
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
@@ -241,16 +231,15 @@ const EditListing = () => {
 
     // Create an array of FileReader objects
 
-      for (let i = 0; i < files?.length; i++) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          newUploadedImages.push(reader.result);
-            setUploadedImages(newUploadedImages);
-        };
-        reader.readAsDataURL(files[i]);
-        readerArray.push(reader);
-      }
-    
+    for (let i = 0; i < files?.length; i++) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        newUploadedImages.push(reader.result);
+        setUploadedImages(newUploadedImages);
+      };
+      reader.readAsDataURL(files[i]);
+      readerArray.push(reader);
+    }
 
     if (e.target.value === "true") {
       boolean = true;
@@ -280,7 +269,6 @@ const EditListing = () => {
         [e.target.name]: boolean ?? e.target.value,
       }));
     }
-    console.log(formData)
   };
   const getSelectedValue = (selectedValue, type) => {
     setFormData({
@@ -289,12 +277,16 @@ const EditListing = () => {
     });
   };
   const onDelete = async () => {
-    console.log(listingId)
-    if (window.confirm('Are you sure you want to delete?')) {
-      await deleteDoc(doc(db, 'listings', listingId))
-      toast.success('Successfully deleted listing')
+    if (window.confirm("Are you sure you want to delete?")) {
+      try {
+        await deleteDoc(doc(db, "listings", listingId));
+        toast.success("Successfully deleted listing");
+        navigate("/");
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }
+  };
 
   if (loading) {
     return <Spinner />;
@@ -305,7 +297,9 @@ const EditListing = () => {
         <button
           onClick={() => navigate("/have-flat")}
           className={
-            clientType === "have-flat" ? "have-flat-btn-active" : "have-flat-btn"
+            clientType === "have-flat"
+              ? "have-flat-btn-active"
+              : "have-flat-btn"
           }
         >
           Have Flat
@@ -313,14 +307,14 @@ const EditListing = () => {
         <button
           onClick={() => navigate("/need-flat")}
           className={
-            clientType === "need-flat" ? "need-flat-btn-active" : "need-flat-btn"
+            clientType === "need-flat"
+              ? "need-flat-btn-active"
+              : "need-flat-btn"
           }
         >
           Need Flat
         </button>
-        <button onClick={onDelete}>
-          delete
-        </button>
+        <button onClick={onDelete}>delete</button>
       </div>
       <div className="form-content">
         <h2 className="form-header">
@@ -345,16 +339,15 @@ const EditListing = () => {
               />
               <select
                 className="addlistingDropdown"
-                onClick={onMutate}        
+                onClick={onMutate}
                 name="city"
-              > 
+              >
                 <option value={city} disabled selected>
-                 {city}
+                  {city}
                 </option>
-                {cityList.map((city)=>{
-                  return <option value={city.name}>{city.name}</option>
+                {cityList.map((city) => {
+                  return <option value={city.name}>{city.name}</option>;
                 })}
-                
               </select>
             </div>
             <SelectInputField
@@ -408,14 +401,12 @@ const EditListing = () => {
                     className="formInputFile"
                     name="images"
                     onChange={onMutate}
-                   
                     max="6"
                     accept=".jpg,.png,.jpeg"
                     multiple
                     required
                   />
                   <p>(JPG, PNG, JPEG)</p>
-                   
                 </label>
               </div>
               <label style={{ fontSize: "12px", fontWeight: "600" }} htmlFor="">
@@ -504,6 +495,6 @@ const EditListing = () => {
       </div>
     </div>
   );
-}
+};
 
-export default EditListing
+export default EditListing;

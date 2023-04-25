@@ -37,14 +37,13 @@ const FlatForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   var curr = new Date();
-  console.log(type);
   const auth = getAuth();
   curr.setDate(curr.getDate());
   var date = curr.toISOString().substring(0, 10);
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
   const [formData, setFormData] = useState({
-    name:"",
+    name: "",
     clientType: type,
     loc: "",
     genderPreference: "",
@@ -85,18 +84,15 @@ const FlatForm = () => {
       selected: !utilities[index].selected,
     };
 
-    console.log(selectedUtility.title);
     utilities[index] = selectedUtility;
     setUtilityList(utilities);
     let amenitiesTempList = utilities.filter(
       (utility) => utility.selected === true
     );
-    console.log(utilities);
 
     amenitiesTempList = amenitiesTempList.map((element) => {
       return element.title;
     });
-    console.log(amenitiesTempList);
     setFormData({
       ...formData,
       clientType: type,
@@ -107,9 +103,7 @@ const FlatForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
     setLoading(true);
-    console.log(auth.currentUser.displayName);
     let formDataCopy = {
       ...formData,
       name: auth?.currentUser?.displayName,
@@ -174,11 +168,13 @@ const FlatForm = () => {
 
     delete formDataCopy.images;
 
-    console.log(formDataCopy);
     const docRef = await addDoc(collection(db, "listings"), formDataCopy);
     setFormData({});
     setLoading(false);
     toast.success("Listing saved");
+    navigate("/", {
+      state: { id: docRef.id },
+    });
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
@@ -190,19 +186,16 @@ const FlatForm = () => {
 
     // Create an array of FileReader objects
 
-      for (let i = 0; i < files?.length; i++) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          newUploadedImages.push(reader.result);
-            setUploadedImages(newUploadedImages);
-        };
-        reader.readAsDataURL(files[i]);
-        readerArray.push(reader);
-      }
-    
-  
-    
-    
+    for (let i = 0; i < files?.length; i++) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        newUploadedImages.push(reader.result);
+        setUploadedImages(newUploadedImages);
+      };
+      reader.readAsDataURL(files[i]);
+      readerArray.push(reader);
+    }
+
     if (e.target.value === "true") {
       boolean = true;
     }
@@ -221,16 +214,13 @@ const FlatForm = () => {
       setFormData((prevState) => ({
         ...prevState,
         images: e.target.files,
-        name:auth?.currentUser?.displayName,
-        userID:auth?.currentUser?.uid
+        name: auth?.currentUser?.displayName,
+        userID: auth?.currentUser?.uid,
       }));
-
-      console.log(e.target.files[0].name);
 
       const data = [];
       for (let i = 0; i < e.target.files.length; i++) {
         data.push(e.target.files[i].name);
-        console.log(e.target.files[i].name);
       }
       setLessonImage((old) => [...old, data]);
     }
@@ -242,8 +232,6 @@ const FlatForm = () => {
         [e.target.name]: boolean ?? e.target.value,
       }));
     }
-
-    console.log(formData);
   };
   const getSelectedValue = (selectedValue, type) => {
     setFormData({

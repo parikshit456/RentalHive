@@ -7,20 +7,16 @@ const MultipleSelectCard = ({
   index,
   onClick,
   isDetailedView = false,
-  value =[]
+  value = [],
 }) => {
-  const [selected,setSelected] = useState(project.selected)
- console.log(value)
-  useEffect(()=>{
-    if(value && value.includes(project.title)){
-      console.log(project.title)
-      setSelected(true)
-
-    }else{
-      setSelected(project.selected)
-
+  const [selected, setSelected] = useState(project.selected);
+  useEffect(() => {
+    if (value && value.includes(project.title)) {
+      setSelected(true);
+    } else {
+      setSelected(project.selected);
     }
-  },[value])
+  }, [value]);
   return (
     <button
       onClick={() => onClick(index)}
@@ -38,7 +34,7 @@ const MultipleSelectCard = ({
         style={{ width: "50%", height: "25px" }}
         className="selectCardImg"
       ></img>
-      <p style={{fontWeight: "600" , fontSize:"11px"}}>{project.title}</p>
+      <p style={{ fontWeight: "600", fontSize: "11px" }}>{project.title}</p>
     </button>
   );
 };

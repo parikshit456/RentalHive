@@ -20,10 +20,8 @@ const Listings = () => {
   const [filterList, setFilterList] = useState([]);
   const [type, setType] = useState("all");
   const location = useLocation();
-  console.log(location);
 
   const auth = getAuth();
-  console.log(auth);
 
   const [listing, setListing] = useState({});
   const [loading, setLoading] = useState(true);
@@ -32,14 +30,12 @@ const Listings = () => {
   const navigate = useNavigate();
 
   const accodomationType = (type) => {
-    console.log("--->" + type);
     type !== "" && setType(type);
     let list = userlist;
     if (type !== "all") {
       list = userlist.filter((user) => {
         return user.data.clientType === type;
       });
-      console.log(list);
       setFilterList(list);
     } else {
       setUserList(userlist);
@@ -49,20 +45,17 @@ const Listings = () => {
     const fetchListing = async () => {
       try {
         const listingsRef = collection(db, "listings");
-        console.log(listingsRef);
         //query
         const q = query(listingsRef);
         const querySnap = await getDocs(q);
         const listings = [];
         querySnap.forEach((doc) => {
-          console.log(doc);
           listings.push({
             id: doc.id,
             data: doc.data(),
           });
         });
         setUserList(listings);
-        console.log(listings);
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");

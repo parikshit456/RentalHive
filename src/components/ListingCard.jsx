@@ -12,8 +12,7 @@ const ListingCard = ({ user }) => {
     genderPreference,
     match_percentage,
   } = user.data;
-  const auth = getAuth()
-  console.log(auth.currentUser)
+  const auth = getAuth();
 
   if (!user) {
     return <Spinner />;
@@ -22,10 +21,7 @@ const ListingCard = ({ user }) => {
     <Link to={`/ListingDetails/${user.id}`}>
       <div className="listing-card">
         <div className="card-top">
-          <img
-            className="card-img"
-            src={auth.currentUser?.photoURL}
-          />
+          <img className="card-img" src={auth.currentUser?.photoURL} />
           <div className="card-info">
             <div className="card-name">{name}</div>
             <div className="card-loc">{loc}</div>

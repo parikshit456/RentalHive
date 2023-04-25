@@ -32,19 +32,12 @@ const Myprofile = () => {
   const { firstName, lastName, contact = "", myGender = "" } = profileData;
 
   useEffect(() => {
-    console.log(user);
-
     const fetchData = async () => {
-      console.log(auth?.currentUser);
       const docRef = doc(db, "users", auth?.currentUser?.uid);
-      console.log(docRef);
       const docSnap = await getDoc(docRef);
-      console.log(docSnap.data());
       if (docSnap.exists()) {
         setLoading(true);
-        console.log(docSnap.data());
         const { name, mobile, myGender } = docSnap.data();
-        console.log(profileData);
         var space = name?.indexOf(" ");
         myGender === "Male" ? setGender(true) : setGender(false);
         setProfileData({
@@ -72,9 +65,7 @@ const Myprofile = () => {
 
   const onMutate = (e) => {
     let boolean = null;
-    console.log(e.target.value);
     setGender(e.target.value);
-    console.log(e.target.value);
     if (e.target.value === "true") {
       boolean = true;
     }
@@ -98,12 +89,10 @@ const Myprofile = () => {
   };
 
   const OnSelect = (e) => {
-    console.log(e.target.name);
     setProfileData({
       ...profileData,
       myGender: e.target.name,
     });
-    console.log(profileData);
   };
 
   if (loading) {

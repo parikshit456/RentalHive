@@ -48,7 +48,6 @@ const Pref = ({ data }) => {
 
   const onClick = (index) => {
     let prefs = [...prefList];
-    console.log(prefs);
 
     let selectedPref = { ...prefs[index], selected: !prefs[index].selected };
     prefs[index] = selectedPref;
@@ -62,11 +61,9 @@ const Pref = ({ data }) => {
   };
   const auth = getAuth();
 
-  console.log(auth);
   const user = auth?.currentUser;
 
   const onSubmit = async () => {
-    console.log(user);
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
@@ -99,8 +96,6 @@ const Pref = ({ data }) => {
   };
 
   useEffect(() => {
-    console.log(user?.uid);
-
     const fetchListing = async () => {
       const docRef = doc(db, "users", user?.uid);
       const docSnap = await getDoc(docRef);
@@ -108,7 +103,6 @@ const Pref = ({ data }) => {
       if (docSnap.exists()) {
         setLoading(true);
 
-        console.log(docSnap.data());
         setFormData(docSnap.data());
         let tempList = docSnap.data().prefList;
         const updatedListWithSelected = prefList.map((item) => {
@@ -121,7 +115,6 @@ const Pref = ({ data }) => {
         setPrefList(updatedListWithSelected);
         getSelectedPrefList(updatedListWithSelected);
 
-        console.log(prefList);
         // prefList = prefList.map((pref) => {});
         // setUserList(docSnap.data().prefList);
         console.log(docSnap.data().prefList);
