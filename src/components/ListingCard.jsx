@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import location_icon from "../assets/svg/location_icon.svg";
 import Spinner from "./Spinner";
+import { getAuth } from "firebase/auth";
 
 const ListingCard = ({ user }) => {
   const {
@@ -11,6 +12,8 @@ const ListingCard = ({ user }) => {
     genderPreference,
     match_percentage,
   } = user.data;
+  const auth = getAuth()
+  console.log(auth.currentUser)
 
   if (!user) {
     return <Spinner />;
@@ -21,7 +24,7 @@ const ListingCard = ({ user }) => {
         <div className="card-top">
           <img
             className="card-img"
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+            src={auth.currentUser?.photoURL}
           />
           <div className="card-info">
             <div className="card-name">{name}</div>

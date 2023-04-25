@@ -1,17 +1,32 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const MultipleSelectCard = ({
   project,
   index,
   onClick,
   isDetailedView = false,
+  value =[]
 }) => {
+  const [selected,setSelected] = useState(project.selected)
+ console.log(value)
+  useEffect(()=>{
+    if(value && value.includes(project.title)){
+      console.log(project.title)
+      setSelected(true)
+
+    }else{
+      setSelected(project.selected)
+
+    }
+  },[value])
   return (
     <button
       onClick={() => onClick(index)}
       key={index}
       className={
-        project.selected
+        selected
           ? "multiple-select-card-active"
           : isDetailedView
           ? "multiple-selected"

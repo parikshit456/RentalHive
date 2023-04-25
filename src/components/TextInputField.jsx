@@ -4,6 +4,7 @@ const TextInputField = ({
   handleInputChange,
   placeholder,
   icon,
+  value,
   type = "icon",
   name
 }) => {
@@ -18,6 +19,7 @@ const TextInputField = ({
       <div className="input-bar">
         <input
         name={name}
+        value={value}
           onChange={handleInputChange}
           type="text"
           placeholder={placeholder}

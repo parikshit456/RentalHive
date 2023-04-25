@@ -196,7 +196,7 @@
 
 .location-header {
   text-align: center;
-font-size: 45px;
+  font-size: 45px;
 }
 
 .location-header span {
@@ -286,11 +286,10 @@ font-size: 45px;
     font-size: 18px;
     font-weight: 500;
   }
-  .location-header{
+  .location-header {
     text-align: center;
     font-size: 33px;
   }
-  
 }
 .city-card h2 {
   color: white;
@@ -333,11 +332,9 @@ font-size: 45px;
   margin: 50px;
   margin-top: 30px;
   display: flex;
-  /* border: 1px solid black; */
   flex-direction: column;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  width: 583px;
 }
 
 .card-top {
@@ -730,11 +727,11 @@ a {
   background-color: rgb(243, 244, 246);
   padding: 0px 10px;
 }
-.addlistingDropdown:focus{
+.addlistingDropdown:focus {
   outline: none !important;
   border: 2px solid var(--primary-color);
 }
-.addlistingDropdown{
+.addlistingDropdown {
   font-size: 15px;
   width: 400px;
   padding: 0px 10px 0px 20px;
@@ -2096,7 +2093,7 @@ input::placeholder {
     height: auto;
   }
 }
-.whatsapp{
+.whatsapp {
   width: 75%;
   height: 34px;
   padding: 9px;
@@ -2108,7 +2105,7 @@ input::placeholder {
   background-color: #c7ede6;
   cursor: pointer;
 }
-.whatsapp:hover{
+.whatsapp:hover {
   background-color: var(--secondary-color);
 }
 @media only screen and (max-width: 600px) {
@@ -2123,4 +2120,12 @@ input::placeholder {
     display: flex;
     align-items: center;
   }
+}
+.uploadedImage img {
+  width: 60px;
+  height: 60px;
+}
+.uploadedImage {
+  display: flex;
+  flex-wrap: wrap;
 }

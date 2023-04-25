@@ -153,6 +153,7 @@ const Pref = ({ data }) => {
                 project={project}
                 index={index}
                 onClick={onClick}
+                // value={}
               />
             );
           })}

@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import CityCard from "./components/CityCard";
+import EditListing from "./components/EditListing";
 // import ExploreNew from "./components/ExploreNew";
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
 
           <Route path="/have-flat" element={<FlatForm />} />
           <Route path="/need-flat" element={<FlatForm />} />
+          <Route path="/EditListing" element={<EditListing />} />
         </Routes>
       </Router>
     </div>

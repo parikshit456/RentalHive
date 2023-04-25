@@ -77,7 +77,7 @@ const Listings = () => {
       <div className="listings">
         {(type !== "all" ? filterList : userlist).map((user) => {
           return (
-            user?.data?.loc?.toLowerCase() === name?.toLowerCase() && (
+            user?.data?.city?.toLowerCase() === name?.toLowerCase() && (
               <ListingCard user={user} />
             )
           );
