@@ -56,6 +56,7 @@ const FlatForm = () => {
     city: "",
     userID: "",
     availableFrom: date,
+    userProfile: auth?.currentUser?.photoURL
   });
 
   const {
@@ -254,6 +255,7 @@ const FlatForm = () => {
     <div className="flat-form">
       <div className="flat-type">
         <button
+        
           onClick={() => navigate("/have-flat")}
           className={
             type === "have-flat" ? "have-flat-btn-active" : "have-flat-btn"
@@ -362,10 +364,7 @@ const FlatForm = () => {
                   />
                   <p>(JPG, PNG, JPEG)</p>
                 </label>
-                {/* <div>{fileName && `${fileName.name} - ${fileName.type}`}</div> */}
               </div>
-              {/* <p>{fileName}</p> */}
-
               <label style={{ fontSize: "12px", fontWeight: "600" }} htmlFor="">
                 {" "}
                 You can upload images upto 25 MB
@@ -415,7 +414,7 @@ const FlatForm = () => {
                 type="date"
                 id="start"
                 name="availableFrom"
-                value={date}
+                value={availableFrom}
                 defaultValue={date}
                 onChange={onMutate}
               />
