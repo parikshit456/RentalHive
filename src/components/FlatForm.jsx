@@ -220,8 +220,6 @@ const FlatForm = () => {
       setFormData((prevState) => ({
         ...prevState,
         images: e.target.files,
-        name: auth?.currentUser?.displayName,
-        userID: auth?.currentUser?.uid,
       }));
 
       const data = [];
@@ -236,6 +234,8 @@ const FlatForm = () => {
       setFormData((prevState) => ({
         ...prevState,
         [e.target.name]: boolean ?? e.target.value,
+        name: auth?.currentUser?.displayName,
+        userID: auth?.currentUser?.uid,
       }));
     }
   };
@@ -382,7 +382,7 @@ const FlatForm = () => {
                           key={index}
                           src={image}
                           alt={`Uploaded ${index + 1}`}
-                        />  
+                        />
                       </div>
                     ))}
                   </div>

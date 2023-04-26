@@ -322,7 +322,7 @@ const EditListing = () => {
   }
   return (
     <div className="flat-form">
-      <div className="flat-type">
+      <div className="edit-flat-type">
         <div className="sub-flat">
           <button
             onClick={() => navigate("/have-flat")}
