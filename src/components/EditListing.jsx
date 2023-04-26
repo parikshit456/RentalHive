@@ -8,6 +8,7 @@ import { amenitiesList } from "../assets/amenities";
 import MultipleSelectCard from "./MultipleSelectCard";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
+import { AiFillDelete, FaTrash } from "react-icons/fa";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 //import { useNavigate } from "react-router-dom";
@@ -51,7 +52,7 @@ const EditListing = () => {
   const occupancyList = ["Single", "Shared", "Any"];
   const [listingId, setListingId] = useState("");
   const [uploadedImages, setUploadedImages] = useState([]);
-
+  const [imgList, setImgList] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     clientType: "",
@@ -61,7 +62,7 @@ const EditListing = () => {
     occupancy: "",
     images: {},
     amenities: [],
-    imgUrls:[],
+    imgUrls: [],
     desc: "",
     contactNumber: "",
     city: "",
@@ -104,10 +105,11 @@ const EditListing = () => {
           }
         });
         console.log(listings[0].data.imgUrls);
-        setUploadedImages(listings[0]?.data?.imgUrls)
+        setUploadedImages(listings[0]?.data?.imgUrls);
 
-        setFormData(listings[0]?.data)
-        setListingId(listings[0]?.id)
+        setFormData(listings[0]?.data);
+        setListingId(listings[0]?.id);
+        setImgList(listings[0]?.data?.imgUrls);
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
@@ -196,45 +198,57 @@ const EditListing = () => {
         });
       };
 
-      const imageUrls = await Promise.all(
-        [...images].map((image) => storeImage(image))
-      ).catch(() => {
-        setLoading(false);
-        toast.error("Images not uploaded");
-        return;
-      });
+      const imageUrls = images
+        ? await Promise.all(
+            [...images].map((image) => storeImage(image))
+          ).catch(() => {
+            setLoading(false);
+            toast.error("Images not uploaded");
+            return;
+          })
+        : [];
+      console.log(imgList);
+      console.log(imgUrls);
+      console.log(imageUrls);
+      console.log(formDataCopy);
       formDataCopy = {
         ...formData,
-        imgUrls:[...imgUrls,...imageUrls],
+        imgUrls: [...imgList, ...imageUrls],
 
         timestamp: "",
       };
+      console.log(formDataCopy);
     } else {
       delete formDataCopy.amenities;
     }
 
     delete formDataCopy.images;
-
-    // try {
-    //   const docRef = doc(db, "listings", listingId);
-    //   await updateDoc(docRef, formDataCopy);
-    //   setLoading(false);
-    //   toast.success("Listing saved");
-    //   navigate("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const docRef = doc(db, "listings", listingId);
+      await updateDoc(docRef, formDataCopy);
+      setLoading(false);
+      toast.success("Listing saved");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
 
     // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
-  const handleRemoveImage = (index,image) => {
-    console.log(image)
-     imgUrls.filter((value)=>value!==image)
+  const handleRemoveImage = (index, image) => {
+    console.log(image);
+    const tempList = imgUrls.filter((value) => value !== image);
+    // console.log(imgUrls.filter((value) => value !== image));
+    // console.log(imgUrls.filter((value) => value === image));
+    setImgList(imgUrls.filter((value) => value !== image));
+    // console.log(imgList);
+    // console.log(imgUrls);
     const imageArray = [...uploadedImages];
     imageArray.splice(index, 1);
     setUploadedImages([...imageArray]);
   };
+  console.log(imgList);
 
   const onMutate = (e) => {
     let boolean = null;
@@ -245,17 +259,16 @@ const EditListing = () => {
 
     // Create an array of FileReader objects
 
-      for (let i = 0; i < files?.length; i++) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          newUploadedImages.push(reader.result);
-          
-            setUploadedImages( newUploadedImages);
-        };
-        reader.readAsDataURL(files[i]);
-        readerArray.push(reader);
-      }
-    
+    for (let i = 0; i < files?.length; i++) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        newUploadedImages.push(reader.result);
+
+        setUploadedImages(newUploadedImages);
+      };
+      reader.readAsDataURL(files[i]);
+      readerArray.push(reader);
+    }
 
     if (e.target.value === "true") {
       boolean = true;
@@ -310,27 +323,31 @@ const EditListing = () => {
   return (
     <div className="flat-form">
       <div className="flat-type">
-        <button
-          onClick={() => navigate("/have-flat")}
-          className={
-            clientType === "have-flat"
-              ? "have-flat-btn-active"
-              : "have-flat-btn"
-          }
-        >
-          Have Flat
+        <div className="sub-flat">
+          <button
+            onClick={() => navigate("/have-flat")}
+            className={
+              clientType === "have-flat"
+                ? "have-flat-btn-active"
+                : "have-flat-btn"
+            }
+          >
+            Have Flat
+          </button>
+          <button
+            onClick={() => navigate("/need-flat")}
+            className={
+              clientType === "need-flat"
+                ? "need-flat-btn-active"
+                : "need-flat-btn"
+            }
+          >
+            Need Flat
+          </button>
+        </div>
+        <button onClick={onDelete} style={{ cursor: "pointer" }}>
+          <FaTrash />
         </button>
-        <button
-          onClick={() => navigate("/need-flat")}
-          className={
-            clientType === "need-flat"
-              ? "need-flat-btn-active"
-              : "need-flat-btn"
-          }
-        >
-          Need Flat
-        </button>
-        <button onClick={onDelete}>delete</button>
       </div>
       <div className="form-content">
         <h2 className="form-header">
@@ -433,15 +450,15 @@ const EditListing = () => {
                     <hr></hr>
                     {uploadedImages.map((image, index) => (
                       <div>
-                      <button onClick={() => handleRemoveImage(index,image)}>
-                        X
-                      </button>
-                      <img
-                        key={index}
-                        src={image}
-                        alt={`Uploaded ${index + 1}`}
-                      />  
-                    </div>
+                        <button onClick={() => handleRemoveImage(index, image)}>
+                          X
+                        </button>
+                        <img
+                          key={index}
+                          src={image}
+                          alt={`Uploaded ${index + 1}`}
+                        />
+                      </div>
                     ))}
                   </div>
                 )}

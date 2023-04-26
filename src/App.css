@@ -187,6 +187,11 @@
   width: 700px;
 }
 
+.flat-type {
+  display: flex;
+  justify-content: space-between;
+}
+
 .explore-left {
   display: flex;
   flex-direction: column;
