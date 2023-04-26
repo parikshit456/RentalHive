@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-const SelectInputField = ({ tagline, selectList,getSelectedValue,fieldType,value=""}) => {
-  const [selectValue, setSelectValue] = useState("");
-useEffect(()=>{
-setSelectValue(value)
-})
+const SelectInputField = ({
+  tagline,
+  selectList,
+  getSelectedValue,
+  fieldType,
+  value = "",
+}) => {
+  const [selectValue, setSelectValue] = useState();
+  useEffect(() => {
+    setSelectValue(value);
+  });
   const onMutate = (e) => {
-    console.log(e.target.name)
+    console.log(e.target.name);
     selectList.forEach((element) => {
       if (e.target.name === element) {
         setSelectValue(element);
       }
     });
     console.log(selectValue);
-    getSelectedValue(e.target.name,fieldType)
+    getSelectedValue(e.target.name, fieldType);
 
     // if (e.target.name === "Male") {
     //   setSelectValue("Male");

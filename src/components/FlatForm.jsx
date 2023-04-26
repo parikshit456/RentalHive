@@ -46,9 +46,9 @@ const FlatForm = () => {
     name: "",
     clientType: type,
     loc: "",
-    genderPreference: "",
-    rent: 0,
-    occupancy: "",
+    genderPreference: "Male",
+    rent: "",
+    occupancy: "Single",
     images: {},
     amenities: [],
     desc: "",
@@ -312,6 +312,7 @@ const FlatForm = () => {
               tagline={"Looking For"}
               fieldType="genderPreference"
               getSelectedValue={getSelectedValue}
+              defaultValue="Male"
             />
           </div>
           <div className="form-row">
@@ -334,6 +335,7 @@ const FlatForm = () => {
               value={occupancy}
               getSelectedValue={getSelectedValue}
               fieldType="occupancy"
+              defaultValue="Single"
             />
           </div>
           {type === "have-flat" && (
