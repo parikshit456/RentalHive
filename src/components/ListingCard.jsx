@@ -11,6 +11,7 @@ const ListingCard = ({ user }) => {
     rent,
     genderPreference,
     match_percentage,
+    userProfile
   } = user.data;
   const auth = getAuth();
 
@@ -21,7 +22,7 @@ const ListingCard = ({ user }) => {
     <Link to={`/ListingDetails/${user.id}`}>
       <div className="listing-card">
         <div className="card-top">
-          <img className="card-img" src={auth.currentUser?.photoURL} />
+          <img className="card-img" src={userProfile} />
           <div className="card-info">
             <div className="card-name">{name}</div>
             <div className="card-loc">{loc}</div>

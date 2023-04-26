@@ -52,6 +52,7 @@ const EditListing = () => {
   const occupancyList = ["Single", "Shared", "Any"];
   const [listingId, setListingId] = useState("");
   const [uploadedImages, setUploadedImages] = useState([]);
+  const [inputError, setInputError] = useState('');
   const [imgList, setImgList] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
@@ -255,6 +256,16 @@ const EditListing = () => {
     const files = e.target.files;
     const readerArray = [];
     const newUploadedImages = [...uploadedImages];
+    
+
+    const value = e.target.value;
+    const regex = /^[a-zA-Z\s]*$/; // Example: only allows alphabetic characters and spaces
+
+    if (!regex.test(value)) {
+      setInputError('Invalid input. Please use only alphabetic characters and spaces.');
+    } else {
+      setInputError('');
+    }
     // console.log(uploadedImages)
 
     // Create an array of FileReader objects
@@ -324,26 +335,18 @@ const EditListing = () => {
     <div className="flat-form">
       <div className="edit-flat-type">
         <div className="sub-flat">
+          
           <button
-            onClick={() => navigate("/have-flat")}
+            onClick={() => navigate("/EditListing")}
             className={
               clientType === "have-flat"
                 ? "have-flat-btn-active"
                 : "have-flat-btn"
             }
           >
-            Have Flat
+            {clientType==="have-flat" ? "Have":"Need"} Flat
           </button>
-          <button
-            onClick={() => navigate("/need-flat")}
-            className={
-              clientType === "need-flat"
-                ? "need-flat-btn-active"
-                : "need-flat-btn"
-            }
-          >
-            Need Flat
-          </button>
+          
         </div>
         <button onClick={onDelete} style={{ cursor: "pointer" }}>
           <FaTrash />
@@ -361,6 +364,11 @@ const EditListing = () => {
             <div>
               {" "}
               <label htmlFor="">Add Your Location*</label>
+              {inputError && (
+        <div style={{ color: 'red' }}>
+          {inputError}
+        </div>
+      )}
               <TextInputField
                 className="form-location"
                 placeholder={"Add Location..."}
@@ -374,6 +382,8 @@ const EditListing = () => {
                 className="addlistingDropdown"
                 onClick={onMutate}
                 name="city"
+                pattern="^((?!Select).)*$"
+                title="Please select a city"
               >
                 <option value={city} disabled selected>
                   {city}
@@ -382,6 +392,7 @@ const EditListing = () => {
                   return <option value={city.name}>{city.name}</option>;
                 })}
               </select>
+              
             </div>
             <SelectInputField
               selectList={genderList}
