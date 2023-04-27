@@ -65,7 +65,7 @@ console.log(location)
         toast.error("Could not fetch listings");
       }
     };
-    (location.pathname==='/EditListing') && fetchListing();
+    (location.pathname==='/') && fetchListing();
     const handleScroll = () => {
       // Check if user has scrolled beyond a certain threshold, e.g. 100px
       const threshold = 100;
