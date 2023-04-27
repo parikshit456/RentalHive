@@ -16,6 +16,8 @@ const Navbar = ({ authUser }) => {
   const navigate = useNavigate();
   const params = useParams();
   const [isEdit, setIsEdit] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const auth = getAuth();
   const location = useLocation();
   const [listing, setListing] = useState([]);
@@ -64,6 +66,19 @@ console.log(location)
       }
     };
     (location.pathname==='/EditListing') && fetchListing();
+    const handleScroll = () => {
+      // Check if user has scrolled beyond a certain threshold, e.g. 100px
+      const threshold = 100;
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      setIsScrolled(scrollTop > threshold);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [auth?.currentUser?.uid, listing]);
 
   const onSignin = () => {
@@ -94,7 +109,7 @@ console.log(location)
   };
 
   return (
-    <div className="navbar">
+    <div className={isScrolled ? "fixed-header navbar" : "navbar"}>
       <div onClick={onLogoClick} className="navbar-logo">
         House<span>Hunter</span>
       </div>

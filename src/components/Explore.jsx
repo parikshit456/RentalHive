@@ -6,6 +6,7 @@ import { cityList } from "../assets/cityList";
 import { ToastContainer } from "react-toastify";
 import LocationPicker from "./LocationPicker";
 import SearchBar from "./SearchBar";
+import Footer from "./Footer";
 // import { Canvas } from "@react-three/fiber";
 // import { OrbitControls, useGLTF } from "@react-three/drei";
 // import { useEffect } from "react";
@@ -82,6 +83,7 @@ const Explore = () => {
         </h1>
         <LocationPicker />
       </div>
+      <Footer/>
     </div>
   );
 };

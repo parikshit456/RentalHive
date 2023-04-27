@@ -5,6 +5,8 @@ import { doc, Firestore, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase.config";
 import Spinner from "./Spinner";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const Myprofile = () => {
   const [gender, setGender] = useState(false);
@@ -54,13 +56,23 @@ const Myprofile = () => {
   }, [auth?.currentUser?.uid]);
 
   const handleSave = async () => {
-    const docRef = doc(db, "users", user?.uid);
+
+    
+    try{const docRef = doc(db, "users", user?.uid);
     let fullname = firstName.trim() + " " + lastName.trim();
-    await updateDoc(docRef, {
+      await updateDoc(docRef, {
+
       name: fullname,
       mobile: contact,
       myGender: myGender,
     });
+    toast.success("Changed Successfully")
+  }catch(err){
+    console.log(err);
+    
+  }
+
+    
   };
 
   const onMutate = (e) => {
@@ -175,9 +187,10 @@ const Myprofile = () => {
         </div>
         <button className="submitButton1" onClick={handleSave}>
           Save Changes
-        </button>
+        </button>     
         <hr />
       </div>
+      <ToastContainer />
     </div>
   );
 };

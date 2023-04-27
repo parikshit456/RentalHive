@@ -22,26 +22,50 @@ const ListingDetails = () => {
   const [listing, setListing] = useState({});
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState([]);
+  const [userPrefList,setUserPrefList] = useState([])
 
   const location = useLocation();
   let type = location.pathname;
   type = type.substring(1);
 
+  
   useEffect(() => {
     const fetchListing = async () => {
       const docRef = doc(db, "listings", params.listingId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        // console.log(docSnap.data());
+        console.log(docSnap.data());
         setListing(docSnap.data());
         // console.log(docSnap.data());
         setLoading(false);
       }
+
+
+      const userDocRef = doc(db, "users", docSnap.data().userID);
+      const userDocSnap = await getDoc(userDocRef);
+      console.log(userDocSnap.data())
+      if (userDocSnap.exists()) {
+        setLoading(true);
+        console.log(userDocSnap.data())
+        const { prefList } = userDocSnap.data();
+        setUserPrefList(prefList)
+        // var space = name?.indexOf(" ");
+        // myGender === "Male" ? setGender(true) : setGender(false);
+        // setProfileData({
+        //   firstName: name?.substring(0, space).trim(),
+        //   lastName: name?.substring(space).trim(),
+        //   contact: mobile,
+        //   myGender: myGender,
+        // });
+        setLoading(false);
+      }
+
+   
     };
     fetchListing();
   }, [navigate, params.listingId]);
-
+console.log(userPrefList)
   const [prefList, setPrefList] = useState(preferenceList);
   const onClick = (index) => {
     let prefs = [...prefList];
@@ -114,10 +138,12 @@ const ListingDetails = () => {
 
           <h3>Preferences</h3>
           <div className="listingPref">
-            {prefList.map((project, index) => {
+            {userPrefList.map((title, index) => {
               return (
                 <MultipleSelectCard
-                  project={project}
+                  project={preferenceList.filter(
+                    (value) => value.title === title
+                  )[0]}
                   index={index}
                   isDetailedView={true}
                   onClick={() => {}}
