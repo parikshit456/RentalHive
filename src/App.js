@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import Notification from "./components/Notification";
 import CityCard from "./components/CityCard";
 import EditListing from "./components/EditListing";
-// import ExploreNew from "./components/ExploreNew";
+import Footer from "./components/Footer";
 
 function App() {
   const auth = getAuth();
@@ -77,6 +77,7 @@ function App() {
           <Route path="/need-flat" element={<FlatForm />} />
           <Route path="/EditListing" element={<EditListing />} />
           <Route path="/Noti" element={<Notification />} />
+          <Route path="/Footer" element={<Footer />} />
         </Routes>
       </Router>
     </div>

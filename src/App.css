@@ -210,6 +210,7 @@
 .location-header {
   text-align: center;
   font-size: 45px;
+  font-weight: 700;
 }
 
 .location-header span {
@@ -2142,3 +2143,45 @@ input::placeholder {
   display: flex;
   flex-wrap: wrap;
 }
+.fixed-header {
+  /* Your fixed header styles here */
+  background-color: rgb(242, 244, 248);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.footer{
+  padding: 10px 50px 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(228, 215, 193);
+}
+.footer span{
+  font-weight: 700;
+}
+.footer a{
+  cursor: pointer;
+}
+.footer a:hover{
+  text-decoration: underline;
+}
+.footer img{
+  height: 30px;
+  width: 30px;
+  margin: 5px;
+}
+@media only screen and (max-width: 600px) {
+  .footer{
+    padding: 10px 50px 10px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(228, 215, 193);
+  }
+}
+
