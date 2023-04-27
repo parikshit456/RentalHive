@@ -54,7 +54,6 @@ const PersonalDetails = ({ setData }) => {
   const onClick = (e) => {
     e.preventDefault();
     setData({ ...personaldetailForm, ...number });
-   // navigate("/pref");
 
     const value =num?.length??0 
     console.log(value);
@@ -67,6 +66,10 @@ const PersonalDetails = ({ setData }) => {
       console.log(city);
       setInputErrorCity('Please select a city')
       
+    }
+
+    if(city && value===12){
+      navigate("/prefs")
     }
 
     // if(lookingFor === "Looking for Flat/Flatmate/PG"){
