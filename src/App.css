@@ -2183,5 +2183,8 @@ input::placeholder {
     justify-content: space-between;
     background-color: rgb(228, 215, 193);
   }
+  .footer div{
+    margin-bottom: 10px;
+  }
 }
 
