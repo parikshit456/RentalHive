@@ -16,7 +16,6 @@ const Navbar = ({ authUser }) => {
   const navigate = useNavigate();
   const params = useParams();
   const [isEdit, setIsEdit] = useState(false);
-
   const auth = getAuth();
   const location = useLocation();
   const [listing, setListing] = useState([]);
@@ -38,7 +37,10 @@ const Navbar = ({ authUser }) => {
   }, []);
 
   useEffect(() => {
+console.log(location)
+
     const fetchListing = async () => {
+      console.log("fetching list")
       try {
         const listingsRef = collection(db, "listings");
         //query
@@ -61,7 +63,7 @@ const Navbar = ({ authUser }) => {
         toast.error("Could not fetch listings");
       }
     };
-    fetchListing();
+    (location.pathname==='/EditListing') && fetchListing();
   }, [auth?.currentUser?.uid, listing]);
 
   const onSignin = () => {

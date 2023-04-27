@@ -42,12 +42,19 @@ const FlatForm = () => {
   var date = curr.toISOString().substring(0, 10);
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
+  const [locError, setLocError] = useState(null);
+  const [rentError, setRentError] = useState(null);
+  const [descError, setDescError] = useState(null);
+  const [contactError, setContactError] = useState(null);
+  const [errors, setErrors] = useState({});
+
   const [formData, setFormData] = useState({
     name: "",
     clientType: type,
     loc: "",
     genderPreference: "Male",
     rent: "",
+    imgUrls:[],
     occupancy: "Single",
     images: {},
     amenities: [],
@@ -56,7 +63,7 @@ const FlatForm = () => {
     city: "",
     userID: "",
     availableFrom: date,
-    userProfile: auth?.currentUser?.photoURL
+    userProfile: auth?.currentUser?.photoURL,
   });
 
   const {
@@ -67,6 +74,7 @@ const FlatForm = () => {
     userID,
     genderPreference,
     rent,
+    imgUrls,
     occupancy,
     images,
     amenities,
@@ -101,82 +109,128 @@ const FlatForm = () => {
     });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  function validateForm(formData) {
+    const errors = {};
 
-    setLoading(true);
-    let formDataCopy = {
-      ...formData,
-      name: auth?.currentUser?.displayName,
-    };
-    if (type === "have-flat") {
-      if (images?.length > 3) {
-        setLoading(false);
-        toast.error("Max 3 images");
-        return;
-      }
-      const storeImage = async (image) => {
-        return new Promise((resolve, reject) => {
-          const storage = getStorage();
-          const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
-
-          const storageRef = ref(storage, "images/" + fileName);
-          const uploadTask = uploadBytesResumable(storageRef, image);
-
-          uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-              const progress =
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              console.log("Upload is " + progress + "% done");
-              switch (snapshot.state) {
-                case "paused":
-                  console.log("Upload is paused");
-                  break;
-                case "running":
-                  console.log("Upload is running");
-                  break;
-              }
-            },
-            (error) => {
-              reject(error);
-            },
-            () => {
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                resolve(downloadURL);
-              });
-            }
-          );
-        });
-      };
-
-      const imgUrls = await Promise.all(
-        [...images].map((image) => storeImage(image))
-      ).catch(() => {
-        setLoading(false);
-        toast.error("Images not uploaded");
-        return;
-      });
-      formDataCopy = {
-        ...formData,
-        imgUrls,
-
-        timestamp: serverTimestamp(),
-      };
-    } else {
-      delete formDataCopy.amenities;
+    if (!loc.match(/^[a-zA-Z\s]{3,}$/)) {
+      errors.loc =
+        "Please add location";
     }
 
-    delete formDataCopy.images;
+    if (!rent.match(/^\d+(?:\.\d{1,2})?$/)) {
+      errors.rent = "Rent must be a number with up to two decimal places.";
+    }
 
-    const docRef = await addDoc(collection(db, "listings"), formDataCopy);
-    setFormData({});
-    setLoading(false);
-    toast.success("Listing saved");
-    navigate("/", {
-      state: { id: docRef.id },
-    });
-    // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+    if (!contactNumber.match(/^\+?\d{1,3}[-\.\s]?\d{3}[-\.\s]?\d{4}$/)) {
+      errors.contactNumber = "Contact number must be a valid phone number.";
+    }
+
+    if (!desc.match(/^.{10,}$/)) {
+      errors.desc =
+        "Description must have a minimum length of 10 characters.";
+    }
+    if (!images || images.length < 1) {
+      errors.images = "Please select at least one image.";
+    }
+  
+console.log(images.length)
+
+    if(!city){
+      errors.city = "Please select a city.";
+    }
+    return errors;
+  }
+
+  const onSubmit = async (e) => {
+    
+    e.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length === 0) {
+      console.log("Submitting form data:", formData);
+      // TODO: Make API call to submit data
+      setLoading(true);
+      let formDataCopy = {
+        ...formData,
+        name: auth?.currentUser?.displayName,
+      };
+      if (type === "have-flat") {
+        if (images?.length > 3) {
+          setLoading(false);
+          toast.error("Max 3 images");
+          return;
+        }
+        const storeImage = async (image) => {
+          return new Promise((resolve, reject) => {
+            const storage = getStorage();
+            const fileName = `${auth.currentUser.uid}-${
+              image.name
+            }-${uuidv4()}`;
+
+            const storageRef = ref(storage, "images/" + fileName);
+            const uploadTask = uploadBytesResumable(storageRef, image);
+
+            uploadTask.on(
+              "state_changed",
+              (snapshot) => {
+                const progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+                switch (snapshot.state) {
+                  case "paused":
+                    console.log("Upload is paused");
+                    break;
+                  case "running":
+                    console.log("Upload is running");
+                    break;
+                }
+              },
+              (error) => {
+                reject(error);
+              },
+              () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                  resolve(downloadURL);
+                });
+              }
+            );
+          });
+        };
+
+        const imgUrls = await Promise.all(
+          [...images].map((image) => storeImage(image))
+        ).catch(() => {
+          setLoading(false);
+          toast.error("Images not uploaded");
+          return;
+        });
+        formDataCopy = {
+          ...formData,
+          imgUrls,
+
+          timestamp: serverTimestamp(),
+        };
+      } else {
+        delete formDataCopy.amenities;
+      }
+
+      delete formDataCopy.images;
+console.log(formDataCopy)
+      const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+      setFormData({});
+      setLoading(false);
+      toast.success("Listing saved");
+      navigate("/", {
+        state: { id: docRef.id },
+      });
+    } else {
+      const keys = Object.keys(errors);
+      setErrors(errors);
+      console.log(keys[0])
+      const firstErrorKey = keys[0];
+      const firstErrorElement = document.getElementsByName(firstErrorKey)[0];
+      firstErrorElement.scrollIntoView({ behavior: "smooth" });
+    }
+  
   };
 
   const handleRemoveImage = (index) => {
@@ -255,7 +309,6 @@ const FlatForm = () => {
     <div className="flat-form">
       <div className="flat-type">
         <button
-        
           onClick={() => navigate("/have-flat")}
           className={
             type === "have-flat" ? "have-flat-btn-active" : "have-flat-btn"
@@ -282,7 +335,6 @@ const FlatForm = () => {
         <form className="form-main">
           <div className="form-row1">
             <div>
-              {" "}
               <label htmlFor="">Add Your Location*</label>
               <TextInputField
                 className="form-location"
@@ -292,7 +344,9 @@ const FlatForm = () => {
                 value={loc}
                 type="icon"
                 handleInputChange={onMutate}
+                error={errors.loc}
               />
+
               <select
                 className="addlistingDropdown"
                 onClick={onMutate}
@@ -305,6 +359,8 @@ const FlatForm = () => {
                   return <option value={city.name}>{city.name}</option>;
                 })}
               </select>
+
+              {errors && <div className="error-msg">{errors.city}</div>}
             </div>
             <SelectInputField
               selectList={genderList}
@@ -327,6 +383,7 @@ const FlatForm = () => {
                 icon="₹"
                 name="rent"
                 handleInputChange={onMutate}
+                error={errors.rent}
               />
             </div>
             <SelectInputField
@@ -391,6 +448,8 @@ const FlatForm = () => {
               </label>
             </div>
           )}
+          {console.log(errors)}
+          {errors && <div className="error-msg">{errors.images}</div>}
 
           <div className="form-row-date">
             <div>
@@ -404,6 +463,7 @@ const FlatForm = () => {
                 value={contactNumber}
                 name="contactNumber"
                 handleInputChange={onMutate}
+                error={errors.contactNumber}
               />
             </div>
 
@@ -447,7 +507,10 @@ const FlatForm = () => {
               id=""
               placeholder="I am looking for a roommate for my flat."
               onChange={onMutate}
+              
             ></textarea>
+              {errors && <div className="error-msg">{errors.desc}</div>
+}
           </div>
           <div className="submit-btn">
             <button onClick={onSubmit}>Submit</button>

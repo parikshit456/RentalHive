@@ -8,15 +8,18 @@ import { getAuth } from "firebase/auth";
 const PersonalDetails = ({ setData }) => {
   const [gender, setGender] = useState();
   const [num, setNum] = useState();
+  const [inputError, setInputError] = useState("");
+  const[inputErrorCity,setInputErrorCity] = useState("")
+  const[inputErrorLookingFor,setInputErrorLookingFor] = useState('')
 
   const [personaldetailForm, setPersonalDetailForm] = useState({
     lookingFor: "Looking for Flat/Flatmate/PG",
     myGender: "Female",
-    city: "Chennai",
+    city: "",
     // mobile: "",
   });
 
-  const { lookingFor, myGender, city, mobile } = personaldetailForm;
+  const { lookingFor, myGender, city } = personaldetailForm;
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -40,6 +43,8 @@ const PersonalDetails = ({ setData }) => {
       });
       setGender(false);
     }
+
+   
   };
 
   const number = {
@@ -49,7 +54,34 @@ const PersonalDetails = ({ setData }) => {
   const onClick = (e) => {
     e.preventDefault();
     setData({ ...personaldetailForm, ...number });
-    navigate("/pref");
+   // navigate("/pref");
+
+    const value =num?.length??0 
+    console.log(value);
+    if(value<12)
+    {
+      setInputError("Input a valid phone number")
+    }
+
+    if(city===""){
+      console.log(city);
+      setInputErrorCity('Please select a city')
+      
+    }
+
+    // if(lookingFor === "Looking for Flat/Flatmate/PG"){
+
+    //   console.log(lookingFor);
+    //   setInputErrorLookingFor("Please select your preference")
+
+
+    // }
+    
+    // setInputError('');
+    // setInputErrorCity('')
+    // setInputErrorLookingFor('')
+    // navigate("/pref")
+
     // If user, doesn,t exist, create user
     //   if (!docSnap.exists()) {
     //     await setDoc(doc(db, "users", user.uid), {
@@ -77,6 +109,11 @@ const PersonalDetails = ({ setData }) => {
             <option value="PG Owner">PG Owner</option>
           </select>
         </div>
+        {inputErrorLookingFor && (
+        <div style={{ color: 'red' }}>
+          {inputErrorLookingFor}
+        </div>
+      )}
 
         <div className="option">
           <p>Your Gender</p>
@@ -114,10 +151,18 @@ const PersonalDetails = ({ setData }) => {
             <option value="Banglore">Banglore</option>
             <option value="Gandhinagar">Gandhinagar</option>
           </select>
+          {inputErrorCity && (
+        <div style={{ color: 'red' }}>
+          {inputErrorCity}
         </div>
+      )}
+        </div>
+       
         <div className="option">
           <p>Your Mobile Number</p>
           <div className="phone-number">
+          {/* <label htmlFor="">Add Your Location*</label> */}
+           
             <PhoneInput
               name="mobile"
               value={num}
@@ -133,6 +178,11 @@ const PersonalDetails = ({ setData }) => {
               disableDropdown="false"
               placeholder="+91 99999-99999"
             />
+               {inputError && (
+        <div style={{ color: 'red' }}>
+          {inputError}
+        </div>
+      )}
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>

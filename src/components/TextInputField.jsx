@@ -6,9 +6,11 @@ const TextInputField = ({
   icon,
   value,
   type = "icon",
-  name
+  name,
+  error
 }) => {
   return (
+    <div>
     <div className="text-box">
       {type === "icon" ? (
         <img className="input-icon" src={icon} alt="" />
@@ -25,6 +27,9 @@ const TextInputField = ({
           placeholder={placeholder}
         />
       </div>
+    </div>
+    {error && <div className="error-msg">{error}</div>
+}
     </div>
   );
 };
