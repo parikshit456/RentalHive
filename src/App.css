@@ -21,13 +21,12 @@
   padding: 5px 20px;
 }
 
-.error-msg{
-  color:red;
-  font-size:10px;
+.error-msg {
+  color: red;
+  font-size: 10px;
   /* margin-bottom:10px; */
   padding: 3px 10px;
 }
-
 
 .navbar-logo {
   cursor: pointer;
@@ -1863,6 +1862,16 @@ label {
   } */
 }
 
+@media only screen and (max-width: 375px) {
+  .btnactive,
+  .btn {
+    width: 68px;
+  }
+  .select-options {
+    padding: 25px 15px;
+  }
+}
+
 /* My profile */
 
 .mainDiv {
@@ -2155,36 +2164,35 @@ input::placeholder {
 }
 
 /* Footer */
-.footer{
+.footer {
   padding: 10px 50px 10px 50px;
   display: flex;
   justify-content: space-between;
   background-color: rgb(228, 215, 193);
 }
-.footer span{
+.footer span {
   font-weight: 700;
 }
-.footer a{
+.footer a {
   cursor: pointer;
 }
-.footer a:hover{
+.footer a:hover {
   text-decoration: underline;
 }
-.footer img{
+.footer img {
   height: 30px;
   width: 30px;
   margin: 5px;
 }
 @media only screen and (max-width: 600px) {
-  .footer{
+  .footer {
     padding: 10px 50px 10px 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: rgb(228, 215, 193);
   }
-  .footer div{
+  .footer div {
     margin-bottom: 10px;
   }
 }
-
