@@ -377,6 +377,7 @@
 .card-loc {
   font-size: 14px;
   color: rgb(205, 205, 206);
+  margin-top: auto;
 }
 
 .card-pref {
