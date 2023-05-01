@@ -22,6 +22,7 @@ import Notification from "./components/Notification";
 import CityCard from "./components/CityCard";
 import EditListing from "./components/EditListing";
 import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   const auth = getAuth();
@@ -78,6 +79,7 @@ function App() {
           <Route path="/EditListing" element={<EditListing />} />
           <Route path="/Noti" element={<Notification />} />
           <Route path="/Footer" element={<Footer />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </Router>
     </div>
