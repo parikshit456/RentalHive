@@ -4,7 +4,6 @@ import CityCard from "./CityCard";
 
 const LocationPicker = () => {
   const cityList = cities;
-  console.log(cityList);
   return (
     <div className="location-picker">
       {cityList.cities.map((city) => {

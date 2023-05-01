@@ -39,10 +39,9 @@ const Navbar = ({ authUser }) => {
   }, []);
 
   useEffect(() => {
-    console.log(location);
+    
 
     const fetchListing = async () => {
-      console.log("fetching list");
       try {
         const listingsRef = collection(db, "listings");
         //query

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const CityCard = ({ city }) => {
   const navigate = useNavigate();
-  console.log(city);
   const onCardClick = () => {
     if (city) {
       navigate("/listings", {

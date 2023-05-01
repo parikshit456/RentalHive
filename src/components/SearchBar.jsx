@@ -12,10 +12,8 @@ const SearchBar = ({
   style = {},
 }) => {
   const [value, setValue] = useState({ name: name, state: "" });
-  console.log(value);
   const navigate = useNavigate();
   const onChangeHandler = (e, v) => {
-    console.log(v);
     if (v) {
       setValue(v);
       navigate("/listings", {
