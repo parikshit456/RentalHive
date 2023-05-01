@@ -39,10 +39,10 @@ const Navbar = ({ authUser }) => {
   }, []);
 
   useEffect(() => {
-console.log(location)
+    console.log(location);
 
     const fetchListing = async () => {
-      console.log("fetching list")
+      console.log("fetching list");
       try {
         const listingsRef = collection(db, "listings");
         //query
@@ -65,7 +65,7 @@ console.log(location)
         toast.error("Could not fetch listings");
       }
     };
-    (location.pathname==='/') && fetchListing();
+    fetchListing();
     const handleScroll = () => {
       // Check if user has scrolled beyond a certain threshold, e.g. 100px
       const threshold = 100;
@@ -79,7 +79,7 @@ console.log(location)
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [auth?.currentUser?.uid, listing]);
+  }, [auth?.currentUser?.uid]);
 
   const onSignin = () => {
     if (isActive) {

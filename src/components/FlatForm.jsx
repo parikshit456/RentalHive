@@ -42,10 +42,6 @@ const FlatForm = () => {
   var date = curr.toISOString().substring(0, 10);
   const genderList = ["Male", "Female", "Any"];
   const occupancyList = ["Single", "Shared", "Any"];
-  const [locError, setLocError] = useState(null);
-  const [rentError, setRentError] = useState(null);
-  const [descError, setDescError] = useState(null);
-  const [contactError, setContactError] = useState(null);
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
@@ -54,7 +50,7 @@ const FlatForm = () => {
     loc: "",
     genderPreference: "Male",
     rent: "",
-    imgUrls:[],
+    imgUrls: [],
     occupancy: "Single",
     images: {},
     amenities: [],
@@ -113,8 +109,7 @@ const FlatForm = () => {
     const errors = {};
 
     if (!loc.match(/^[a-zA-Z\s]{3,}$/)) {
-      errors.loc =
-        "Please add location";
+      errors.loc = "Please add location";
     }
 
     if (!rent.match(/^\d+(?:\.\d{1,2})?$/)) {
@@ -126,23 +121,21 @@ const FlatForm = () => {
     }
 
     if (!desc.match(/^.{10,}$/)) {
-      errors.desc =
-        "Description must have a minimum length of 10 characters.";
+      errors.desc = "Description must have a minimum length of 10 characters.";
     }
     if (!images || images.length < 1) {
       errors.images = "Please select at least one image.";
     }
-  
-console.log(images.length)
 
-    if(!city){
+    console.log(images.length);
+
+    if (!city) {
       errors.city = "Please select a city.";
     }
     return errors;
   }
 
   const onSubmit = async (e) => {
-    
     e.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
@@ -214,7 +207,7 @@ console.log(images.length)
       }
 
       delete formDataCopy.images;
-console.log(formDataCopy)
+      console.log(formDataCopy);
       const docRef = await addDoc(collection(db, "listings"), formDataCopy);
       setFormData({});
       setLoading(false);
@@ -225,12 +218,11 @@ console.log(formDataCopy)
     } else {
       const keys = Object.keys(errors);
       setErrors(errors);
-      console.log(keys[0])
+      console.log(keys[0]);
       const firstErrorKey = keys[0];
       const firstErrorElement = document.getElementsByName(firstErrorKey)[0];
       firstErrorElement.scrollIntoView({ behavior: "smooth" });
     }
-  
   };
 
   const handleRemoveImage = (index) => {
@@ -507,10 +499,8 @@ console.log(formDataCopy)
               id=""
               placeholder="I am looking for a roommate for my flat."
               onChange={onMutate}
-              
             ></textarea>
-              {errors && <div className="error-msg">{errors.desc}</div>
-}
+            {errors && <div className="error-msg">{errors.desc}</div>}
           </div>
           <div className="submit-btn">
             <button onClick={onSubmit}>Submit</button>

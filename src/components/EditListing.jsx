@@ -52,8 +52,9 @@ const EditListing = () => {
   const occupancyList = ["Single", "Shared", "Any"];
   const [listingId, setListingId] = useState("");
   const [uploadedImages, setUploadedImages] = useState([]);
-  const [inputError, setInputError] = useState('');
-  const [imgList, setImgList] = useState([]);
+  const [inputError, setInputError] = useState("");
+  const [errors, setErrors] = useState({});
+
   const [formData, setFormData] = useState({
     name: "",
     clientType: "",
@@ -105,12 +106,9 @@ const EditListing = () => {
             });
           }
         });
-        console.log(listings[0].data.imgUrls);
-        setUploadedImages(listings[0]?.data?.imgUrls);
 
         setFormData(listings[0]?.data);
         setListingId(listings[0]?.id);
-        setImgList(listings[0]?.data?.imgUrls);
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
@@ -118,7 +116,6 @@ const EditListing = () => {
     };
     fetchListing();
   }, [auth?.currentUser?.uid]);
-  const [selectedUtilityList, setSelectedUtilityList] = useState([]);
 
   const onClick = async (index) => {
     let tempUtilityList = amenitiesList.forEach((value) => {
@@ -150,121 +147,149 @@ const EditListing = () => {
     });
   };
 
+  function validateForm(formData) {
+    const errors = {};
+
+    if (!loc.match(/^[a-zA-Z\s]{3,}$/)) {
+      errors.loc = "Please add location";
+    }
+
+    if (!rent.match(/^\d+(?:\.\d{1,2})?$/)) {
+      errors.rent = "Rent must be a number with up to two decimal places.";
+    }
+
+    if (!contactNumber.match(/^\+?\d{1,3}[-\.\s]?\d{3}[-\.\s]?\d{4}$/)) {
+      errors.contactNumber = "Contact number must be a valid phone number.";
+    }
+
+    if (!desc.match(/^.{10,}$/)) {
+      errors.desc = "Description must have a minimum length of 10 characters.";
+    }
+    if (!images || images.length < 1) {
+      errors.images = "Please select at least one image.";
+    }
+
+    // console.log(images.length);
+
+    if (!city) {
+      errors.city = "Please select a city.";
+    }
+    return errors;
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    setLoading(true);
-    let formDataCopy = {
-      ...formData,
-      name: auth.currentUser.displayName,
-    };
-    if (clientType === "have-flat") {
-      if (images?.length > 3) {
-        setLoading(false);
-        toast.error("Max 3 images");
-        return;
-      }
-      const storeImage = async (image) => {
-        return new Promise((resolve, reject) => {
-          const storage = getStorage();
-          const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
-
-          const storageRef = ref(storage, "images/" + fileName);
-          const uploadTask = uploadBytesResumable(storageRef, image);
-
-          uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-              const progress =
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              console.log("Upload is " + progress + "% done");
-              switch (snapshot.state) {
-                case "paused":
-                  console.log("Upload is paused");
-                  break;
-                case "running":
-                  console.log("Upload is running");
-                  break;
-              }
-            },
-            (error) => {
-              reject(error);
-            },
-            () => {
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                resolve(downloadURL);
-              });
-            }
-          );
-        });
-      };
-
-      const imageUrls = images
-        ? await Promise.all(
-            [...images].map((image) => storeImage(image))
-          ).catch(() => {
-            setLoading(false);
-            toast.error("Images not uploaded");
-            return;
-          })
-        : [];
-      console.log(imgList);
-      console.log(imgUrls);
-      console.log(imageUrls);
-      console.log(formDataCopy);
-      formDataCopy = {
+    console.log(errors);
+    const errorList = validateForm();
+    if (Object.keys(errorList).length === 0) {
+      setLoading(true);
+      let formDataCopy = {
         ...formData,
-        imgUrls: [...imgList, ...imageUrls],
-
-        timestamp: "",
+        name: auth.currentUser.displayName,
       };
-      console.log(formDataCopy);
+      if (clientType === "have-flat") {
+        if (images?.length > 3) {
+          setLoading(false);
+          toast.error("Max 3 images");
+          return;
+        }
+        const storeImage = async (image) => {
+          return new Promise((resolve, reject) => {
+            const storage = getStorage();
+            const fileName = `${auth.currentUser.uid}-${
+              image.name
+            }-${uuidv4()}`;
+
+            const storageRef = ref(storage, "images/" + fileName);
+            const uploadTask = uploadBytesResumable(storageRef, image);
+
+            uploadTask.on(
+              "state_changed",
+              (snapshot) => {
+                const progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+                switch (snapshot.state) {
+                  case "paused":
+                    console.log("Upload is paused");
+                    break;
+                  case "running":
+                    console.log("Upload is running");
+                    break;
+                }
+              },
+              (error) => {
+                reject(error);
+              },
+              () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                  resolve(downloadURL);
+                });
+              }
+            );
+          });
+        };
+
+        const imageUrls = await Promise.all(
+          [...images].map((image) => storeImage(image))
+        ).catch(() => {
+          setLoading(false);
+          toast.error("Images not uploaded");
+          return;
+        });
+
+        formDataCopy = {
+          ...formData,
+          imgUrls: imageUrls,
+
+          timestamp: "",
+        };
+        console.log(formDataCopy);
+      } else {
+        delete formDataCopy.amenities;
+      }
+
+      delete formDataCopy.images;
+      try {
+        const docRef = doc(db, "listings", listingId);
+        await updateDoc(docRef, formDataCopy);
+        setLoading(false);
+        toast.success("Listing saved");
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-      delete formDataCopy.amenities;
+      const keys = Object.keys(errorList);
+      setErrors(errorList);
+      console.log(keys[0]);
+      const firstErrorKey = keys[0];
+      const firstErrorElement = document.getElementsByName(firstErrorKey)[0];
+      firstErrorElement.scrollIntoView({ behavior: "smooth" });
     }
-
-    delete formDataCopy.images;
-    try {
-      const docRef = doc(db, "listings", listingId);
-      await updateDoc(docRef, formDataCopy);
-      setLoading(false);
-      toast.success("Listing saved");
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-
-    // navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   };
 
   const handleRemoveImage = (index, image) => {
-    console.log(image);
-    const tempList = imgUrls.filter((value) => value !== image);
-    // console.log(imgUrls.filter((value) => value !== image));
-    // console.log(imgUrls.filter((value) => value === image));
-    setImgList(imgUrls.filter((value) => value !== image));
-    // console.log(imgList);
-    // console.log(imgUrls);
     const imageArray = [...uploadedImages];
     imageArray.splice(index, 1);
     setUploadedImages([...imageArray]);
   };
-  console.log(imgList);
 
   const onMutate = (e) => {
     let boolean = null;
     const files = e.target.files;
     const readerArray = [];
     const newUploadedImages = [...uploadedImages];
-    
 
     const value = e.target.value;
     const regex = /^[a-zA-Z\s]*$/; // Example: only allows alphabetic characters and spaces
 
     if (!regex.test(value)) {
-      setInputError('Invalid input. Please use only alphabetic characters and spaces.');
+      setInputError(
+        "Invalid input. Please use only alphabetic characters and spaces."
+      );
     } else {
-      setInputError('');
+      setInputError("");
     }
     // console.log(uploadedImages)
 
@@ -335,7 +360,6 @@ const EditListing = () => {
     <div className="flat-form">
       <div className="edit-flat-type">
         <div className="sub-flat">
-          
           <button
             onClick={() => navigate("/EditListing")}
             className={
@@ -344,9 +368,8 @@ const EditListing = () => {
                 : "have-flat-btn"
             }
           >
-            {clientType==="have-flat" ? "Have":"Need"} Flat
+            {clientType === "have-flat" ? "Have" : "Need"} Flat
           </button>
-          
         </div>
         <button onClick={onDelete} style={{ cursor: "pointer" }}>
           <FaTrash />
@@ -364,11 +387,7 @@ const EditListing = () => {
             <div>
               {" "}
               <label htmlFor="">Add Your Location*</label>
-              {inputError && (
-        <div style={{ color: 'red' }}>
-          {inputError}
-        </div>
-      )}
+              {inputError && <div style={{ color: "red" }}>{inputError}</div>}
               <TextInputField
                 className="form-location"
                 placeholder={"Add Location..."}
@@ -376,6 +395,7 @@ const EditListing = () => {
                 value={loc}
                 name="loc"
                 type="icon"
+                error={errors.loc}
                 handleInputChange={onMutate}
               />
               <select
@@ -392,7 +412,7 @@ const EditListing = () => {
                   return <option value={city.name}>{city.name}</option>;
                 })}
               </select>
-              
+              {errors && <div className="error-msg">{errors.city}</div>}
             </div>
             <SelectInputField
               selectList={genderList}
@@ -413,6 +433,7 @@ const EditListing = () => {
                 icon="₹"
                 name="rent"
                 value={rent}
+                error={errors.rent}
                 handleInputChange={onMutate}
               />
             </div>
@@ -476,6 +497,7 @@ const EditListing = () => {
               </label>
             </div>
           )}
+          {errors && <div className="error-msg">{errors.images}</div>}
 
           <div className="form-row-date">
             <div>
@@ -488,6 +510,7 @@ const EditListing = () => {
                 icon="+91"
                 value={contactNumber}
                 name="contactNumber"
+                error={errors.contactNumber}
                 handleInputChange={onMutate}
               />
             </div>
@@ -534,6 +557,7 @@ const EditListing = () => {
               placeholder="I am looking for a roommate for my flat."
               onChange={onMutate}
             ></textarea>
+            {errors && <div className="error-msg">{errors.desc}</div>}
           </div>
           <div className="submit-btn">
             <button onClick={onSubmit}>Update</button>
