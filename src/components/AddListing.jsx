@@ -6,6 +6,7 @@ import buildingSvg from "../assets/svg/building.svg";
 import roomMate from "../assets/svg/roommate.svg";
 
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const AddListing = () => {
   return (
@@ -52,6 +53,7 @@ const AddListing = () => {
           </Link>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

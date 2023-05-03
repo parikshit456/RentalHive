@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
+import Footer from "./Footer";
 
 const Listings = () => {
   const [userlist, setUserList] = useState([]);
@@ -76,6 +77,7 @@ const Listings = () => {
           );
         })}
       </div>
+      <Footer/>
     </div>
   );
 };

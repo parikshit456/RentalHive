@@ -2,6 +2,7 @@ import React from 'react';
 import dhairya from "../../src/assets/jpg/dhairya.jfif"
 import parikshit from '../../src/assets/jpg/parikshit.jpg'
 import rohit from '../../src/assets/jpg/rohit.jpg'
+import Footer from './Footer';
 function AboutUs() {
   return (
     <div className="about-us-container">
@@ -23,6 +24,7 @@ function AboutUs() {
    
         <a href="https://www.linkedin.com/in/person3/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import location_icon from "../assets/svg/location_icon.svg";
 import location_icon1 from "../assets/svg/loc.svg";
 import Spinner from "./Spinner";
 import { getAuth } from "firebase/auth";
+import Footer from "./Footer";
 
 const ListingCard = ({ user }) => {
   const {
@@ -14,7 +15,6 @@ const ListingCard = ({ user }) => {
     match_percentage,
     userProfile
   } = user.data;
-  console.log(user.data)
   const auth = getAuth();
 
   if (!user) {
@@ -63,6 +63,7 @@ const ListingCard = ({ user }) => {
         </div>
       </div>
     </Link>
+    
   );
 };
 

@@ -7,20 +7,20 @@ import instagram from "../assets/svg/instagram.svg";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer">
+      <footer className="footer" style={{marginTop:"20px"}}>
         <div>
           <span>Services</span>
-          <a>Branding</a>
-          <a>Design</a>
-          <a>Marketing</a>
-          <a>Advertisement</a>
+          <a href="/about-us">Branding</a>
+          <a href="/about-us">Design</a>
+          <a href="/about-us">Marketing</a>
+          <a href="/about-us">Advertisement</a>
         </div>
         <div>
           <span>Company</span>
-          <a>About us</a>
-          <a>Contact</a>
-          <a>Jobs</a>
-          <a>Press kit</a>
+          <a href="/about-us">About us</a>
+          <a href="/about-us">Contact</a>
+          <a href="/about-us">Jobs</a>
+          <a href="/about-us">Press kit</a>
         </div>
         <div>
           <span>Legal</span>

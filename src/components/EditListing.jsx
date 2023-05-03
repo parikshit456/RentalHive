@@ -36,6 +36,7 @@ import {
 import { async } from "@firebase/util";
 import { useEffect } from "react";
 import { cityList } from "../assets/cityList";
+import Footer from "./Footer";
 
 const EditListing = () => {
   const location = useLocation();
@@ -565,6 +566,7 @@ const EditListing = () => {
           </div>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 };

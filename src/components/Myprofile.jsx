@@ -7,6 +7,7 @@ import { db } from "../firebase.config";
 import Spinner from "./Spinner";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "./Footer";
 
 const Myprofile = () => {
   const [gender, setGender] = useState(false);
@@ -112,6 +113,7 @@ const Myprofile = () => {
   }
 
   return (
+    <div>
     <div className="mainDiv">
       <div className="formDiv">
         <h1>Profile</h1>
@@ -191,6 +193,7 @@ const Myprofile = () => {
         <hr />
       </div>
       <ToastContainer />
+    </div>
     </div>
   );
 };

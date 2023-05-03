@@ -1,8 +1,14 @@
 import React from 'react'
+import Footer from './Footer'
 
 const Notification = () => {
   return (
-    <div className='noti'>You have no notification yet!</div>
+    <div>
+        <div className='noti'>You have no notification yet!</div>
+        <Footer/>
+    </div>
+    
+    
   )
 }
 

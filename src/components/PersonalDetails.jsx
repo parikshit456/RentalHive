@@ -146,6 +146,12 @@ const PersonalDetails = ({ setData }) => {
             <option value="Chennai">Chennai</option>
             <option value="Banglore">Banglore</option>
             <option value="Gandhinagar">Gandhinagar</option>
+            <option value="Ahemdabad">Ahemdabad</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Pune">Pune</option>
           </select>
           {inputErrorCity && (
             <div style={{ color: "red" }}>{inputErrorCity}</div>
