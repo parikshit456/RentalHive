@@ -14,6 +14,7 @@ import Spinner from "./Spinner";
 import { amenitiesList } from "../assets/amenities";
 import ImageSlider from "./ImageSlider";
 import ReactWhatsapp from "react-whatsapp";
+import Footer from "./Footer";
 
 const ListingDetails = () => {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ console.log(userPrefList)
   }
 
   return (
+    <div>
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="listingdetail">
         <div className="listingdetasilinside">
@@ -180,6 +182,9 @@ console.log(userPrefList)
           <p>{listing.desc}</p>
         </div>
       </div>
+      
+    </div>
+    <Footer/>
     </div>
   );
 };

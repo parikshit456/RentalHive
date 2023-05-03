@@ -2170,6 +2170,7 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   background-color: rgb(228, 215, 193);
+  /* margin-top: 20px; */
 }
 .footer span {
   font-weight: 700;
