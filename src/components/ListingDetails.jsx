@@ -73,7 +73,7 @@ console.log(userPrefList)
 
   return (
     <div>
-    {auth.currentUser ? <div style={{ display: "flex", justifyContent: "center" }}>
+    {auth?.currentUser ? <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="listingdetail">
         <div className="listingdetasilinside">
           <div className="listingProfileCard">
