@@ -5,7 +5,6 @@ import rohit from "../../src/assets/jpg/rohit.jpg";
 import Footer from "./Footer";
 import github from "../assets/svg/github.svg";
 import linkedin from "../assets/svg/linkedin.svg";
-import facebook from "../assets/svg/facebook.svg";
 import instagram from "../assets/svg/instagram.svg";
 
 function AboutUs() {
@@ -90,6 +89,7 @@ function AboutUs() {
         </div>
         </div>
       </div>
+      <div className="high">Hover on the name if you are high or wanna see matrix glitch!</div>
       <Footer />
     </div>
   );

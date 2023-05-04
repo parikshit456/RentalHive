@@ -2248,13 +2248,18 @@ input::placeholder {
     padding: 42px;
     height: 350px;
   }
-
   .about-us-container {
     height: auto;
     display: block;
   }
   .about-person h3 {
     font-size: 20px;
+  }
+  
+}
+@media only screen and (max-width: 600px){
+  .high {
+    visibility: hidden;
   }
 }
 
@@ -2284,9 +2289,9 @@ input::placeholder {
   background-image: linear-gradient(
     -225deg,
     #231557 0%,
-    #00ffd5 29%,
-    #d0a4dd 67%,
-    #00ffea 100%
+    #ffc400 29%,
+    #ff4d00 67%,
+    #16e0a7 100%
   );
   background-size: auto auto;
   background-clip: border-box;
@@ -2305,4 +2310,11 @@ input::placeholder {
   to {
     background-position: 200% center;
   }
+}
+.high{
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  font-style:oblique;
+  background-color: #dfd0bb;
 }

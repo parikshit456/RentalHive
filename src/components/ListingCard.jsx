@@ -4,7 +4,8 @@ import location_icon from "../assets/svg/location_icon.svg";
 import location_icon1 from "../assets/svg/loc.svg";
 import Spinner from "./Spinner";
 import { getAuth } from "firebase/auth";
-import Footer from "./Footer";
+import chat from "../assets/svg/chat.svg"
+import call from "../assets/svg/call.svg"
 
 const ListingCard = ({ user }) => {
   const {
@@ -56,9 +57,10 @@ const ListingCard = ({ user }) => {
           <div className="distance">5 km from your search</div>
           <div>
             {" "}
-            <div className="match"> </div>
-            <div className="chat"></div>
-            <div className="call"></div>
+            <div className="match">  
+            <img src={chat} style={{width:"20px" , marginRight:"10px"}}/>
+            <img src={call} style={{width:"20px"}}/>
+            </div>
           </div>
         </div>
       </div>
