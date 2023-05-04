@@ -19,7 +19,6 @@ const Navbar = ({ authUser }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const auth = getAuth();
-  const location = useLocation();
   const [listing, setListing] = useState([]);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -95,6 +94,11 @@ const Navbar = ({ authUser }) => {
 
     navigate("/Signup");
   };
+
+  const onContact = () => {
+    navigate("/about-us");
+  };
+
   const onLogoClick = () => {
     if (isActive) {
       setIsActive(!isActive);
@@ -147,7 +151,7 @@ const Navbar = ({ authUser }) => {
                 </div>
               </div>
               <div className="download-btn">
-                <button>Contact Us</button>
+                <button onClick={onContact}>Contact Us</button>
               </div>
             </div>
 
