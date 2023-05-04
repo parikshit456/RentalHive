@@ -41,18 +41,18 @@ function AboutUs() {
           <h3 className="animate-charcter">Rohit Dubey</h3>
 
           <div style={{display:"flex" , justifyContent:"center"}}>
-            <a>
+            <a href="https://www.instagram.com/rohit_dubey_._/?r=nametag" target="_blank">
               <img
                 src={instagram}
                 className="about-img"
               />
             </a>
-            <a>
+            <a href="https://github.com/Rohit5464" target="_blank">
               <img
                 src={github}
                 className="about-img" style={{height:"50px" ,width:"50px" , marginTop:"0px"}}/>
             </a>
-            <a>
+            <a href="https://www.linkedin.com/in/rohit-dubey-232742224/" target="_blank">
               <img
                 src={linkedin}
                 className="about-img"
@@ -67,18 +67,18 @@ function AboutUs() {
           <h3 className="animate-charcter" >Parikshit Agarwal</h3>
           <div>
           <div style={{display:"flex" , justifyContent:"center"}}>
-            <a>
+            <a href="https://www.instagram.com/_parikshitagarwal_/?igshid=ZDdkNTZiNTM%3D" target="_blank">
               <img
                 src={instagram}
                 className="about-img"
               />
             </a>
-            <a>
+            <a href="https://github.com/parikshit456" target="_blank">
               <img
                 src={github}
                 className="about-img" style={{height:"50px" ,width:"50px" , marginTop:"0px"}}/>
             </a>
-            <a>
+            <a href="https://www.linkedin.com/in/parikshit-agarwal-37b533202/" target="_blank">
               <img
                 src={linkedin}
                 className="about-img"
