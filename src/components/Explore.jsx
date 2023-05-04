@@ -7,11 +7,7 @@ import { ToastContainer } from "react-toastify";
 import LocationPicker from "./LocationPicker";
 import SearchBar from "./SearchBar";
 import Footer from "./Footer";
-// import { Canvas } from "@react-three/fiber";
-// import { OrbitControls, useGLTF } from "@react-three/drei";
-// import { useEffect } from "react";
-// import { House } from "../components/House";
-// import { GLTFLoader } from "three-stdlib";
+
 const Explore = () => {
   const [query, setQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,11 +32,6 @@ const Explore = () => {
           <div className="sub-tagline">
             Share your room with right roommates
           </div>
-          {/* <TextInputField
-          handleInputChange={handleInputChange}
-          placeholder={"Search Places..."}
-          icon={location_icon}
-        /> */}
           <SearchBar
             handleInputChange={handleInputChange}
             icon={location_icon}
@@ -53,25 +44,11 @@ const Explore = () => {
                 </li>
               ))}
           </ul>
-          {/* <ul className="suggestion-list">
-          {suggestions.length > 0 &&
-            suggestions.map((suggestion) => (
-              <li key={suggestion.place_id}>{suggestion.display_name}</li>
-            ))}
-        </ul> */}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="explore-right">
             <img src={house_search} alt="" />
-            {/* <Canvas resize={true}>
-              <OrbitControls enableZoom={true} />
-              <ambientLight intensity={0.5} />
-              <directionalLight intensity={1} />
-              <Suspense fallback={null}>
-                <House />
-              </Suspense>
-            </Canvas> */}
           </div>
         </div>
         <ToastContainer />

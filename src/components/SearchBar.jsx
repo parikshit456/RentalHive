@@ -39,8 +39,6 @@ const SearchBar = ({
           openOnFocus={false}
           value={value}
           onChange={onChangeHandler}
-          //   autoComplete
-          //   autoHighlight
           options={cityList}
           getOptionLabel={(opt) => opt.name}
           renderInput={(params) => (

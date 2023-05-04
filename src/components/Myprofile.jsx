@@ -18,11 +18,7 @@ const Myprofile = () => {
   const auth = getAuth();
 
   const user = auth.currentUser;
-  // let fullName = "";
-  // fullName = auth?.currentUser?.displayName;
-  // var space = fullName?.indexOf(" ");
-  // const fName = fullName?.substring(0, space);
-  // const lName = fullName?.substring(space);
+
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -147,14 +143,12 @@ const Myprofile = () => {
                 placeholder="987654321"
                 name="contact"
                 value={contact}
-                // onChange={onMutate}
               />
             </div>
             <div>
               <div className="item4">
                 <div style={{ marginRight: "340px" }}>Gender</div>
                 <button
-                  // className="formButtonActive btn1"
                   className={
                     myGender === "Male" ? "formButtonActive1" : "formButton1"
                   }
@@ -166,7 +160,6 @@ const Myprofile = () => {
                   Male
                 </button>
                 <button
-                  // className="formButton"
                   name="Female"
                   className={
                     myGender === "Female" ? "formButtonActive1" : "formButton1"
@@ -179,12 +172,6 @@ const Myprofile = () => {
                 </button>
               </div>
             </div>
-            {/* <SelectInputField
-              selectList={genderList}
-              tagline={"Occupancy"}
-              getSelectedValue={getSelectedValue}
-              fieldType="occupancy"
-            /> */}
           </form>
         </div>
         <button className="submitButton1" onClick={handleSave}>

@@ -5,17 +5,9 @@ import { useNavigate } from "react-router";
 import Navbar from "./Navbar";
 
 const Profile = ({ user }) => {
-  // const [user , setUser] = useState(null)
-  // const [isActive, setIsActive] = useState(false);
-  const auth = getAuth();
-  // useEffect(() => {
-  //   console.log(auth.currentUser);
-  //   setUser(auth.currentUser)
-  // },[])
 
-  // const toggleMenu = () => {
-  //   setIsActive(!isActive);
-  // };
+  const auth = getAuth();
+
 
   const navigate = useNavigate();
 
@@ -26,9 +18,7 @@ const Profile = ({ user }) => {
 
   return (
     <div className="dropdown1">
-      {/* <button class="dropbtn-logo"> */}
       <img src={user.photoURL} className="dropbtn-logo"></img>
-      {/* </button> */}
       <div class="dropdown-content">
         <p>Hi {user.displayName}</p>
         <a href="/Pref">My Prefrence</a>

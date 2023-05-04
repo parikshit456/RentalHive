@@ -23,7 +23,6 @@ const CityCard = ({ city }) => {
       onClick={onCardClick}
     >
       <h2>{city.name}</h2>
-      {/* <img src={city.image} width="50px" alt="" /> */}
     </div>
   );
 };

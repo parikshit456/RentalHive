@@ -46,7 +46,6 @@ const Listings = () => {
     const fetchListing = async () => {
       try {
         const listingsRef = collection(db, "listings");
-        //query
         const q = query(listingsRef);
         const querySnap = await getDocs(q);
         const listings = [];
