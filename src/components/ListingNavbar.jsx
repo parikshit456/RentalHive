@@ -43,7 +43,6 @@ const ListingNavbar = ({ accodomationType, cityName }) => {
         icon={location_icon}
         name={cityName}
       />
-      {/* <TextInputField placeholder={"Search Places..."} icon={location_icon} /> */}
     </div>
   );
 };

@@ -115,7 +115,6 @@ const Navbar = ({ authUser }) => {
 
       {user ? (
         <div className="btn-container">
-          {/* <button className="navButton">Add Listing</button> */}
           <Link
             to={isEdit && listing.length > 0 ? "/EditListing" : "/add-listing"}
           >

@@ -39,7 +39,6 @@ const ListingDetails = () => {
       if (docSnap.exists()) {
         console.log(docSnap.data());
         setListing(docSnap.data());
-        // console.log(docSnap.data());
         setLoading(false);
       }
 
@@ -52,14 +51,6 @@ const ListingDetails = () => {
         console.log(userDocSnap.data())
         const { prefList } = userDocSnap.data();
         setUserPrefList(prefList)
-        // var space = name?.indexOf(" ");
-        // myGender === "Male" ? setGender(true) : setGender(false);
-        // setProfileData({
-        //   firstName: name?.substring(0, space).trim(),
-        //   lastName: name?.substring(space).trim(),
-        //   contact: mobile,
-        //   myGender: myGender,
-        // });
         setLoading(false);
       }
 

@@ -8,9 +8,7 @@ import { amenitiesList } from "../assets/amenities";
 import MultipleSelectCard from "./MultipleSelectCard";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer, toast } from "react-toastify";
-
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-//import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 
 import {
@@ -22,7 +20,6 @@ import {
 import { db } from "../firebase.config";
 import { v4 as uuidv4 } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { async } from "@firebase/util";
 import { cityList } from "../assets/cityList";
 
 const FlatForm = () => {

@@ -71,7 +71,6 @@ const Signin = () => {
               onClick={() => setShowPassword((prevState) => !prevState)}
             />
           </div>
-          {/* <Link to='/forgotpassword' className='forgotPasswordLink'>Forgot Password </Link> */}
           <div className="signInBar">
             <button className="signInButton">Sign In</button>
           </div>

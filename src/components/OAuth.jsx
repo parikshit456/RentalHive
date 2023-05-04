@@ -27,16 +27,7 @@ const OAuth = () => {
         navigate("/PersonalDetails");
       }
 
-      // If user, doesn,t exist, create user
-      //   if (!docSnap.exists()) {
-      //     await setDoc(doc(db, "users", user.uid), {
-      //       name: user.displayName,
-      //       email: user.email,
-      //       timeStamp: serverTimestamp(),
-      //     });
-      //   }
     } catch (error) {
-      // console.log(error)
       toast.error("Could not authorize with Google");
     }
   };

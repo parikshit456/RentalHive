@@ -67,27 +67,6 @@ const PersonalDetails = ({ setData }) => {
     if (city && value === 12) {
       navigate("/pref");
     }
-
-    // if(lookingFor === "Looking for Flat/Flatmate/PG"){
-
-    //   console.log(lookingFor);
-    //   setInputErrorLookingFor("Please select your preference")
-
-    // }
-
-    // setInputError('');
-    // setInputErrorCity('')
-    // setInputErrorLookingFor('')
-    // navigate("/pref")
-
-    // If user, doesn,t exist, create user
-    //   if (!docSnap.exists()) {
-    //     await setDoc(doc(db, "users", user.uid), {
-    //       name: user.displayName,
-    //       email: user.email,
-    //       timeStamp: serverTimestamp(),
-    //     });
-    //   }
   };
 
   return (
@@ -161,7 +140,6 @@ const PersonalDetails = ({ setData }) => {
         <div className="option">
           <p>Your Mobile Number</p>
           <div className="phone-number">
-            {/* <label htmlFor="">Add Your Location*</label> */}
 
             <PhoneInput
               name="mobile"

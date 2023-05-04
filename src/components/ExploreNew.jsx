@@ -30,7 +30,6 @@ const ExploreNew = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center center",
-        // width: "100vw",
         height: "87vh",
         display: "flex",
         flexDirection: "column",
@@ -38,13 +37,11 @@ const ExploreNew = () => {
         alignItems: "center",
       }}
     >
-      {/* <Navbar /> */}
       <SearchBar
         style={style}
         handleInputChange={handleInputChange}
         icon={location_icon}
       />
-      {/* <div></div> */}
     </div>
   );
 };

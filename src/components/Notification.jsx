@@ -7,8 +7,6 @@ const Notification = () => {
         <div className='noti'>You have no notification yet!</div>
         <Footer/>
     </div>
-    
-    
   )
 }
 

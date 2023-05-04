@@ -22,12 +22,6 @@ const SelectInputField = ({
     console.log(selectValue);
     getSelectedValue(e.target.name, fieldType);
 
-    // if (e.target.name === "Male") {
-    //   setSelectValue("Male");
-    // }
-    // if (e.target.value === "Female") {
-    //   setSelectValue("Female");
-    // }
   };
   return (
     <div className="multiple-select">
@@ -47,15 +41,6 @@ const SelectInputField = ({
           );
         })}
 
-        {/* <button
-          className={!gender ? "btnactive" : "btn"}
-          type="button"
-          value={2}
-          onClick={onMutate}
-          style={{ marginRight: "50px" }}
-        >
-          Female
-        </button> */}
       </div>
     </div>
   );
