@@ -10,6 +10,9 @@ import Footer from "./Footer";
 
 const AddListing = () => {
   return (
+    <div>
+
+
     <div className="add-listing">
       <h1 className="requirement-heading">List your Requirement</h1>
       <hr className="horizontal-line" />
@@ -53,7 +56,9 @@ const AddListing = () => {
           </Link>
         </div>
       </div>
-      <Footer/>
+
+    </div>
+    <Footer/>
     </div>
   );
 };

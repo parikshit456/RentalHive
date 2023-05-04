@@ -15,6 +15,7 @@ import { amenitiesList } from "../assets/amenities";
 import ImageSlider from "./ImageSlider";
 import ReactWhatsapp from "react-whatsapp";
 import Footer from "./Footer";
+import Signin from "./Signin";
 
 const ListingDetails = () => {
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ console.log(userPrefList)
 
   return (
     <div>
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    {auth.currentUser ? <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="listingdetail">
         <div className="listingdetasilinside">
           <div className="listingProfileCard">
@@ -183,7 +184,7 @@ console.log(userPrefList)
         </div>
       </div>
       
-    </div>
+    </div> : navigate("/Signin") }
     <Footer/>
     </div>
   );
