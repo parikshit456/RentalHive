@@ -89,7 +89,7 @@ function AboutUs() {
         </div>
         </div>
       </div>
-      <div className="high">Hover on the name if you are high or wanna see matrix glitch!</div>
+      <div className="high">Hover on the name if you are high or wanna see the matrix glitch!</div>
       <Footer />
     </div>
   );

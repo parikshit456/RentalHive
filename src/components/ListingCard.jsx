@@ -22,8 +22,9 @@ const ListingCard = ({ user }) => {
     return <Spinner />;
   }
   return (
-    <Link to={`/ListingDetails/${user.id}`}>
+    
       <div className="listing-card">
+        <Link to={`/ListingDetails/${user.id}`}>
         <div className="card-top">
           <img className="card-img" src={userProfile} />
           <div className="card-info">
@@ -63,8 +64,9 @@ const ListingCard = ({ user }) => {
             </div>
           </div>
         </div>
+        </Link>
       </div>
-    </Link>
+    
     
   );
 };
