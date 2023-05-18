@@ -1,6 +1,7 @@
 export const cityList = [
   {
     name: "Mumbai",
+    college: ["NMIMS" , "DAIICT" , "PDPU"],
     state: "Maharashtra",
   },
   {
