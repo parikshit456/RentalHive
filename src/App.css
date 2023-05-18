@@ -58,7 +58,7 @@
   cursor: pointer;
 }
 .listingPhone p {
-  margin: 10px 0px;
+  margin: 5px 0px;
   font-size: 13px;
   text-align: center;
 }
@@ -1633,7 +1633,7 @@ label {
   }
 }
 .listingdetasilinside hr {
-  margin: 45px 0.5rem;
+  margin: 30px 0.5rem;
   border-color: #d5d5d5;
 }
 .listingInfo {
@@ -2130,7 +2130,7 @@ input::placeholder {
   padding: 9px;
   border-radius: 10px;
   cursor: pointer;
-  margin: 5px 0px;
+  margin: 15px 0px;
   display: flex;
   align-items: center;
   background-color: #c7ede6;

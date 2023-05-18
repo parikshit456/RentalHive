@@ -54,6 +54,7 @@ const FlatForm = () => {
     desc: "",
     contactNumber: "",
     city: "",
+    college:"",
     userID: "",
     availableFrom: date,
     userProfile: auth?.currentUser?.photoURL,
@@ -64,6 +65,7 @@ const FlatForm = () => {
     clientType,
     loc,
     city,
+    college,
     userID,
     genderPreference,
     rent,
@@ -348,6 +350,21 @@ const FlatForm = () => {
                   return <option value={city.name}>{city.name}</option>;
                 })}
               </select>
+
+
+              {city === "Mumbai" ? <select
+                className="addlistingDropdown"
+                onClick={onMutate}
+                name="college"
+              >
+                <option value="" disabled selected>
+                  Select your college
+                </option>
+                {cityList[0].college.map((college) => {
+                  return <option value={college}>{college}</option>;
+                })}
+              </select> : <></>
+              }
 
               {errors && <div className="error-msg">{errors.city}</div>}
             </div>

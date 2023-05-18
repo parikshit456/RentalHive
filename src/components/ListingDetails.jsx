@@ -86,7 +86,8 @@ console.log(userPrefList)
             </div>
             <div className="listingPhone">
               <img src={address} style={{ width: "60px" }} />
-              <p>{listing.loc}</p>
+              <p><span style={{ fontSize:"20px"}}>🌍</span>{listing.loc}</p>
+              <p><span style={{ fontSize:"20px"}}>🎓</span>{listing.college}</p>
               <ReactWhatsapp
                 number={listing.contactNumber}
                 message="Hello World!!!"
