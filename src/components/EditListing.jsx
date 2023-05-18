@@ -69,6 +69,7 @@ const EditListing = () => {
     desc: "",
     contactNumber: "",
     city: "",
+    college:"",
     userID: "",
     availableFrom: date,
   });
@@ -86,6 +87,7 @@ const EditListing = () => {
     desc,
     userID,
     city,
+    college,
     contactNumber,
     availableFrom,
   } = formData;
@@ -242,7 +244,6 @@ const EditListing = () => {
         formDataCopy = {
           ...formData,
           imgUrls: imageUrls,
-
           timestamp: "",
         };
         console.log(formDataCopy);
@@ -403,7 +404,6 @@ const EditListing = () => {
                 className="addlistingDropdown"
                 onClick={onMutate}
                 name="city"
-                pattern="^((?!Select).)*$"
                 title="Please select a city"
               >
                 <option value={city} disabled selected>
@@ -413,6 +413,21 @@ const EditListing = () => {
                   return <option value={city.name}>{city.name}</option>;
                 })}
               </select>
+
+              {city === "Mumbai" ? <select
+                className="addlistingDropdown"
+                onClick={onMutate}
+                name="college"
+              >
+                <option disabled selected>
+                  {college}
+                </option>
+                {cityList[0].college.map((college) => {
+                  return <option value={college}>{college}</option>;
+                })}
+              </select> : <></>
+              }
+
               {errors && <div className="error-msg">{errors.city}</div>}
             </div>
             <SelectInputField
